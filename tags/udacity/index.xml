@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Udacity on Yuchu Luo&#39;s Homepage</title>
-    <link>https://wolegechu.github.io/tags/udacity/</link>
+    <link>http://www.luoyuchu.com/tags/udacity/</link>
     <description>Recent content in Udacity on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Predicting Rossmann Store Sales</title>
-      <link>https://wolegechu.github.io/project/rossmann/</link>
+      <link>http://www.luoyuchu.com/project/rossmann/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/rossmann/</guid>
+      <guid>http://www.luoyuchu.com/project/rossmann/</guid>
       <description>&lt;p&gt;Rossmann operates over 3,000 drug stores in 7 European countries. Currently, Rossmann store managers are tasked with predicting their daily sales for up to six weeks in advance. Store sales are influenced by many factors, including promotions, competition, school and state holidays, seasonality, and locality. With thousands of individual managers predicting sales based on their unique circumstances, the accuracy of results can be quite varied.&lt;/p&gt;
 
 &lt;p&gt;In their first Kaggle competition, Rossmann is challenging you to predict 6 weeks of daily sales for 1,115 stores located across Germany. Reliable sales forecasts enable store managers to create effective staff schedules that increase productivity and motivation. By helping Rossmann create a robust prediction model, you will help store managers stay focused on what’s most important to them: their customers and their teams!&lt;/p&gt;
@@ -27,10 +27,10 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     
     <item>
       <title>A Digit Recognition Program</title>
-      <link>https://wolegechu.github.io/project/digit_recognition/</link>
+      <link>http://www.luoyuchu.com/project/digit_recognition/</link>
       <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/digit_recognition/</guid>
+      <guid>http://www.luoyuchu.com/project/digit_recognition/</guid>
       <description>&lt;p&gt;In this project, I used deep neural networks and convolutional neural networks to create a program that prints numbers it observes in real time from images it is given. First, I designed and tested a model architecture that can identify sequences of digits in an image. Next, I trained that model so it could decode sequences of digits from natural images by using the Street View House Numbers (SVHN) dataset. After the model was properly trained, I then tested my model using a program on newly-captured images. Finally, I refined your implementation to also localize where numbers are on the image, and test this localization on newly-captured images.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
@@ -48,10 +48,10 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     
     <item>
       <title>Train a Smartcab How to Drive</title>
-      <link>https://wolegechu.github.io/project/smartcab/</link>
+      <link>http://www.luoyuchu.com/project/smartcab/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/smartcab/</guid>
+      <guid>http://www.luoyuchu.com/project/smartcab/</guid>
       <description>
 
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
@@ -64,7 +64,7 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
 
 &lt;h3 id=&#34;below-is-the-final-score&#34;&gt;Below is the final score:&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://wolegechu.github.io/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.luoyuchu.com/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;the-main-techniques-used&#34;&gt;The main techniques used:&lt;/h3&gt;
 
@@ -81,10 +81,10 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     
     <item>
       <title>Creating Customer Segments</title>
-      <link>https://wolegechu.github.io/project/customer-segments/</link>
+      <link>http://www.luoyuchu.com/project/customer-segments/</link>
       <pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/customer-segments/</guid>
+      <guid>http://www.luoyuchu.com/project/customer-segments/</guid>
       <description>&lt;p&gt;In this project I applied unsupervised learning techniques on product spending data collected for customers of a wholesale distributor in Lisbon, Portugal to identify customer segments hidden in the data. I first explored the data by selecting a small subset to sample and determine if any product categories highly correlate with one another. Afterwards, I preprocessed the data by scaling each product category and then identifying (and removing) unwanted outliers. With the good, clean customer spending data, I applied PCA transformations to the data and implement clustering algorithms to segment the transformed customer data. Finally, I compared the segmentation found with an additional labeling and consider ways this information could assist the wholesale distributor with future service changes.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
@@ -104,10 +104,10 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     
     <item>
       <title>Finding Donors for CharityML</title>
-      <link>https://wolegechu.github.io/project/finding-donors/</link>
+      <link>http://www.luoyuchu.com/project/finding-donors/</link>
       <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/finding-donors/</guid>
+      <guid>http://www.luoyuchu.com/project/finding-donors/</guid>
       <description>&lt;p&gt;In this project, I applied supervised learning techniques and an analytical mind on data collected for the U.S. census to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. I first explored the data to learn how the census data is recorded. Next, I applied a series of transformations and preprocessing techniques to manipulate the data into a workable format. Then I evaluated several supervised learners of my choice on the data, and considered which is best suited for the solution. Afterwards, I optimized the model I had selected and presented it as my solution to CharityML. Finally, I explored the chosen model and its predictions under the hood, to see just how well it&amp;rsquo;s performing when considering the data it&amp;rsquo;s given. predicted selling price to the statistics.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
@@ -128,10 +128,10 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     
     <item>
       <title>Meet Up Event Planner</title>
-      <link>https://wolegechu.github.io/project/meet-up-event-planner/</link>
+      <link>http://www.luoyuchu.com/project/meet-up-event-planner/</link>
       <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/meet-up-event-planner/</guid>
+      <guid>http://www.luoyuchu.com/project/meet-up-event-planner/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;

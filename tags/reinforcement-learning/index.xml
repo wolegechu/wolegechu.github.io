@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reinforcement Learning on Yuchu Luo&#39;s Homepage</title>
-    <link>https://wolegechu.github.io/tags/reinforcement-learning/</link>
+    <link>http://www.luoyuchu.com/tags/reinforcement-learning/</link>
     <description>Recent content in Reinforcement Learning on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Train a Smartcab How to Drive</title>
-      <link>https://wolegechu.github.io/project/smartcab/</link>
+      <link>http://www.luoyuchu.com/project/smartcab/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/smartcab/</guid>
+      <guid>http://www.luoyuchu.com/project/smartcab/</guid>
       <description>
 
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
@@ -28,7 +28,7 @@
 
 &lt;h3 id=&#34;below-is-the-final-score&#34;&gt;Below is the final score:&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://wolegechu.github.io/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.luoyuchu.com/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;the-main-techniques-used&#34;&gt;The main techniques used:&lt;/h3&gt;
 
@@ -45,19 +45,19 @@
     
     <item>
       <title>An introduction to Imitation Learning (Part 1)</title>
-      <link>https://wolegechu.github.io/post/imitation-learning-1/</link>
+      <link>http://www.luoyuchu.com/post/imitation-learning-1/</link>
       <pubDate>Sun, 12 Mar 2017 22:38:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/post/imitation-learning-1/</guid>
+      <guid>http://www.luoyuchu.com/post/imitation-learning-1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Knowledge arrangement about Reinforcement Learning</title>
-      <link>https://wolegechu.github.io/post/knowledge-arrangement-about-rl/</link>
+      <link>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</link>
       <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/post/knowledge-arrangement-about-rl/</guid>
+      <guid>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>User Portrait on Yuchu Luo&#39;s Homepage</title>
-    <link>https://wolegechu.github.io/tags/user-portrait/</link>
+    <link>http://www.luoyuchu.com/tags/user-portrait/</link>
     <description>Recent content in User Portrait on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>The construction of user portrait based on Big Data (Theoretical section)</title>
-      <link>https://wolegechu.github.io/post/user-portrait-theoretical/</link>
+      <link>http://www.luoyuchu.com/post/user-portrait-theoretical/</link>
       <pubDate>Sun, 10 Jan 2016 05:58:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/post/user-portrait-theoretical/</guid>
+      <guid>http://www.luoyuchu.com/post/user-portrait-theoretical/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep Learning on Yuchu Luo&#39;s Homepage</title>
-    <link>https://wolegechu.github.io/tags/deep-learning/</link>
+    <link>http://www.luoyuchu.com/tags/deep-learning/</link>
     <description>Recent content in Deep Learning on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>A Digit Recognition Program</title>
-      <link>https://wolegechu.github.io/project/digit_recognition/</link>
+      <link>http://www.luoyuchu.com/project/digit_recognition/</link>
       <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/project/digit_recognition/</guid>
+      <guid>http://www.luoyuchu.com/project/digit_recognition/</guid>
       <description>&lt;p&gt;In this project, I used deep neural networks and convolutional neural networks to create a program that prints numbers it observes in real time from images it is given. First, I designed and tested a model architecture that can identify sequences of digits in an image. Next, I trained that model so it could decode sequences of digits from natural images by using the Street View House Numbers (SVHN) dataset. After the model was properly trained, I then tested my model using a program on newly-captured images. Finally, I refined your implementation to also localize where numbers are on the image, and test this localization on newly-captured images.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;

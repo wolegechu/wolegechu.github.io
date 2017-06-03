@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Knowledge Arrangement on Yuchu Luo&#39;s Homepage</title>
-    <link>https://wolegechu.github.io/tags/knowledge-arrangement/</link>
+    <link>http://www.luoyuchu.com/tags/knowledge-arrangement/</link>
     <description>Recent content in Knowledge Arrangement on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Knowledge arrangement about Reinforcement Learning</title>
-      <link>https://wolegechu.github.io/post/knowledge-arrangement-about-rl/</link>
+      <link>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</link>
       <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/post/knowledge-arrangement-about-rl/</guid>
+      <guid>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</guid>
       <description></description>
     </item>
     

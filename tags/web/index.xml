@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on Yuchu Luo&#39;s Homepage</title>
+    <link>https://wolegechu.github.io/tags/web/</link>
+    <description>Recent content in Web on Yuchu Luo&#39;s Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
+    <lastBuildDate>Mon, 19 Sep 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/web/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Meet Up Event Planner</title>
+      <link>https://wolegechu.github.io/project/meet-up-event-planner/</link>
+      <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/meet-up-event-planner/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This is Udacity Senior web developer 1st project
+Meet up event planner is a web app for creating events with features as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;HTML5, SASS&lt;/li&gt;
+&lt;li&gt;Firebase API&lt;/li&gt;
+&lt;li&gt;Bootstrap 3 provides foundational styling and utility CSS classes (ex. alerts, error styling)&lt;/li&gt;
+&lt;li&gt;Real-time validation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;install-the-node-package-building-test&#34;&gt;Install the node package &amp;amp; Building &amp;amp; Test&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/wolegechu/Meet-Up-Event-Planner.git
+$ cd Meet-Up-Event-Planner
+$ npm install
+$ gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You must run this application on &amp;lsquo;localhost&amp;rsquo; due to the Firebase&lt;/li&gt;
+&lt;li&gt;You should register an account first&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;web-pages&#34;&gt;Web Pages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;index.html&lt;/strong&gt;: login&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;signup.html&lt;/strong&gt;: register&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;app.html&lt;/strong&gt;: display and creating plans&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code &lt;a href=&#34;https://raw.githubusercontent.com/wolegechu/Meet-Up-Event-Planner&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

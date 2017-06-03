@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Udacity on Yuchu Luo&#39;s Homepage</title>
+    <link>https://wolegechu.github.io/tags/udacity/</link>
+    <description>Recent content in Udacity on Yuchu Luo&#39;s Homepage</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
+    <lastBuildDate>Sun, 19 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/udacity/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Predicting Rossmann Store Sales</title>
+      <link>https://wolegechu.github.io/project/rossmann/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/rossmann/</guid>
+      <description>&lt;p&gt;Rossmann operates over 3,000 drug stores in 7 European countries. Currently, Rossmann store managers are tasked with predicting their daily sales for up to six weeks in advance. Store sales are influenced by many factors, including promotions, competition, school and state holidays, seasonality, and locality. With thousands of individual managers predicting sales based on their unique circumstances, the accuracy of results can be quite varied.&lt;/p&gt;
+
+&lt;p&gt;In their first Kaggle competition, Rossmann is challenging you to predict 6 weeks of daily sales for 1,115 stores located across Germany. Reliable sales forecasts enable store managers to create effective staff schedules that increase productivity and motivation. By helping Rossmann create a robust prediction model, you will help store managers stay focused on what’s most important to them: their customers and their teams!&lt;/p&gt;
+
+&lt;p&gt;(There are a lot of flaws due to lack of time.)
+You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/tree/master/Capstone&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Digit Recognition Program</title>
+      <link>https://wolegechu.github.io/project/digit_recognition/</link>
+      <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/digit_recognition/</guid>
+      <description>&lt;p&gt;In this project, I used deep neural networks and convolutional neural networks to create a program that prints numbers it observes in real time from images it is given. First, I designed and tested a model architecture that can identify sequences of digits in an image. Next, I trained that model so it could decode sequences of digits from natural images by using the Street View House Numbers (SVHN) dataset. After the model was properly trained, I then tested my model using a program on newly-captured images. Finally, I refined your implementation to also localize where numbers are on the image, and test this localization on newly-captured images.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Deep Neural Networks&lt;/li&gt;
+&lt;li&gt;Convolutional Neural Networks&lt;/li&gt;
+&lt;li&gt;Adadelta&lt;/li&gt;
+&lt;li&gt;Keras based on TensorFlow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/5.%20Digit%20Recognition/digit_recognition.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Train a Smartcab How to Drive</title>
+      <link>https://wolegechu.github.io/project/smartcab/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/smartcab/</guid>
+      <description>
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;In this project I applied reinforcement learning techniques for a self-driving agent in a simplified world to aid it in effectively reaching its destinations in the allotted time. I first investigated the environment the agent operates in by constructing a very basic driving implementation. Once the agent is successful at operating within the environment, I then identified each possible state the agent can be in when considering such things as traffic lights and oncoming traffic at each intersection. With states identified, I then implemented a Q-Learning algorithm for the self-driving agent to guide the agent towards its destination within the allotted time. Finally, I improved upon the Q-Learning algorithm to find the best configuration of learning and exploration factors to ensure the self-driving agent is reaching its destinations with consistently positive results.&lt;/p&gt;
+
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;In the not-so-distant future, taxicab companies across the United States no longer employ human drivers to operate their fleet of vehicles. Instead, the taxicabs are operated by self-driving agents, known as &lt;em&gt;smartcabs&lt;/em&gt;, to transport people from one location to another within the cities those companies operate. In major metropolitan areas, such as Chicago, New York City, and San Francisco, an increasing number of people have come to depend on &lt;em&gt;smartcabs&lt;/em&gt; to get to where they need to go as safely and reliably as possible. Although &lt;em&gt;smartcabs&lt;/em&gt; have become the transport of choice, concerns have arose that a self-driving agent might not be as safe or reliable as human drivers, particularly when considering city traffic lights and other vehicles. To alleviate these concerns, my task is to use reinforcement learning techniques to construct a demonstration of a &lt;em&gt;smartcab&lt;/em&gt; operating in real-time to prove that both safety and reliability can be achieved.&lt;/p&gt;
+
+&lt;h3 id=&#34;below-is-the-final-score&#34;&gt;Below is the final score:&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://wolegechu.github.io/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-main-techniques-used&#34;&gt;The main techniques used:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Markov Decision Processes&lt;/li&gt;
+&lt;li&gt;Reinforcement Learning&lt;/li&gt;
+&lt;li&gt;Game Theory&lt;/li&gt;
+&lt;li&gt;More Game Theory beginning at Stochastic games and Multi-agent RL&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/4.%20Smartcab/smartcab.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating Customer Segments</title>
+      <link>https://wolegechu.github.io/project/customer-segments/</link>
+      <pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/customer-segments/</guid>
+      <description>&lt;p&gt;In this project I applied unsupervised learning techniques on product spending data collected for customers of a wholesale distributor in Lisbon, Portugal to identify customer segments hidden in the data. I first explored the data by selecting a small subset to sample and determine if any product categories highly correlate with one another. Afterwards, I preprocessed the data by scaling each product category and then identifying (and removing) unwanted outliers. With the good, clean customer spending data, I applied PCA transformations to the data and implement clustering algorithms to segment the transformed customer data. Finally, I compared the segmentation found with an additional labeling and consider ways this information could assist the wholesale distributor with future service changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Clustering&lt;/li&gt;
+&lt;li&gt;More Clustering&lt;/li&gt;
+&lt;li&gt;Feature Scaling&lt;/li&gt;
+&lt;li&gt;Feature Selection&lt;/li&gt;
+&lt;li&gt;PCA&lt;/li&gt;
+&lt;li&gt;Feature Transformation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/3.%20Customer%20Segments/customer_segments.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Finding Donors for CharityML</title>
+      <link>https://wolegechu.github.io/project/finding-donors/</link>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/finding-donors/</guid>
+      <description>&lt;p&gt;In this project, I applied supervised learning techniques and an analytical mind on data collected for the U.S. census to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. I first explored the data to learn how the census data is recorded. Next, I applied a series of transformations and preprocessing techniques to manipulate the data into a workable format. Then I evaluated several supervised learners of my choice on the data, and considered which is best suited for the solution. Afterwards, I optimized the model I had selected and presented it as my solution to CharityML. Finally, I explored the chosen model and its predictions under the hood, to see just how well it&amp;rsquo;s performing when considering the data it&amp;rsquo;s given. predicted selling price to the statistics.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Decision Trees&lt;/li&gt;
+&lt;li&gt;Regression &amp;amp; Classification&lt;/li&gt;
+&lt;li&gt;Regressions&lt;/li&gt;
+&lt;li&gt;Kernel Methods &amp;amp; SVM&lt;/li&gt;
+&lt;li&gt;GaussianNB&lt;/li&gt;
+&lt;li&gt;Ensemble learning&lt;/li&gt;
+&lt;li&gt;RandomForestClassifier&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/2.%20Finding%20Donors/finding_donors.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Meet Up Event Planner</title>
+      <link>https://wolegechu.github.io/project/meet-up-event-planner/</link>
+      <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/project/meet-up-event-planner/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This is Udacity Senior web developer 1st project
+Meet up event planner is a web app for creating events with features as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;HTML5, SASS&lt;/li&gt;
+&lt;li&gt;Firebase API&lt;/li&gt;
+&lt;li&gt;Bootstrap 3 provides foundational styling and utility CSS classes (ex. alerts, error styling)&lt;/li&gt;
+&lt;li&gt;Real-time validation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;install-the-node-package-building-test&#34;&gt;Install the node package &amp;amp; Building &amp;amp; Test&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/wolegechu/Meet-Up-Event-Planner.git
+$ cd Meet-Up-Event-Planner
+$ npm install
+$ gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You must run this application on &amp;lsquo;localhost&amp;rsquo; due to the Firebase&lt;/li&gt;
+&lt;li&gt;You should register an account first&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;web-pages&#34;&gt;Web Pages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;index.html&lt;/strong&gt;: login&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;signup.html&lt;/strong&gt;: register&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;app.html&lt;/strong&gt;: display and creating plans&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see the code &lt;a href=&#34;https://raw.githubusercontent.com/wolegechu/Meet-Up-Event-Planner&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

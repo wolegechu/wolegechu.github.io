@@ -5,6 +5,69 @@
     
     <url>
     
+      <loc>https://wolegechu.github.io/project/rossmann/</loc>
+      <lastmod>2017-03-19T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/project/digit_recognition/</loc>
+      <lastmod>2017-03-16T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/project/smartcab/</loc>
+      <lastmod>2017-03-14T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/post/imitation-learning-1/</loc>
+      <lastmod>2017-03-12T22:38:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/project/customer-segments/</loc>
+      <lastmod>2017-03-12T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/project/finding-donors/</loc>
+      <lastmod>2017-02-15T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/project/boston-housing-prices/</loc>
+      <lastmod>2017-02-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://wolegechu.github.io/tags/academic/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
@@ -50,8 +113,8 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/project/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <loc>https://wolegechu.github.io/project/meet-up-event-planner/</loc>
+      <lastmod>2016-09-19T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -59,25 +122,7 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/project/example-external-project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://wolegechu.github.io/post/getting-started/</loc>
-      <lastmod>2016-04-20T12:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://wolegechu.github.io/post/widgets/</loc>
+      <loc>https://wolegechu.github.io/post/knowledge-arrangement-about-rl/</loc>
       <lastmod>2016-04-20T11:00:00+00:00</lastmod>
     </url>
     
@@ -86,8 +131,8 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/post/managing-content/</loc>
-      <lastmod>2016-04-20T11:00:00+00:00</lastmod>
+      <loc>https://wolegechu.github.io/post/knowledge-of-domain-name/</loc>
+      <lastmod>2016-01-11T07:45:00+00:00</lastmod>
     </url>
     
   
@@ -95,8 +140,8 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/post/writing-markdown-latex/</loc>
-      <lastmod>2016-04-20T10:00:00+00:00</lastmod>
+      <loc>https://wolegechu.github.io/post/user-portrait-theoretical/</loc>
+      <lastmod>2016-01-10T05:58:00+00:00</lastmod>
     </url>
     
   
@@ -106,15 +151,6 @@
     
       <loc>https://wolegechu.github.io/publication/person-re-identification/</loc>
       <lastmod>2015-09-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://wolegechu.github.io/post/migrate-from-jekyll/</loc>
-      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -161,7 +197,7 @@
     <url>
     
       <loc>https://wolegechu.github.io/tags/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-03-16T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -170,8 +206,8 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/tags/demo/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <loc>https://wolegechu.github.io/tags/knowledge-arrangement/</loc>
+      <lastmod>2016-04-20T11:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -180,18 +216,8 @@
     
     <url>
     
-      <loc>https://wolegechu.github.io/tags/hugo/</loc>
-      <lastmod>2016-04-20T12:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>https://wolegechu.github.io/tags/jekyll/</loc>
-      <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+      <loc>https://wolegechu.github.io/tags/machine-learning/</loc>
+      <lastmod>2017-03-19T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -201,7 +227,7 @@
     <url>
     
       <loc>https://wolegechu.github.io/project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-03-19T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -220,6 +246,16 @@
     
     <url>
     
+      <loc>https://wolegechu.github.io/tags/reinforcement-learning/</loc>
+      <lastmod>2017-03-14T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://wolegechu.github.io/tags/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -230,8 +266,48 @@
     
     <url>
     
+      <loc>https://wolegechu.github.io/tags/tittle-tattle/</loc>
+      <lastmod>2016-01-11T07:45:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/tags/udacity/</loc>
+      <lastmod>2017-03-19T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/tags/user-portrait/</loc>
+      <lastmod>2016-01-10T05:58:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>https://wolegechu.github.io/tags/web/</loc>
+      <lastmod>2016-09-19T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>https://wolegechu.github.io/</loc>
-      <lastmod>2016-04-20T00:00:00+00:00</lastmod>
+      <lastmod>2017-06-02T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

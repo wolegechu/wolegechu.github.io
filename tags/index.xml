@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Yuchu Luo&#39;s Homepage</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2016 Your Name</copyright>
+    <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/" rel="self" type="application/rss+xml" />
     
@@ -23,36 +23,72 @@
     <item>
       <title>Deep Learning</title>
       <link>https://wolegechu.github.io/tags/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>https://wolegechu.github.io/tags/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Demo</title>
-      <link>https://wolegechu.github.io/tags/demo/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <title>Knowledge Arrangement</title>
+      <link>https://wolegechu.github.io/tags/knowledge-arrangement/</link>
+      <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/tags/demo/</guid>
+      <guid>https://wolegechu.github.io/tags/knowledge-arrangement/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hugo</title>
-      <link>https://wolegechu.github.io/tags/hugo/</link>
-      <pubDate>Wed, 20 Apr 2016 12:00:00 +0000</pubDate>
+      <title>Machine Learning</title>
+      <link>https://wolegechu.github.io/tags/machine-learning/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/tags/hugo/</guid>
+      <guid>https://wolegechu.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Jekyll</title>
-      <link>https://wolegechu.github.io/tags/jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      <title>Reinforcement Learning</title>
+      <link>https://wolegechu.github.io/tags/reinforcement-learning/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://wolegechu.github.io/tags/jekyll/</guid>
+      <guid>https://wolegechu.github.io/tags/reinforcement-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tittle Tattle</title>
+      <link>https://wolegechu.github.io/tags/tittle-tattle/</link>
+      <pubDate>Mon, 11 Jan 2016 07:45:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/tags/tittle-tattle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Udacity</title>
+      <link>https://wolegechu.github.io/tags/udacity/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/tags/udacity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>User Portrait</title>
+      <link>https://wolegechu.github.io/tags/user-portrait/</link>
+      <pubDate>Sun, 10 Jan 2016 05:58:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/tags/user-portrait/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://wolegechu.github.io/tags/web/</link>
+      <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://wolegechu.github.io/tags/web/</guid>
       <description></description>
     </item>
     

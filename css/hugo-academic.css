@@ -1020,12 +1020,12 @@ table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.43;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  /*border-top: 1px solid #ddd;*/
 }
 
 table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+  /*border-bottom: 2px solid #ddd;*/
 }
 
 table > caption + thead > tr:first-child > th,
@@ -1038,7 +1038,7 @@ table > thead:first-child > tr:first-child > td {
 }
 
 table > tbody + tbody {
-  border-top: 2px solid #ddd;
+  /*border-top: 2px solid #ddd;*/
 }
 
 table table {
@@ -1046,10 +1046,10 @@ table table {
 }
 
 /* Table Striped */
-table > tbody > tr:nth-child(odd) > td,
+/*table > tbody > tr:nth-child(odd) > td,
 table > tbody > tr:nth-child(odd) > th {
   background-color: #f9f9f9;
-}
+}*/
 
 /* Table Hover */
 table > tbody > tr:hover > td,
@@ -1113,4 +1113,9 @@ div.alert a:hover {
   color: #fff;
   background-color: #f44336; /* Material Red500 */
   border-color: #ebccd1;
+}
+
+.rate {
+  float: right;
+  height: 24px;
 }

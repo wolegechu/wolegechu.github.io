@@ -104,6 +104,18 @@
         
 
         <li class="nav-item">
+          <a href="/#skills" data-target="#skills">
+            
+            <span>Skills</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
           <a href="/#posts" data-target="#posts">
             
             <span>Posts</span>
@@ -119,18 +131,6 @@
           <a href="/#projects" data-target="#projects">
             
             <span>Projects</span>
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        <li class="nav-item">
-          <a href="/#skills" data-target="#skills">
-            
-            <span>Skills</span>
           </a>
         </li>
 
@@ -269,6 +269,14 @@
             </div>
           </li>
           
+          <li>
+            <i class="fa-li fa fa-graduation-cap"></i>
+            <div class="description">
+              <p class="course">High School, 2012-2015</p>
+              <p class="institution">The No. 1 Middle School of Yiyang, Hunan</p>
+            </div>
+          </li>
+          
         </ul>
       </div>
       
@@ -293,7 +301,9 @@
     
   </div>
   <div class="col-xs-12 col-md-8">
-    <p>I&rsquo;ve organized an <code>Academic and Technical Exchange Group about Reinforcement Learning</code> via Wechat. The members comes from CAS, CMU, THU, PKU, SJTU, ZJU, XJTU, BJTU, FDU, NJU, XMU, SDU, USTC, HIT, YU, NYU, UESTC, CSU and so on. In addition, there are many friends work in Tencent, Baidu, Alibaba, Netease, Didi, MSRA etc. We have different academic degrees, from undergraduate to P.h.D. Feel free to contact with me about joining this group or discussing issues together if you are interested in Reinforcement Learning.  (You can get my Wechat <a href="#contact">here</a>)</p>
+    <p>I&rsquo;ve organized an <code>Academic and Technical Exchange Group about Reinforcement Learning</code> via Wechat with a good atmosphere. The members comes from CAS, CMU, THU, PKU, SJTU, ZJU, XJTU, BJTU, FDU, NJU, XMU, SDU, USTC, HIT, YU, NYU, UESTC, CSU and so on. In addition, there are many friends work in Tencent, Baidu, Alibaba, Netease, Didi, MSRA etc. We have different academic degrees, from undergraduate to P.h.D.</p>
+
+<p>Feel free to contact with me about joining this group or discussing issues together if you are interested in Reinforcement Learning.  (You can get my Wechat <a href="#contact">here</a>)</p>
 
   </div>
 </div>
@@ -1075,6 +1085,26 @@
     <script src="/js/hugo-academic.js"></script>
     
 
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-72309442-3', 'auto');
+        ga('send', 'pageview');
+
+         
+        var links = document.querySelectorAll('a');
+        Array.prototype.map.call(links, function(item) {
+            if (item.host != document.location.host) {
+                item.addEventListener('click', function() {
+                    var action = item.getAttribute('data-action') || 'follow';
+                    ga('send', 'event', 'outbound', action, item.href);
+                });
+            }
+        });
+    </script>
     
 
     

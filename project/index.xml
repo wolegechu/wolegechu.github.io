@@ -7,8 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
-    <lastBuildDate>Sun, 19 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/project/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>An Quadrotor Safety Monitorting System</title>
+      <link>http://www.luoyuchu.com/project/an-quadrotor-safety-monitorting-system/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.luoyuchu.com/project/an-quadrotor-safety-monitorting-system/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Implemented and optimized a anomaly detection algorithm called Isolation Forest, which can receive temporal information and feed back the abnormal degree.&lt;/li&gt;
+&lt;li&gt;Developed an exploration tool for the iForest algorithm, which can do visualization to a certain extent&lt;/li&gt;
+&lt;li&gt;Won Provincial 1st Prizes both in the 2017 Challenge Cup and the E-Commerce Competition, Technical group. And get the qualification to the 2017 national contests.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Predicting Rossmann Store Sales</title>

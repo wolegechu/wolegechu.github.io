@@ -1,0 +1,21 @@
++++
+abstract = ""
+abstract_short = ""
+date = "2017-08-24T16:56:22+08:00"
+event = ""
+event_url = ""
+highlight = true
+location = ""
+math = false
+selected = false
+title = ""
+url_pdf = ""
+url_slides = ""
+url_video = ""
+
+[header]
+  caption = ""
+  image = ""
+
++++
+

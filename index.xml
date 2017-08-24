@@ -11,6 +11,33 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Deep Reinforcement Learning</title>
+      <link>http://www.luoyuchu.com/talk/deep-reinforcemnt-learning/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.luoyuchu.com/talk/deep-reinforcemnt-learning/</guid>
+      <description>&lt;p&gt;Slides release soon.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Intro to Reinforcement Learning</title>
+      <link>http://www.luoyuchu.com/talk/reinforcement-learning/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.luoyuchu.com/talk/reinforcement-learning/</guid>
+      <description>&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;2b0ad1af004f4266b693269e394f35cf&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Markov Decision Processes&lt;/li&gt;
+&lt;li&gt;Model-based and Model-free&lt;/li&gt;
+&lt;li&gt;Value Iteration and Policy Iteration&lt;/li&gt;
+&lt;li&gt;Q-learning and approximate Q-learning&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>An Quadrotor Safety Monitorting System</title>
       <link>http://www.luoyuchu.com/project/an-quadrotor-safety-monitorting-system/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
@@ -170,16 +197,6 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
     </item>
     
     <item>
-      <title>Example Talk</title>
-      <link>http://www.luoyuchu.com/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.luoyuchu.com/talk/example-talk/</guid>
-      <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://gcushen.github.io/hugo-academic-demo/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Meet Up Event Planner</title>
       <link>http://www.luoyuchu.com/project/meet-up-event-planner/</link>
       <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
@@ -259,16 +276,6 @@ $ gulp
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>http://www.luoyuchu.com/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mobile visual clothing search</title>
-      <link>http://www.luoyuchu.com/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.luoyuchu.com/publication/clothing-search/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>

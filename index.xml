@@ -16,7 +16,9 @@
       <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.luoyuchu.com/talk/deep-reinforcemnt-learning/</guid>
-      <description>&lt;ul&gt;
+      <description>&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;62b49c13db9b4b61a97bc64140d96453&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
+
+&lt;ul&gt;
 &lt;li&gt;Markov Decision Processes&lt;/li&gt;
 &lt;li&gt;Policy Learning and Value Learning&lt;/li&gt;
 &lt;li&gt;Bellman Equation&lt;/li&gt;
@@ -29,7 +31,7 @@
 &lt;p&gt;&lt;strong&gt;Ref and Recommend Materials&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;CS231n: Deep Reinforcement Learning (&lt;a href=&#34;https://www.youtube.com/watch?v=lvoHnicueoE&amp;amp;index=14&amp;amp;list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;) (&lt;a href=&#34;http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture14.pdf&#34; target=&#34;_blank&#34;&gt;Slides&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;CS231n: Deep Reinforcement Learning (&lt;a href=&#34;https://www.youtube.com/watch?v=lvoHnicueoE&amp;amp;index=14&amp;amp;list=PLC1qU-LWwrF64f4QKQT-Vg5Wr4qEE1Zxk&#34; target=&#34;_blank&#34;&gt;Video&lt;/a&gt;) (&lt;a href=&#34;http://cs231n.stanford.edu/slides/2017/cs231n_2017_lecture14.pdf&#34; target=&#34;_blank&#34;&gt;Slide&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1312.5602&#34; target=&#34;_blank&#34;&gt;Playing Atari with Deep Reinforcement Learning&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1406.6247&#34; target=&#34;_blank&#34;&gt;Recurrent Models of Visual Attention&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow&#34; target=&#34;_blank&#34;&gt;Reinforcement Learning Methods and Tutorials&lt;/a&gt;&lt;/li&gt;

@@ -2,47 +2,47 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Yuchu Luo - 罗宇矗</title>
-    <link>http://www.luoyuchu.com/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Yuchu Luo - 罗宇矗</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
+    <copyright>&amp;copy; 2017 Yuchu Luo</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>An introduction to Imitation Learning (Part 1)</title>
-      <link>http://www.luoyuchu.com/post/imitation-learning-1/</link>
+      <link>/post/imitation-learning-1/</link>
       <pubDate>Sun, 12 Mar 2017 22:38:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/post/imitation-learning-1/</guid>
+      <guid>/post/imitation-learning-1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Knowledge arrangement about Reinforcement Learning</title>
-      <link>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</link>
+      <link>/post/knowledge-arrangement-about-rl/</link>
       <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/post/knowledge-arrangement-about-rl/</guid>
+      <guid>/post/knowledge-arrangement-about-rl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The knowledge of domain name that everyone should know</title>
-      <link>http://www.luoyuchu.com/post/knowledge-of-domain-name/</link>
+      <link>/post/knowledge-of-domain-name/</link>
       <pubDate>Mon, 11 Jan 2016 07:45:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/post/knowledge-of-domain-name/</guid>
+      <guid>/post/knowledge-of-domain-name/</guid>
       <description></description>
     </item>
     
     <item>
       <title>The construction of user portrait based on Big Data (Theoretical section)</title>
-      <link>http://www.luoyuchu.com/post/user-portrait-theoretical/</link>
+      <link>/post/user-portrait-theoretical/</link>
       <pubDate>Sun, 10 Jan 2016 05:58:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/post/user-portrait-theoretical/</guid>
+      <guid>/post/user-portrait-theoretical/</guid>
       <description></description>
     </item>
     

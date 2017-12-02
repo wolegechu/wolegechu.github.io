@@ -2,30 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks on Yuchu Luo - 罗宇矗</title>
-    <link>http://www.luoyuchu.com/talk/</link>
+    <link>/talk/</link>
     <description>Recent content in Recent &amp; Upcoming Talks on Yuchu Luo - 罗宇矗</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2016 Yuchu Luo</copyright>
+    <copyright>&amp;copy; 2017 Yuchu Luo</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/talk/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>卷积神经网络：从相遇相知到相爱 (available soon)</title>
-      <link>http://www.luoyuchu.com/talk/cnn/</link>
-      <pubDate>Fri, 10 Nov 2017 19:00:00 +0000</pubDate>
+      <title>End-to-end Deep Models For Self-driving Car (Avaliable soon)</title>
+      <link>/talk/end-to-end-deep-models-for-self-driving-car/</link>
+      <pubDate>Sun, 26 Nov 2017 19:00:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/talk/cnn/</guid>
-      <description>&lt;hr /&gt;
+      <guid>/talk/end-to-end-deep-models-for-self-driving-car/</guid>
+      <description>
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;reference&#34;&gt;Reference:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Huval, Brody, et al. &amp;ldquo;An empirical evaluation of deep learning on highway driving.&amp;ldquo; arXiv preprint arXiv:1504.01716 (2015).&lt;/li&gt;
+&lt;li&gt;Ulbrich, Simon, et al. &amp;ldquo;Towards a Functional System Architecture for Automated Vehicles.&amp;ldquo; arXiv preprint arXiv:1703.08557 (2017).&lt;/li&gt;
+&lt;li&gt;Pomerleau, Dean A. &amp;ldquo;Alvinn: An autonomous land vehicle in a neural network.&amp;ldquo; 
+Advances in neural information processing systems. 1989.&lt;/li&gt;
+&lt;li&gt;Muller, Urs, et al. &amp;ldquo;Off-road obstacle avoidance through end-to-end learning.“ Advances in neural information processing systems. 2006.APA&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Chen, Chenyi, et al. &amp;ldquo;Deepdriving: Learning affordance for direct perception in autonomous driving.&amp;ldquo; Proceedings of the IEEE International Conference on Computer Vision. 2015.&lt;/li&gt;
+&lt;li&gt;Chen, Chenyi, et al. &amp;ldquo;Deepdriving: Learning affordance for direct perception in autonomous driving.&amp;ldquo; Proceedings of the IEEE International Conference on Computer Vision. 2015.&lt;/li&gt;
+&lt;li&gt;Bojarski, Mariusz, et al. &amp;ldquo;End to end learning for self-driving cars.&amp;ldquo; arXiv preprint arXiv:1604.07316 (2016).&lt;/li&gt;
+&lt;li&gt;Codevilla, Felipe, et al. &amp;ldquo;End-to-end driving via conditional imitation learning.&amp;ldquo; arXiv preprint arXiv:1710.02410 (2017).&lt;/li&gt;
+&lt;li&gt;Xu, Huazhe, et al. &amp;ldquo;End-to-end learning of driving models from large-scale video datasets.&amp;ldquo; arXiv preprint arXiv:1612.01079(2016).&lt;/li&gt;
+&lt;li&gt;Mukadam, Mustafa, et al. “Tactical Decision Making for Lane Changing with Deep Reinforcement Learning.&amp;rdquo; (2017).&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
     <item>
-      <title>如何实现无人驾驶？ (available soon)</title>
-      <link>http://www.luoyuchu.com/talk/how-to-build-self-driving-car/</link>
+      <title>卷积神经网络：从相遇相知到相爱</title>
+      <link>/talk/cnn/</link>
+      <pubDate>Fri, 10 Nov 2017 19:00:00 +0000</pubDate>
+      
+      <guid>/talk/cnn/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;7aba17f26f474cb9aebb0ffba3c11446&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>如何实现无人驾驶</title>
+      <link>/talk/how-to-build-self-driving-car/</link>
       <pubDate>Fri, 20 Oct 2017 19:00:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/talk/how-to-build-self-driving-car/</guid>
+      <guid>/talk/how-to-build-self-driving-car/</guid>
       <description>&lt;p&gt;MIL 智能体组无人驾驶汽车项目介绍&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -34,10 +64,10 @@
     
     <item>
       <title>Deep Reinforcement Learning</title>
-      <link>http://www.luoyuchu.com/talk/deep-reinforcemnt-learning/</link>
+      <link>/talk/deep-reinforcemnt-learning/</link>
       <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/talk/deep-reinforcemnt-learning/</guid>
+      <guid>/talk/deep-reinforcemnt-learning/</guid>
       <description>&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;62b49c13db9b4b61a97bc64140d96453&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
 &lt;hr /&gt;
@@ -65,10 +95,10 @@
     
     <item>
       <title>Intro to Reinforcement Learning</title>
-      <link>http://www.luoyuchu.com/talk/reinforcement-learning/</link>
+      <link>/talk/reinforcement-learning/</link>
       <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.luoyuchu.com/talk/reinforcement-learning/</guid>
+      <guid>/talk/reinforcement-learning/</guid>
       <description>&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;2b0ad1af004f4266b693269e394f35cf&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
 &lt;hr /&gt;

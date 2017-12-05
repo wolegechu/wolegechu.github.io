@@ -11,6 +11,133 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>2017-12-03</title>
+      <link>/post/til-2017-12-04/</link>
+      <pubDate>Sun, 03 Dec 2017 00:38:00 +0000</pubDate>
+      
+      <guid>/post/til-2017-12-04/</guid>
+      <description>
+
+&lt;h2 id=&#34;paper-daily&#34;&gt;Paper Daily&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(NIPS 2017) Visual Reference Resolution using Attention Memory for Visual Dialog, Paul Hongsuch Seo
+
+&lt;ul&gt;
+&lt;li&gt;An associative attention memory storing s sequence of previous (attention, key) pairs&lt;/li&gt;
+&lt;li&gt;Retrieves the previous attention, taking into account recency, which is most relevant for the current Q&lt;/li&gt;
+&lt;li&gt;Resoning ability, maybe the best single model (trained by mle) presently.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;computer-network-notes&#34;&gt;Computer Network Notes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Classes (think in binary system)
+
+&lt;ul&gt;
+&lt;li&gt;CA: 1-126 ($2^{24}-2$)&lt;/li&gt;
+&lt;li&gt;CB: 128-191 ($2^{16}-2$)&lt;/li&gt;
+&lt;li&gt;CC: 192-223 ($2^8-2$)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;DBA: Directed Broadcast Address (NID, HID 1s [11.255.255.255])&lt;/li&gt;
+&lt;li&gt;NID: (NID, HID 0s [11.0.0.0])&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;types-of-casting&#34;&gt;Types of casting&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unicast&lt;/li&gt;
+&lt;li&gt;Broadcast
+
+&lt;ul&gt;
+&lt;li&gt;Limited
+
+&lt;ul&gt;
+&lt;li&gt;11.0.0.0  |m|11.1.2.3 (Source Address)|255.255.255.255 (Destination Address)|&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Directed
+
+&lt;ul&gt;
+&lt;li&gt;11.0.0.0  |m|11.1.2.3|20.255.255.255|&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;subnets-subnet-mask-cidr&#34;&gt;Subnets, Subnet Mask, CIDR&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;subnetting disadvantage
+
+&lt;ul&gt;
+&lt;li&gt;reach the process complexly&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The difference between in subnet and outside subnet;&lt;/li&gt;
+&lt;li&gt;Every subnet waste two IP addresses for the NID and DBA
+
+&lt;ul&gt;
+&lt;li&gt;2 subnet: For CC: (128 - 2) x 2 = 252&lt;/li&gt;
+&lt;li&gt;2 subnet: (200.1.2.0)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Subnet Mask: 32 bit
+
+&lt;ul&gt;
+&lt;li&gt;#1: #NID + #SID, #0: #HID&lt;/li&gt;
+&lt;li&gt;can find out NID&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Variable lenght subnet masking (VLSM)&lt;/li&gt;
+&lt;li&gt;Classless Inter Domain Routing
+
+&lt;ul&gt;
+&lt;li&gt;(a.b.c.d/n) n: #NID&lt;/li&gt;
+&lt;li&gt;Rules of blocks
+
+&lt;ul&gt;
+&lt;li&gt;All IP addrees should be contiguous&lt;/li&gt;
+&lt;li&gt;$2^n$&lt;/li&gt;
+&lt;li&gt;Fast IP address in the block should be evenly divided by size of the block&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Subnetting in CIDR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;operating-system-notes&#34;&gt;Operating System Notes&lt;/h2&gt;
+
+&lt;h2 id=&#34;file-system&#34;&gt;File System&lt;/h2&gt;
+
+&lt;h3 id=&#34;cache-memory&#34;&gt;cache memory&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cache - Paging (main memory) - Secondary Memory
+
+&lt;ul&gt;
+&lt;li&gt;Hit latency: the time to hit in the cache&lt;/li&gt;
+&lt;li&gt;Cache hit: a state in which data requested for processing by a component or application is found in the cache memory&lt;/li&gt;
+&lt;li&gt;Cache miss: not found&lt;/li&gt;
+&lt;li&gt;Miss latency: the time (in cycles) the CPU waits when a miss happen in the cache&lt;/li&gt;
+&lt;li&gt;Page fault, Page hit&lt;/li&gt;
+&lt;li&gt;Spatial/temporal locality&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Direct Mapping
+
+&lt;ul&gt;
+&lt;li&gt;[Tag | Index | Offset]&lt;/li&gt;
+&lt;li&gt;$2^m$ addresses&lt;/li&gt;
+&lt;li&gt;$2^k$ cache entries&lt;/li&gt;
+&lt;li&gt;$2^n$ block size&lt;/li&gt;
+&lt;li&gt;Step:
+
+&lt;ul&gt;
+&lt;li&gt;Use the index part of the address to find the appropriate cache entry&lt;/li&gt;
+&lt;li&gt;CHeck the tag to see if the entry contains the right data&lt;/li&gt;
+&lt;li&gt;If it does, then use the offset to the find the correct byte&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>End-to-end Deep Models For Self-driving Car (Avaliable soon)</title>
       <link>/talk/end-to-end-deep-models-for-self-driving-car/</link>
       <pubDate>Sun, 26 Nov 2017 19:00:00 +0000</pubDate>
@@ -336,15 +463,6 @@ $ gulp
 
 &lt;p&gt;You can see the code &lt;a href=&#34;https://raw.githubusercontent.com/wolegechu/Meet-Up-Event-Planner&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Knowledge arrangement about Reinforcement Learning</title>
-      <link>/post/knowledge-arrangement-about-rl/</link>
-      <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
-      
-      <guid>/post/knowledge-arrangement-about-rl/</guid>
-      <description></description>
     </item>
     
   </channel>

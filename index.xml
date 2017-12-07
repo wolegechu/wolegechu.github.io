@@ -11,11 +11,11 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>2017-12-03</title>
-      <link>/post/til-2017-12-04/</link>
-      <pubDate>Sun, 03 Dec 2017 00:38:00 +0000</pubDate>
+      <title>2017-12-05</title>
+      <link>/post/til-2017-12-05/</link>
+      <pubDate>Tue, 05 Dec 2017 00:38:00 +0000</pubDate>
       
-      <guid>/post/til-2017-12-04/</guid>
+      <guid>/post/til-2017-12-05/</guid>
       <description>
 
 &lt;h2 id=&#34;paper-daily&#34;&gt;Paper Daily&lt;/h2&gt;
@@ -26,7 +26,8 @@
 &lt;ul&gt;
 &lt;li&gt;An associative attention memory storing s sequence of previous (attention, key) pairs&lt;/li&gt;
 &lt;li&gt;Retrieves the previous attention, taking into account recency, which is most relevant for the current Q&lt;/li&gt;
-&lt;li&gt;Resoning ability, maybe the best single model (trained by mle) presently.&lt;/li&gt;
+&lt;li&gt;Resoning ability, maybe the best single model (trained by mle) presently&lt;/li&gt;
+&lt;li&gt;Other keywords, text as key, attention as value, aceess values according to key; Method is Attention over attention&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -121,7 +122,7 @@
 &lt;li&gt;Direct Mapping
 
 &lt;ul&gt;
-&lt;li&gt;[Tag | Index | Offset]&lt;/li&gt;
+&lt;li&gt;[Tag | Index (line number)| (block) Offset]&lt;/li&gt;
 &lt;li&gt;$2^m$ addresses&lt;/li&gt;
 &lt;li&gt;$2^k$ cache entries&lt;/li&gt;
 &lt;li&gt;$2^n$ block size&lt;/li&gt;
@@ -132,6 +133,82 @@
 &lt;li&gt;CHeck the tag to see if the entry contains the right data&lt;/li&gt;
 &lt;li&gt;If it does, then use the offset to the find the correct byte&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>2017-12-05</title>
+      <link>/post/til-2017-12-06/</link>
+      <pubDate>Tue, 05 Dec 2017 00:38:00 +0000</pubDate>
+      
+      <guid>/post/til-2017-12-06/</guid>
+      <description>
+
+&lt;h2 id=&#34;paper-daily&#34;&gt;Paper Daily&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Where Classification Fails, Interpretation Rises
+
+&lt;ul&gt;
+&lt;li&gt;apply an attention mechanism to the adversarial examples detection&lt;/li&gt;
+&lt;li&gt;uisng attention to defend against adversarial examples&lt;/li&gt;
+&lt;li&gt;(this paper is hard to read)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Deep Image Prior
+
+&lt;ul&gt;
+&lt;li&gt;randomly-initialized neural network can be used as a handcrafted prior with excellent results&lt;/li&gt;
+&lt;li&gt;search in parameter space&lt;/li&gt;
+&lt;li&gt;apply untrianed CNN, fit a G network to a single degraded image.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Deep Reinforcement Learning framework for Autonoumous Driving
+
+&lt;ul&gt;
+&lt;li&gt;Deep Deterministic Actor Critic (DDAC)
+
+&lt;ul&gt;
+&lt;li&gt;actor: provides the policy mapping from a state to action&lt;/li&gt;
+&lt;li&gt;critic: evaluates the value of the action taken (same as Q-function)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;review-of-clustering-algorithms&#34;&gt;Review of clustering algorithms&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Clustering
+
+&lt;ul&gt;
+&lt;li&gt;k-means&lt;/li&gt;
+&lt;li&gt;k-medoids&lt;/li&gt;
+&lt;li&gt;Gaussian Mixture Model&lt;/li&gt;
+&lt;li&gt;Spectral Clustering&lt;/li&gt;
+&lt;li&gt;Hierachical Clustering&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Other relevant algorithms
+
+&lt;ul&gt;
+&lt;li&gt;Expecatation Maximization&lt;/li&gt;
+&lt;li&gt;Dimendsionality Reduction
+
+&lt;ul&gt;
+&lt;li&gt;Laplacian Eigenmap&lt;/li&gt;
+&lt;li&gt;Locally Linear Embedding&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;computer-orgnisation&#34;&gt;Computer orgnisation&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Direct mapping
+
+&lt;ul&gt;
+&lt;li&gt;process is divided into pages&lt;/li&gt;
+&lt;li&gt;main memory is divided into frames/blocks&lt;/li&gt;
+&lt;li&gt;cache is divided into lines&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
@@ -415,53 +492,6 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
 &lt;/ul&gt;
 
 &lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/1.%20Boston%20Housing%20Prices/boston_housing.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Meet Up Event Planner</title>
-      <link>/project/meet-up-event-planner/</link>
-      <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/meet-up-event-planner/</guid>
-      <description>
-
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-
-&lt;p&gt;This is Udacity Senior web developer 1st project
-Meet up event planner is a web app for creating events with features as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;HTML5, SASS&lt;/li&gt;
-&lt;li&gt;Firebase API&lt;/li&gt;
-&lt;li&gt;Bootstrap 3 provides foundational styling and utility CSS classes (ex. alerts, error styling)&lt;/li&gt;
-&lt;li&gt;Real-time validation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;install-the-node-package-building-test&#34;&gt;Install the node package &amp;amp; Building &amp;amp; Test&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/wolegechu/Meet-Up-Event-Planner.git
-$ cd Meet-Up-Event-Planner
-$ npm install
-$ gulp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;You must run this application on &amp;lsquo;localhost&amp;rsquo; due to the Firebase&lt;/li&gt;
-&lt;li&gt;You should register an account first&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;web-pages&#34;&gt;Web Pages&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;index.html&lt;/strong&gt;: login&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;signup.html&lt;/strong&gt;: register&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;app.html&lt;/strong&gt;: display and creating plans&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can see the code &lt;a href=&#34;https://raw.githubusercontent.com/wolegechu/Meet-Up-Event-Planner&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

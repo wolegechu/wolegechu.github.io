@@ -11,6 +11,248 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>2017-12-12</title>
+      <link>/post/til-2017-12-12/</link>
+      <pubDate>Tue, 12 Dec 2017 00:38:00 +0000</pubDate>
+      
+      <guid>/post/til-2017-12-12/</guid>
+      <description>
+
+&lt;h2 id=&#34;note-deep-learning-practice-and-trends-nips-2017&#34;&gt;[Note] Deep Learning: Practice and Trends (NIPS 2017)&lt;/h2&gt;
+
+&lt;h3 id=&#34;practice&#34;&gt;Practice&lt;/h3&gt;
+
+&lt;h4 id=&#34;architectures&#34;&gt;Architectures&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Convolutional Nets
+
+&lt;ul&gt;
+&lt;li&gt;Locality: objects tend to have a local spatial support
+
+&lt;ul&gt;
+&lt;li&gt;locally-connected&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Teanslation invariance: object appearance is independent of location&lt;/li&gt;
+&lt;li&gt;Tricks of the Trade
+
+&lt;ul&gt;
+&lt;li&gt;Optimization
+
+&lt;ul&gt;
+&lt;li&gt;SGD with momentum&lt;/li&gt;
+&lt;li&gt;Batch Norm&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Initialization
+
+&lt;ul&gt;
+&lt;li&gt;Weight init: start from the weights which lead to stable training&lt;/li&gt;
+&lt;li&gt;Sample from zero-mean normal distribution w/ small variance 0.01
+
+&lt;ul&gt;
+&lt;li&gt;Adaptively choose variance for each layer
+
+&lt;ul&gt;
+&lt;li&gt;preserve gradient magnitude: 1/sqrt(fan_in)&lt;/li&gt;
+&lt;li&gt;works fine for VGGNets (up to 20 layers), but not sufficient for deeper nets&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Model
+
+&lt;ul&gt;
+&lt;li&gt;Stacking 3x3 convolutions&lt;/li&gt;
+&lt;li&gt;Inception&lt;/li&gt;
+&lt;li&gt;ResNet adds modules which ensure that the gradient doesn&amp;rsquo;t vanish&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;recurrent-nets&#34;&gt;Recurrent Nets&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Two Key Ingredients: Neural Embeddings, Recurrent Language Models&lt;/li&gt;
+&lt;li&gt;Dot product Attention
+
+&lt;ul&gt;
+&lt;li&gt;Inputs: &amp;ldquo;I am a cat&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Input RNN states: $e_1e_2e_3e_4$&lt;/li&gt;
+&lt;li&gt;Decoder RNN state at step i (query): $h_i$&lt;/li&gt;
+&lt;li&gt;Compute scalars $h_i^Te_1, h_i^Te_2,&amp;hellip;$representing similarity / relevance between encoder steps and query&lt;/li&gt;
+&lt;li&gt;Normaliza [h_i^Te_1,h_i^Te_2,&amp;hellip;] with softmax to produce attention weights&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Tricks of the Trade
+
+&lt;ul&gt;
+&lt;li&gt;Long sequences?
+
+&lt;ul&gt;
+&lt;li&gt;Attention&lt;/li&gt;
+&lt;li&gt;Bigger state&lt;/li&gt;
+&lt;li&gt;Reverse inputs&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Can&amp;rsquo;t overfit?
+
+&lt;ul&gt;
+&lt;li&gt;Bigger hidden state&lt;/li&gt;
+&lt;li&gt;Deep LSTM + Skip Connections&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Overfit?
+
+&lt;ul&gt;
+&lt;li&gt;Dropout + Ensembles&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Tuning
+
+&lt;ul&gt;
+&lt;li&gt;Keep calm and decrease your learning rate&lt;/li&gt;
+&lt;li&gt;Initalization of parameters is critical (in seq2seq we used U(-0.05, 0.05))&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clip the gradients!&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;E.g. if ||grad|| &amp;gt; 5: grad = grad/||grad|| * 5&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Attention and Memory Toolbox
+
+&lt;ul&gt;
+&lt;li&gt;Read/Write memories (neural turing machine)&lt;/li&gt;
+&lt;li&gt;Sequence Prediction&lt;/li&gt;
+&lt;li&gt;Seq2Seq&lt;/li&gt;
+&lt;li&gt;Temporal Hierarchies&lt;/li&gt;
+&lt;li&gt;Multimodality&lt;/li&gt;
+&lt;li&gt;Attention/Pointers&lt;/li&gt;
+&lt;li&gt;Recurrent Architectures&lt;/li&gt;
+&lt;li&gt;Key, Value memories&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;trends&#34;&gt;Trends&lt;/h3&gt;
+
+&lt;h4 id=&#34;autoregressive-models&#34;&gt;Autoregressive Models&lt;/h4&gt;
+
+&lt;p&gt;$$P(x;\theta) = \prod_{n=1}^N P(x&lt;em&gt;n|x&lt;/em&gt;{&lt;n&gt;};\theta)$$
+- Each factor can be parametrized by $\theta$, which can be shared
+- The variables can be arbitrarily ordered and grouped, as long as the ordering and grouping is consistent.
+- Building Blocks
+    - Inputs and Outpus: these can also be conditioning variables
+        - Image pixels
+        - Text sequences
+        - Audio waveforms
+    - Architectures
+        - Recurrent, over space and time
+        - Causal convolutions
+        - Causal conv + attention
+        - Attention-only!
+    - Losses:
+        - Discrete case: softmax cross entropy
+        - Continuous: Gaussian (mixture) likelihood
+        - &lt;strong&gt;Mixture of logistics loss&lt;/strong&gt; (PixelCNN++ in ICLR 2017)
+            - $$ v ~ \sum_{i=1}^K \pi_i logistic(\mu_i,s&lt;em&gt;i) $$
+            - $$ P(x|\pi,\mu,s) = \sum&lt;/em&gt;{i=1}^K \pi_i[\sigma((x+0.5-\mu_i)/s_i) - \sigma((x-0.5-\mu_i) / s_i)] $$
+- Autogressive scoring and sampling
+    - Fully sequential models:
+        - PixelCNN, PixelCNN++, WaveNet, &amp;hellip;
+        - O(1) scoring, O(N) sampling
+    - Models with conditional independence assumptions:
+        - O(1) scoring, sampling can be O(1), O(log N), etc depending on cond. indep. assumptions
+    - Distilled models:
+        - Parall WaveNet, Parallel NMT
+        - O(N) scoring, O(1) sampling&lt;/p&gt;
+
+&lt;h4 id=&#34;domain-alignment-unsupervised&#34;&gt;Domain Alignment (unsupervised)&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Building Blocks
+
+&lt;ul&gt;
+&lt;li&gt;Inputs and Outpus
+
+&lt;ul&gt;
+&lt;li&gt;Sets of images with shared structure, but weak or no alignment&lt;/li&gt;
+&lt;li&gt;Text corpora in different languages, but not parallel&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Architecures
+
+&lt;ul&gt;
+&lt;li&gt;Nothing fancy!&lt;/li&gt;
+&lt;li&gt;For images: mostly convolutional nets&lt;/li&gt;
+&lt;li&gt;For text: recurrent&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Losses
+
+&lt;ul&gt;
+&lt;li&gt;Latent space: Domain confusion&lt;/li&gt;
+&lt;li&gt;Pixel space: Cycle consistency&lt;/li&gt;
+&lt;li&gt;Both adversarial loss and likelihoods work!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Approach
+
+&lt;ul&gt;
+&lt;li&gt;Cross-modal retrieval&lt;/li&gt;
+&lt;li&gt;Unsupervised domain transfer for classification&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Case&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DiscoGAN - Car2Face&lt;/li&gt;
+&lt;li&gt;GraspGAN&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Unsupervised Neural Machine Translation&lt;/p&gt;
+
+&lt;h4 id=&#34;learning-to-learn-meta-learning&#34;&gt;Learning to Learn / Meta Learning&lt;/h4&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Building Blocks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Inputs and Outputs: text, images, actions&lt;/li&gt;
+&lt;li&gt;Architectures: Recurrent, CNN (+attention)&lt;/li&gt;
+&lt;li&gt;Losses (loss based on another loss): Model, Optimization, Initialization&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Learning to learn:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What is Meta Learning?
+
+&lt;ul&gt;
+&lt;li&gt;Go beyond train/test from same distribution&lt;/li&gt;
+&lt;li&gt;Task between train/test changes, so model has to &amp;ldquo;learn to learn&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Model Based, Metric Based, Optimization Based&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusions-and-expectations&#34;&gt;Conclusions and Expectations&lt;/h2&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Deep autoregressive models and ConvNets are ubiquitous and already useful in consumer applications&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Inductive biases are useful&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;spatial invariance for CNNs&lt;/li&gt;
+&lt;li&gt;time recurrence for RNNs&lt;/li&gt;
+&lt;li&gt;Permutation invariance for Graphs&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Simple tricks like ResNet will be discovered&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Adversarial networks and unsupervised domain adaptation have interesting market app (e.g. phone apps like style transfer)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Meta learning: more and more of the model lifecycle (train/val/test) will be learned in an end-to-end way&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Program syntesis + Graph networks may be very important and find more real-world applications (e.g. RobustFill)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>2017-12-05</title>
       <link>/post/til-2017-12-05/</link>
       <pubDate>Tue, 05 Dec 2017 00:38:00 +0000</pubDate>
@@ -472,26 +714,6 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
 &lt;/ul&gt;
 
 &lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/2.%20Finding%20Donors/finding_donors.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Predicting Boston Housing Prices</title>
-      <link>/project/boston-housing-prices/</link>
-      <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/boston-housing-prices/</guid>
-      <description>&lt;p&gt;In this project, I applied basic machine learning concepts on data collected for housing prices in the Boston, Massachusetts area to predict the selling price of a new home. I first explored the data to obtain important features and descriptive statistics about the dataset. Next, I properly split the data into testing and training subsets, and determine a suitable performance metric for this problem. Then I analyzed performance graphs for a learning algorithm with varying parameters and training set sizes. This enabled me to pick the optimal model that best generalizes for unseen data. Finally, I tested this optimal model on a new sample and compare the predicted selling price to my statistics.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Evaluating Model performance&lt;/li&gt;
-&lt;li&gt;Model Evaluation &amp;amp; Validation&lt;/li&gt;
-&lt;li&gt;Model Optimization&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/1.%20Boston%20Housing%20Prices/boston_housing.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

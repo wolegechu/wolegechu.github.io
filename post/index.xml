@@ -11,6 +11,120 @@
     <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Virtual Memory OS</title>
+      <link>/post/vm_os/</link>
+      <pubDate>Wed, 27 Dec 2017 00:38:00 +0000</pubDate>
+      
+      <guid>/post/vm_os/</guid>
+      <description>
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#paging&#34;&gt;Paging&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#working-set-model&#34;&gt;Working set model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paging-challenge&#34;&gt;Paging challenge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#re-starting-instructions&#34;&gt;Re-starting instructions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#eviction-policies&#34;&gt;Eviction policies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#thrashing&#34;&gt;Thrashing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#details-of-paging&#34;&gt;Details of paging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-user-level-perspective&#34;&gt;The user-level perspective&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-4-4-bsd&#34;&gt;Case study: 4.4 BSD&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;h2 id=&#34;paging&#34;&gt;Paging&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171227-110059.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use disk to simulate larger virtual than physical memory&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;working-set-model&#34;&gt;Working set model&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Disk much, much slower than memory
+
+&lt;ul&gt;
+&lt;li&gt;Goal: run at memory speed, not disk speed&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;sup&gt;80&lt;/sup&gt;&amp;frasl;&lt;sub&gt;20&lt;/sub&gt; rule: 20% of memory gets 80% of memory accesses
+
+&lt;ul&gt;
+&lt;li&gt;Keep the hot 20% in memory&lt;/li&gt;
+&lt;li&gt;Keep the cold 80% on disk&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paging-challenge&#34;&gt;Paging challenge&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to resume a process after a fault?
+
+&lt;ul&gt;
+&lt;li&gt;Need to save state and resume&lt;/li&gt;
+&lt;li&gt;Process might have been in the middle of an instruction!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What to fetch from disk?
+
+&lt;ul&gt;
+&lt;li&gt;Just needed page or more?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What to eject?
+
+&lt;ul&gt;
+&lt;li&gt;How to allocate physical pages amongst processes?&lt;/li&gt;
+&lt;li&gt;Wchich of a particular process&amp;rsquo;s pages to keep in memory?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;re-starting-instructions&#34;&gt;Re-starting instructions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Hardware provides kernel with information about page fault
+
+&lt;ul&gt;
+&lt;li&gt;Faulting virtual address (In &lt;code&gt;%cr2&lt;/code&gt; reg on x86&amp;ndash;may see it if you midify Pintos &lt;code&gt;page_fault&lt;/code&gt; and use &lt;code&gt;fault_addr&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Address of instruction that caused fault&lt;/li&gt;
+&lt;li&gt;Was the access a read or write? Was it an instruction fetch? Was it caused by user accss to kernel-only memory?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hardware mush allow resuming after a fault&lt;/li&gt;
+&lt;li&gt;Idempotent instructions are easy
+
+&lt;ul&gt;
+&lt;li&gt;E.g., simple load or store instruction can be restarted&lt;/li&gt;
+&lt;li&gt;Just re-execute any instruction that only accesses one address&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Complex instructions must be re-started, too
+
+&lt;ul&gt;
+&lt;li&gt;E.g., x86 move string instructions&lt;/li&gt;
+&lt;li&gt;Specify src, dst, count in &lt;code&gt;%esi, %edi, %ecx&lt;/code&gt; registers&lt;/li&gt;
+&lt;li&gt;On fault, registers adjusted to resume where move left off
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;eviction-policies&#34;&gt;Eviction policies&lt;/h2&gt;
+
+&lt;h2 id=&#34;thrashing&#34;&gt;Thrashing&lt;/h2&gt;
+
+&lt;h2 id=&#34;details-of-paging&#34;&gt;Details of paging&lt;/h2&gt;
+
+&lt;h2 id=&#34;the-user-level-perspective&#34;&gt;The user-level perspective&lt;/h2&gt;
+
+&lt;h2 id=&#34;case-study-4-4-bsd&#34;&gt;Case study: 4.4 BSD&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Virtual Memory Hardware</title>
       <link>/post/vm_hardware/</link>
       <pubDate>Tue, 26 Dec 2017 00:38:00 +0000</pubDate>
@@ -18,19 +132,72 @@
       <guid>/post/vm_hardware/</guid>
       <description>
 
-&lt;h3 id=&#34;issues-in-sharing-physical-memory&#34;&gt;Issues in sharing physical memory&lt;/h3&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#issues-in-sharing-physical-memory&#34;&gt;Issues in sharing physical memory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#virtual-memory&#34;&gt;Virtual memory&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#goals&#34;&gt;goals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#virtual-memory-advantages&#34;&gt;Virtual memory advantages&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ideas&#34;&gt;Ideas&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#ideal-1-load-time-linking&#34;&gt;Ideal 1: load-time linking&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ideal-2-base-bound-register&#34;&gt;Ideal 2: base + bound register&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#definition&#34;&gt;Definition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#base-bound&#34;&gt;Base + bound&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#trade-offs&#34;&gt;Trade-offs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#segmentation&#34;&gt;Segmentation&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#segmentation-mechanics&#34;&gt;Segmentation mechanics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#segmentation-example&#34;&gt;Segmentation example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#trade-offs-1&#34;&gt;Trade-offs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fragmentation&#34;&gt;Fragmentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#alternatives-to-hardware-mmu&#34;&gt;Alternatives to hardware MMU&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paging&#34;&gt;Paging&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#trade-offs-2&#34;&gt;Trade-offs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#simplified-allocation&#34;&gt;Simplified allocation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paging-data-structures&#34;&gt;Paging data structures&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#example-paging-on-pdp-11&#34;&gt;Example: Paging on PDP-11&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-152306.png&#34; alt=&#34;&#34; /&gt;
-- Protection
-    - A bug in one process can corrupt in another
-    - Must somehow prevent process A from trashing B&amp;rsquo;s memory
-    - Also prevent A from even observing B&amp;rsquo;s memory (ssh-agent)
-- Transparency
-    - A process shouldn&amp;rsquo;t require particular physical memory bits
-    - Yet processes often require large amounts of contiguous memory (for stack, large data structures, etc.)
-- Resource exhaustion
-    - Programmers typically assume machine has &amp;ldquo;enough&amp;rdquo; memory
-    - Sum of sizes of all processes often greater than physical memory&lt;/p&gt;
+
+&lt;h2 id=&#34;issues-in-sharing-physical-memory&#34;&gt;Issues in sharing physical memory&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-152306.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Protection
+
+&lt;ul&gt;
+&lt;li&gt;A bug in one process can corrupt in another&lt;/li&gt;
+&lt;li&gt;Must somehow prevent process A from trashing B&amp;rsquo;s memory&lt;/li&gt;
+&lt;li&gt;Also prevent A from even observing B&amp;rsquo;s memory (ssh-agent)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Transparency
+
+&lt;ul&gt;
+&lt;li&gt;A process shouldn&amp;rsquo;t require particular physical memory bits&lt;/li&gt;
+&lt;li&gt;Yet processes often require large amounts of contiguous memory (for stack, large data structures, etc.)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Resource exhaustion
+
+&lt;ul&gt;
+&lt;li&gt;Programmers typically assume machine has &amp;ldquo;enough&amp;rdquo; memory&lt;/li&gt;
+&lt;li&gt;Sum of sizes of all processes often greater than physical memory&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;virtual-memory&#34;&gt;Virtual memory&lt;/h2&gt;
 
@@ -78,27 +245,48 @@
 
 &lt;h3 id=&#34;ideal-1-load-time-linking&#34;&gt;Ideal 1: load-time linking&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-154928.png&#34; alt=&#34;&#34; /&gt;
-- &lt;em&gt;Linker&lt;/em&gt; patches addresses of symbols like printf
-- Idea: link when process executed, not at compile time
-    - Determine where process will reside in memory
-    - Adjust all refernces within program (using addtion)
-- Problems?
-    - How to enforce protection?
-    - How to move once already in memory? (consider data pointers)
-    - What if no contiguous free region fits program?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-154928.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Linker&lt;/em&gt; patches addresses of symbols like printf&lt;/li&gt;
+&lt;li&gt;Idea: link when process executed, not at compile time
+
+&lt;ul&gt;
+&lt;li&gt;Determine where process will reside in memory&lt;/li&gt;
+&lt;li&gt;Adjust all refernces within program (using addtion)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Problems?
+
+&lt;ul&gt;
+&lt;li&gt;How to enforce protection?&lt;/li&gt;
+&lt;li&gt;How to move once already in memory? (consider data pointers)&lt;/li&gt;
+&lt;li&gt;What if no contiguous free region fits program?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;ideal-2-base-bound-register&#34;&gt;Ideal 2: base + bound register&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-163437.png&#34; alt=&#34;&#34; /&gt;
-- Two special privileged registers: &lt;strong&gt;base&lt;/strong&gt; snf &lt;strong&gt;bound&lt;/strong&gt;
-- On each load/store/jump:
-    - Physical address = virtual address + base
-    - Check 0 ≤ vitual address ≤ bound, else trap to kernel
-- How to move process in memory?
-    - Change base register
-- What happens on context switch?
-    - OS must re-load base and bound register&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-163437.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Two special privileged registers: &lt;strong&gt;base&lt;/strong&gt; snf &lt;strong&gt;bound&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;On each load/store/jump:
+
+&lt;ul&gt;
+&lt;li&gt;Physical address = virtual address + base&lt;/li&gt;
+&lt;li&gt;Check 0 ≤ vitual address ≤ bound, else trap to kernel&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;How to move process in memory?
+
+&lt;ul&gt;
+&lt;li&gt;Change base register&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What happens on context switch?
+
+&lt;ul&gt;
+&lt;li&gt;OS must re-load base and bound register&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;definition&#34;&gt;Definition&lt;/h2&gt;
 
@@ -143,25 +331,43 @@
 
 &lt;h2 id=&#34;segmentation&#34;&gt;Segmentation&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-164915.png&#34; alt=&#34;&#34; /&gt;
-- Let processes have many base/bound regs
-    - Address space built from many segments
-    - Can share/protect memory at segment granularity
-- Must specify segment as part of virtual address&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-164915.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Let processes have many base/bound regs
+
+&lt;ul&gt;
+&lt;li&gt;Address space built from many segments&lt;/li&gt;
+&lt;li&gt;Can share/protect memory at segment granularity&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Must specify segment as part of virtual address&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;segmentation-mechanics&#34;&gt;Segmentation mechanics&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-191449.png&#34; alt=&#34;&#34; /&gt;
-- Each process has a segment table
-- Each VA (Virtual Address) indicates a segment and offset:
-    - Top bits of addr select segment, low bits select offset (PDP-10)
-    - Or segment selected by instruction or operand (means you need wider &amp;ldquo;far&amp;rdquo; pointers to specify segment)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-191449.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Each process has a segment table&lt;/li&gt;
+&lt;li&gt;Each VA (Virtual Address) indicates a segment and offset:
+
+&lt;ul&gt;
+&lt;li&gt;Top bits of addr select segment, low bits select offset (PDP-10)&lt;/li&gt;
+&lt;li&gt;Or segment selected by instruction or operand (means you need wider &amp;ldquo;far&amp;rdquo; pointers to specify segment)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;segmentation-example&#34;&gt;Segmentation example&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-192145.png&#34; alt=&#34;&#34; /&gt;
-- 2-bit segment number (1st digit), 12 bit offset (last 3)
-    - Where is 0x0&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-192145.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2-bit segment number (1st digit), 12 bit offset (last 3)
+
+&lt;ul&gt;
+&lt;li&gt;Where is 0x0&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;trade-offs-1&#34;&gt;Trade-offs&lt;/h3&gt;
 
@@ -274,14 +480,23 @@
 &lt;img src=&#34;/img/post/WX20171227-094654.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;###Example: Paging on PDP-11
-- 64K virtual memory, 8K pages
-    - Separate address space for instructions &amp;amp; data
-    - I.e., can&amp;rsquo;t read your own instructions with a load
-- Entire page table stored in registers
-    - 8 Instruction page translation
-    - 8 Data page translation
-- Swap 16 machine registers on each context switch&lt;/p&gt;
+&lt;h3 id=&#34;example-paging-on-pdp-11&#34;&gt;Example: Paging on PDP-11&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;64K virtual memory, 8K pages
+
+&lt;ul&gt;
+&lt;li&gt;Separate address space for instructions &amp;amp; data&lt;/li&gt;
+&lt;li&gt;I.e., can&amp;rsquo;t read your own instructions with a load&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Entire page table stored in registers
+
+&lt;ul&gt;
+&lt;li&gt;8 Instruction page translation&lt;/li&gt;
+&lt;li&gt;8 Data page translation&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Swap 16 machine registers on each context switch&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -293,11 +508,33 @@
       <guid>/post/til-2017-12-12/</guid>
       <description>
 
-&lt;h2 id=&#34;note-deep-learning-practice-and-trends-nips-2017&#34;&gt;[Note] Deep Learning: Practice and Trends (NIPS 2017)&lt;/h2&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#note-deep-learning-practice-and-trends-nips-2017&#34;&gt;[Note] Deep Learning: Practice and Trends (NIPS 2017)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#practice&#34;&gt;Practice&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#architectures&#34;&gt;Architectures&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#recurrent-nets&#34;&gt;Recurrent Nets&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#trends&#34;&gt;Trends&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#autoregressive-models&#34;&gt;Autoregressive Models&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#domain-alignment-unsupervised&#34;&gt;Domain Alignment (unsupervised)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#learning-to-learn-meta-learning&#34;&gt;Learning to Learn / Meta Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusions-and-expectations&#34;&gt;Conclusions and Expectations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
 
-&lt;h3 id=&#34;practice&#34;&gt;Practice&lt;/h3&gt;
 
-&lt;h4 id=&#34;architectures&#34;&gt;Architectures&lt;/h4&gt;
+&lt;h1 id=&#34;note-deep-learning-practice-and-trends-nips-2017&#34;&gt;[Note] Deep Learning: Practice and Trends (NIPS 2017)&lt;/h1&gt;
+
+&lt;h2 id=&#34;practice&#34;&gt;Practice&lt;/h2&gt;
+
+&lt;h3 id=&#34;architectures&#34;&gt;Architectures&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Convolutional Nets
@@ -307,7 +544,6 @@
 
 &lt;ul&gt;
 &lt;li&gt;locally-connected&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Teanslation invariance: object appearance is independent of location&lt;/li&gt;
 &lt;li&gt;Tricks of the Trade
@@ -345,7 +581,7 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&#34;recurrent-nets&#34;&gt;Recurrent Nets&lt;/h4&gt;
+&lt;h3 id=&#34;recurrent-nets&#34;&gt;Recurrent Nets&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Two Key Ingredients: Neural Embeddings, Recurrent Language Models&lt;/li&gt;
@@ -356,7 +592,7 @@
 &lt;li&gt;Input RNN states: $e_1e_2e_3e_4$&lt;/li&gt;
 &lt;li&gt;Decoder RNN state at step i (query): $h_i$&lt;/li&gt;
 &lt;li&gt;Compute scalars $h_i^Te_1, h_i^Te_2,&amp;hellip;$representing similarity / relevance between encoder steps and query&lt;/li&gt;
-&lt;li&gt;Normaliza [h_i^Te_1,h_i^Te_2,&amp;hellip;] with softmax to produce attention weights&lt;/li&gt;
+&lt;li&gt;Normaliza $[h_i^Te_1,h_i^Te_2,&amp;hellip;]$ with softmax to produce attention weights&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Tricks of the Trade
 
@@ -405,40 +641,70 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;trends&#34;&gt;Trends&lt;/h3&gt;
+&lt;h2 id=&#34;trends&#34;&gt;Trends&lt;/h2&gt;
 
-&lt;h4 id=&#34;autoregressive-models&#34;&gt;Autoregressive Models&lt;/h4&gt;
+&lt;h3 id=&#34;autoregressive-models&#34;&gt;Autoregressive Models&lt;/h3&gt;
 
-&lt;p&gt;$$P(x;\theta) = \prod_{n=1}^N P(x&lt;em&gt;n|x&lt;/em&gt;{&lt;n&gt;};\theta)$$
-- Each factor can be parametrized by $\theta$, which can be shared
-- The variables can be arbitrarily ordered and grouped, as long as the ordering and grouping is consistent.
-- Building Blocks
-    - Inputs and Outpus: these can also be conditioning variables
-        - Image pixels
-        - Text sequences
-        - Audio waveforms
-    - Architectures
-        - Recurrent, over space and time
-        - Causal convolutions
-        - Causal conv + attention
-        - Attention-only!
-    - Losses:
-        - Discrete case: softmax cross entropy
-        - Continuous: Gaussian (mixture) likelihood
-        - &lt;strong&gt;Mixture of logistics loss&lt;/strong&gt; (PixelCNN++ in ICLR 2017)
-            - $$ v ~ \sum_{i=1}^K \pi_i logistic(\mu_i,s&lt;em&gt;i) $$
-            - $$ P(x|\pi,\mu,s) = \sum&lt;/em&gt;{i=1}^K \pi_i[\sigma((x+0.5-\mu_i)/s_i) - \sigma((x-0.5-\mu_i) / s_i)] $$
-- Autogressive scoring and sampling
-    - Fully sequential models:
-        - PixelCNN, PixelCNN++, WaveNet, &amp;hellip;
-        - O(1) scoring, O(N) sampling
-    - Models with conditional independence assumptions:
-        - O(1) scoring, sampling can be O(1), O(log N), etc depending on cond. indep. assumptions
-    - Distilled models:
-        - Parall WaveNet, Parallel NMT
-        - O(N) scoring, O(1) sampling&lt;/p&gt;
+&lt;p&gt;$$P(x;\theta) = \prod_{n=1}^N P(x_n|x_n;\theta)$$&lt;/p&gt;
 
-&lt;h4 id=&#34;domain-alignment-unsupervised&#34;&gt;Domain Alignment (unsupervised)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Each factor can be parametrized by $\theta$, which can be shared&lt;/li&gt;
+&lt;li&gt;The variables can be arbitrarily ordered and grouped, as long as the ordering and grouping is consistent.&lt;/li&gt;
+&lt;li&gt;Building Blocks
+
+&lt;ul&gt;
+&lt;li&gt;Inputs and Outpus: these can also be conditioning variables
+
+&lt;ul&gt;
+&lt;li&gt;Image pixels&lt;/li&gt;
+&lt;li&gt;Text sequences&lt;/li&gt;
+&lt;li&gt;Audio waveforms&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Architectures
+
+&lt;ul&gt;
+&lt;li&gt;Recurrent, over space and time&lt;/li&gt;
+&lt;li&gt;Causal convolutions&lt;/li&gt;
+&lt;li&gt;Causal conv + attention&lt;/li&gt;
+&lt;li&gt;Attention-only!&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Losses:
+
+&lt;ul&gt;
+&lt;li&gt;Discrete case: softmax cross entropy&lt;/li&gt;
+&lt;li&gt;Continuous: Gaussian (mixture) likelihood&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mixture of logistics loss&lt;/strong&gt; (PixelCNN++ in ICLR 2017)
+
+&lt;ul&gt;
+&lt;li&gt;$$ v ~ \sum_{i=1}^K \pi_i logistic(\mu_i,s_i) $$&lt;/li&gt;
+&lt;li&gt;$$ P(x|\pi,\mu,s) = \sum_{i=1}^K \pi_i[\sigma((x+0.5-\mu_i)/s_i) - \sigma((x-0.5-\mu_i) / s_i)] $$&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Autogressive scoring and sampling
+
+&lt;ul&gt;
+&lt;li&gt;Fully sequential models:
+
+&lt;ul&gt;
+&lt;li&gt;PixelCNN, PixelCNN++, WaveNet, &amp;hellip;&lt;/li&gt;
+&lt;li&gt;O(1) scoring, O(N) sampling&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Models with conditional independence assumptions:
+
+&lt;ul&gt;
+&lt;li&gt;O(1) scoring, sampling can be O(1), O(log N), etc depending on cond. indep. assumptions&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Distilled models:
+
+&lt;ul&gt;
+&lt;li&gt;Parall WaveNet, Parallel NMT&lt;/li&gt;
+&lt;li&gt;O(N) scoring, O(1) sampling&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;domain-alignment-unsupervised&#34;&gt;Domain Alignment (unsupervised)&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Building Blocks
@@ -471,27 +737,26 @@
 &lt;li&gt;Cross-modal retrieval&lt;/li&gt;
 &lt;li&gt;Unsupervised domain transfer for classification&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Case&lt;/p&gt;
+&lt;li&gt;Case
 
 &lt;ul&gt;
 &lt;li&gt;DiscoGAN - Car2Face&lt;/li&gt;
 &lt;li&gt;GraspGAN&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Unsupervised Neural Machine Translation&lt;/p&gt;
-
-&lt;h4 id=&#34;learning-to-learn-meta-learning&#34;&gt;Learning to Learn / Meta Learning&lt;/h4&gt;&lt;/li&gt;
+&lt;li&gt;Unsupervised Neural Machine Translation&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;li&gt;&lt;p&gt;Building Blocks:&lt;/p&gt;
+&lt;h3 id=&#34;learning-to-learn-meta-learning&#34;&gt;Learning to Learn / Meta Learning&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Building Blocks:
 
 &lt;ul&gt;
 &lt;li&gt;Inputs and Outputs: text, images, actions&lt;/li&gt;
 &lt;li&gt;Architectures: Recurrent, CNN (+attention)&lt;/li&gt;
 &lt;li&gt;Losses (loss based on another loss): Model, Optimization, Initialization&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Learning to learn:&lt;/p&gt;
+&lt;li&gt;Learning to learn:
 
 &lt;ul&gt;
 &lt;li&gt;What is Meta Learning?
@@ -500,29 +765,25 @@
 &lt;li&gt;Go beyond train/test from same distribution&lt;/li&gt;
 &lt;li&gt;Task between train/test changes, so model has to &amp;ldquo;learn to learn&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Model Based, Metric Based, Optimization Based&lt;/p&gt;
-
-&lt;h2 id=&#34;conclusions-and-expectations&#34;&gt;Conclusions and Expectations&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;Model Based, Metric Based, Optimization Based&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;li&gt;&lt;p&gt;Deep autoregressive models and ConvNets are ubiquitous and already useful in consumer applications&lt;/p&gt;&lt;/li&gt;
+&lt;h2 id=&#34;conclusions-and-expectations&#34;&gt;Conclusions and Expectations&lt;/h2&gt;
 
-&lt;li&gt;&lt;p&gt;Inductive biases are useful&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Deep autoregressive models and ConvNets are ubiquitous and already useful in consumer applications&lt;/li&gt;
+&lt;li&gt;Inductive biases are useful
 
 &lt;ul&gt;
 &lt;li&gt;spatial invariance for CNNs&lt;/li&gt;
 &lt;li&gt;time recurrence for RNNs&lt;/li&gt;
 &lt;li&gt;Permutation invariance for Graphs&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Simple tricks like ResNet will be discovered&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Adversarial networks and unsupervised domain adaptation have interesting market app (e.g. phone apps like style transfer)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Meta learning: more and more of the model lifecycle (train/val/test) will be learned in an end-to-end way&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Program syntesis + Graph networks may be very important and find more real-world applications (e.g. RobustFill)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Simple tricks like ResNet will be discovered&lt;/li&gt;
+&lt;li&gt;Adversarial networks and unsupervised domain adaptation have interesting market app (e.g. phone apps like style transfer)&lt;/li&gt;
+&lt;li&gt;Meta learning: more and more of the model lifecycle (train/val/test) will be learned in an end-to-end way&lt;/li&gt;
+&lt;li&gt;Program syntesis + Graph networks may be very important and find more real-world applications (e.g. RobustFill)&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

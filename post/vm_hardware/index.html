@@ -332,19 +332,72 @@
       <div class="article-style" itemprop="articleBody">
         
 
-<h3 id="issues-in-sharing-physical-memory">Issues in sharing physical memory</h3>
+<h2>Table of Contents</h2>
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#issues-in-sharing-physical-memory">Issues in sharing physical memory</a></li>
+<li><a href="#virtual-memory">Virtual memory</a>
+<ul>
+<li><a href="#goals">goals</a></li>
+<li><a href="#virtual-memory-advantages">Virtual memory advantages</a></li>
+</ul></li>
+<li><a href="#ideas">Ideas</a>
+<ul>
+<li><a href="#ideal-1-load-time-linking">Ideal 1: load-time linking</a></li>
+<li><a href="#ideal-2-base-bound-register">Ideal 2: base + bound register</a></li>
+</ul></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#base-bound">Base + bound</a>
+<ul>
+<li><a href="#trade-offs">Trade-offs</a></li>
+</ul></li>
+<li><a href="#segmentation">Segmentation</a>
+<ul>
+<li><a href="#segmentation-mechanics">Segmentation mechanics</a></li>
+<li><a href="#segmentation-example">Segmentation example</a></li>
+<li><a href="#trade-offs-1">Trade-offs</a></li>
+<li><a href="#fragmentation">Fragmentation</a></li>
+<li><a href="#alternatives-to-hardware-mmu">Alternatives to hardware MMU</a></li>
+</ul></li>
+<li><a href="#paging">Paging</a>
+<ul>
+<li><a href="#trade-offs-2">Trade-offs</a></li>
+<li><a href="#simplified-allocation">Simplified allocation</a></li>
+<li><a href="#paging-data-structures">Paging data structures</a></li>
+<li><a href="#example-paging-on-pdp-11">Example: Paging on PDP-11</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
 
-<p><img src="/img/post/WX20171226-152306.png" alt="" />
-- Protection
-    - A bug in one process can corrupt in another
-    - Must somehow prevent process A from trashing B&rsquo;s memory
-    - Also prevent A from even observing B&rsquo;s memory (ssh-agent)
-- Transparency
-    - A process shouldn&rsquo;t require particular physical memory bits
-    - Yet processes often require large amounts of contiguous memory (for stack, large data structures, etc.)
-- Resource exhaustion
-    - Programmers typically assume machine has &ldquo;enough&rdquo; memory
-    - Sum of sizes of all processes often greater than physical memory</p>
+
+<h2 id="issues-in-sharing-physical-memory">Issues in sharing physical memory</h2>
+
+<p><img src="/img/post/WX20171226-152306.png" alt="" /></p>
+
+<ul>
+<li>Protection
+
+<ul>
+<li>A bug in one process can corrupt in another</li>
+<li>Must somehow prevent process A from trashing B&rsquo;s memory</li>
+<li>Also prevent A from even observing B&rsquo;s memory (ssh-agent)</li>
+</ul></li>
+<li>Transparency
+
+<ul>
+<li>A process shouldn&rsquo;t require particular physical memory bits</li>
+<li>Yet processes often require large amounts of contiguous memory (for stack, large data structures, etc.)</li>
+</ul></li>
+<li>Resource exhaustion
+
+<ul>
+<li>Programmers typically assume machine has &ldquo;enough&rdquo; memory</li>
+<li>Sum of sizes of all processes often greater than physical memory</li>
+</ul></li>
+</ul>
 
 <h2 id="virtual-memory">Virtual memory</h2>
 
@@ -392,27 +445,48 @@
 
 <h3 id="ideal-1-load-time-linking">Ideal 1: load-time linking</h3>
 
-<p><img src="/img/post/WX20171226-154928.png" alt="" />
-- <em>Linker</em> patches addresses of symbols like printf
-- Idea: link when process executed, not at compile time
-    - Determine where process will reside in memory
-    - Adjust all refernces within program (using addtion)
-- Problems?
-    - How to enforce protection?
-    - How to move once already in memory? (consider data pointers)
-    - What if no contiguous free region fits program?</p>
+<p><img src="/img/post/WX20171226-154928.png" alt="" /></p>
+
+<ul>
+<li><em>Linker</em> patches addresses of symbols like printf</li>
+<li>Idea: link when process executed, not at compile time
+
+<ul>
+<li>Determine where process will reside in memory</li>
+<li>Adjust all refernces within program (using addtion)</li>
+</ul></li>
+<li>Problems?
+
+<ul>
+<li>How to enforce protection?</li>
+<li>How to move once already in memory? (consider data pointers)</li>
+<li>What if no contiguous free region fits program?</li>
+</ul></li>
+</ul>
 
 <h3 id="ideal-2-base-bound-register">Ideal 2: base + bound register</h3>
 
-<p><img src="/img/post/WX20171226-163437.png" alt="" />
-- Two special privileged registers: <strong>base</strong> snf <strong>bound</strong>
-- On each load/store/jump:
-    - Physical address = virtual address + base
-    - Check 0 ≤ vitual address ≤ bound, else trap to kernel
-- How to move process in memory?
-    - Change base register
-- What happens on context switch?
-    - OS must re-load base and bound register</p>
+<p><img src="/img/post/WX20171226-163437.png" alt="" /></p>
+
+<ul>
+<li>Two special privileged registers: <strong>base</strong> snf <strong>bound</strong></li>
+<li>On each load/store/jump:
+
+<ul>
+<li>Physical address = virtual address + base</li>
+<li>Check 0 ≤ vitual address ≤ bound, else trap to kernel</li>
+</ul></li>
+<li>How to move process in memory?
+
+<ul>
+<li>Change base register</li>
+</ul></li>
+<li>What happens on context switch?
+
+<ul>
+<li>OS must re-load base and bound register</li>
+</ul></li>
+</ul>
 
 <h2 id="definition">Definition</h2>
 
@@ -457,25 +531,43 @@
 
 <h2 id="segmentation">Segmentation</h2>
 
-<p><img src="/img/post/WX20171226-164915.png" alt="" />
-- Let processes have many base/bound regs
-    - Address space built from many segments
-    - Can share/protect memory at segment granularity
-- Must specify segment as part of virtual address</p>
+<p><img src="/img/post/WX20171226-164915.png" alt="" /></p>
+
+<ul>
+<li>Let processes have many base/bound regs
+
+<ul>
+<li>Address space built from many segments</li>
+<li>Can share/protect memory at segment granularity</li>
+</ul></li>
+<li>Must specify segment as part of virtual address</li>
+</ul>
 
 <h3 id="segmentation-mechanics">Segmentation mechanics</h3>
 
-<p><img src="/img/post/WX20171226-191449.png" alt="" />
-- Each process has a segment table
-- Each VA (Virtual Address) indicates a segment and offset:
-    - Top bits of addr select segment, low bits select offset (PDP-10)
-    - Or segment selected by instruction or operand (means you need wider &ldquo;far&rdquo; pointers to specify segment)</p>
+<p><img src="/img/post/WX20171226-191449.png" alt="" /></p>
+
+<ul>
+<li>Each process has a segment table</li>
+<li>Each VA (Virtual Address) indicates a segment and offset:
+
+<ul>
+<li>Top bits of addr select segment, low bits select offset (PDP-10)</li>
+<li>Or segment selected by instruction or operand (means you need wider &ldquo;far&rdquo; pointers to specify segment)</li>
+</ul></li>
+</ul>
 
 <h3 id="segmentation-example">Segmentation example</h3>
 
-<p><img src="/img/post/WX20171226-192145.png" alt="" />
-- 2-bit segment number (1st digit), 12 bit offset (last 3)
-    - Where is 0x0</p>
+<p><img src="/img/post/WX20171226-192145.png" alt="" /></p>
+
+<ul>
+<li>2-bit segment number (1st digit), 12 bit offset (last 3)
+
+<ul>
+<li>Where is 0x0</li>
+</ul></li>
+</ul>
 
 <h3 id="trade-offs-1">Trade-offs</h3>
 
@@ -588,14 +680,23 @@
 <img src="/img/post/WX20171227-094654.png" alt="" /></li>
 </ul>
 
-<p>###Example: Paging on PDP-11
-- 64K virtual memory, 8K pages
-    - Separate address space for instructions &amp; data
-    - I.e., can&rsquo;t read your own instructions with a load
-- Entire page table stored in registers
-    - 8 Instruction page translation
-    - 8 Data page translation
-- Swap 16 machine registers on each context switch</p>
+<h3 id="example-paging-on-pdp-11">Example: Paging on PDP-11</h3>
+
+<ul>
+<li>64K virtual memory, 8K pages
+
+<ul>
+<li>Separate address space for instructions &amp; data</li>
+<li>I.e., can&rsquo;t read your own instructions with a load</li>
+</ul></li>
+<li>Entire page table stored in registers
+
+<ul>
+<li>8 Instruction page translation</li>
+<li>8 Data page translation</li>
+</ul></li>
+<li>Swap 16 machine registers on each context switch</li>
+</ul>
 
       </div>
 
@@ -606,7 +707,7 @@
   
   <a class="btn btn-primary btn-outline" href="/tags/today-i-learned">Today I Learned</a>
   
-  <a class="btn btn-primary btn-outline" href="/tags/computer-network">Computer Network</a>
+  <a class="btn btn-primary btn-outline" href="/tags/operating-system">Operating System</a>
   
 </div>
 
@@ -643,6 +744,9 @@
       aria-hidden="true">&larr;</span> 2017-12-12</a></li>
     
 
+    
+    <li class="next"><a href="/post/vm_os/">Virtual Memory OS <span
+      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>

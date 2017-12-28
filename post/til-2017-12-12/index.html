@@ -332,11 +332,33 @@
       <div class="article-style" itemprop="articleBody">
         
 
-<h2 id="note-deep-learning-practice-and-trends-nips-2017">[Note] Deep Learning: Practice and Trends (NIPS 2017)</h2>
+<h2>Table of Contents</h2>
+<nav id="TableOfContents">
+<ul>
+<li><a href="#note-deep-learning-practice-and-trends-nips-2017">[Note] Deep Learning: Practice and Trends (NIPS 2017)</a>
+<ul>
+<li><a href="#practice">Practice</a>
+<ul>
+<li><a href="#architectures">Architectures</a></li>
+<li><a href="#recurrent-nets">Recurrent Nets</a></li>
+</ul></li>
+<li><a href="#trends">Trends</a>
+<ul>
+<li><a href="#autoregressive-models">Autoregressive Models</a></li>
+<li><a href="#domain-alignment-unsupervised">Domain Alignment (unsupervised)</a></li>
+<li><a href="#learning-to-learn-meta-learning">Learning to Learn / Meta Learning</a></li>
+</ul></li>
+<li><a href="#conclusions-and-expectations">Conclusions and Expectations</a></li>
+</ul></li>
+</ul>
+</nav>
 
-<h3 id="practice">Practice</h3>
 
-<h4 id="architectures">Architectures</h4>
+<h1 id="note-deep-learning-practice-and-trends-nips-2017">[Note] Deep Learning: Practice and Trends (NIPS 2017)</h1>
+
+<h2 id="practice">Practice</h2>
+
+<h3 id="architectures">Architectures</h3>
 
 <ul>
 <li>Convolutional Nets
@@ -346,7 +368,6 @@
 
 <ul>
 <li>locally-connected</li>
-<li></li>
 </ul></li>
 <li>Teanslation invariance: object appearance is independent of location</li>
 <li>Tricks of the Trade
@@ -384,7 +405,7 @@
 </ul></li>
 </ul>
 
-<h4 id="recurrent-nets">Recurrent Nets</h4>
+<h3 id="recurrent-nets">Recurrent Nets</h3>
 
 <ul>
 <li>Two Key Ingredients: Neural Embeddings, Recurrent Language Models</li>
@@ -395,7 +416,7 @@
 <li>Input RNN states: $e_1e_2e_3e_4$</li>
 <li>Decoder RNN state at step i (query): $h_i$</li>
 <li>Compute scalars $h_i^Te_1, h_i^Te_2,&hellip;$representing similarity / relevance between encoder steps and query</li>
-<li>Normaliza [h_i^Te_1,h_i^Te_2,&hellip;] with softmax to produce attention weights</li>
+<li>Normaliza $[h_i^Te_1,h_i^Te_2,&hellip;]$ with softmax to produce attention weights</li>
 </ul></li>
 <li>Tricks of the Trade
 
@@ -444,40 +465,70 @@
 </ul></li>
 </ul>
 
-<h3 id="trends">Trends</h3>
+<h2 id="trends">Trends</h2>
 
-<h4 id="autoregressive-models">Autoregressive Models</h4>
+<h3 id="autoregressive-models">Autoregressive Models</h3>
 
-<p>$$P(x;\theta) = \prod_{n=1}^N P(x<em>n|x</em>{<n>};\theta)$$
-- Each factor can be parametrized by $\theta$, which can be shared
-- The variables can be arbitrarily ordered and grouped, as long as the ordering and grouping is consistent.
-- Building Blocks
-    - Inputs and Outpus: these can also be conditioning variables
-        - Image pixels
-        - Text sequences
-        - Audio waveforms
-    - Architectures
-        - Recurrent, over space and time
-        - Causal convolutions
-        - Causal conv + attention
-        - Attention-only!
-    - Losses:
-        - Discrete case: softmax cross entropy
-        - Continuous: Gaussian (mixture) likelihood
-        - <strong>Mixture of logistics loss</strong> (PixelCNN++ in ICLR 2017)
-            - $$ v ~ \sum_{i=1}^K \pi_i logistic(\mu_i,s<em>i) $$
-            - $$ P(x|\pi,\mu,s) = \sum</em>{i=1}^K \pi_i[\sigma((x+0.5-\mu_i)/s_i) - \sigma((x-0.5-\mu_i) / s_i)] $$
-- Autogressive scoring and sampling
-    - Fully sequential models:
-        - PixelCNN, PixelCNN++, WaveNet, &hellip;
-        - O(1) scoring, O(N) sampling
-    - Models with conditional independence assumptions:
-        - O(1) scoring, sampling can be O(1), O(log N), etc depending on cond. indep. assumptions
-    - Distilled models:
-        - Parall WaveNet, Parallel NMT
-        - O(N) scoring, O(1) sampling</p>
+<p>$$P(x;\theta) = \prod_{n=1}^N P(x_n|x_n;\theta)$$</p>
 
-<h4 id="domain-alignment-unsupervised">Domain Alignment (unsupervised)</h4>
+<ul>
+<li>Each factor can be parametrized by $\theta$, which can be shared</li>
+<li>The variables can be arbitrarily ordered and grouped, as long as the ordering and grouping is consistent.</li>
+<li>Building Blocks
+
+<ul>
+<li>Inputs and Outpus: these can also be conditioning variables
+
+<ul>
+<li>Image pixels</li>
+<li>Text sequences</li>
+<li>Audio waveforms</li>
+</ul></li>
+<li>Architectures
+
+<ul>
+<li>Recurrent, over space and time</li>
+<li>Causal convolutions</li>
+<li>Causal conv + attention</li>
+<li>Attention-only!</li>
+</ul></li>
+<li>Losses:
+
+<ul>
+<li>Discrete case: softmax cross entropy</li>
+<li>Continuous: Gaussian (mixture) likelihood</li>
+<li><strong>Mixture of logistics loss</strong> (PixelCNN++ in ICLR 2017)
+
+<ul>
+<li>$$ v ~ \sum_{i=1}^K \pi_i logistic(\mu_i,s_i) $$</li>
+<li>$$ P(x|\pi,\mu,s) = \sum_{i=1}^K \pi_i[\sigma((x+0.5-\mu_i)/s_i) - \sigma((x-0.5-\mu_i) / s_i)] $$</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Autogressive scoring and sampling
+
+<ul>
+<li>Fully sequential models:
+
+<ul>
+<li>PixelCNN, PixelCNN++, WaveNet, &hellip;</li>
+<li>O(1) scoring, O(N) sampling</li>
+</ul></li>
+<li>Models with conditional independence assumptions:
+
+<ul>
+<li>O(1) scoring, sampling can be O(1), O(log N), etc depending on cond. indep. assumptions</li>
+</ul></li>
+<li>Distilled models:
+
+<ul>
+<li>Parall WaveNet, Parallel NMT</li>
+<li>O(N) scoring, O(1) sampling</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="domain-alignment-unsupervised">Domain Alignment (unsupervised)</h3>
 
 <ul>
 <li>Building Blocks
@@ -510,27 +561,26 @@
 <li>Cross-modal retrieval</li>
 <li>Unsupervised domain transfer for classification</li>
 </ul></li>
-
-<li><p>Case</p>
+<li>Case
 
 <ul>
 <li>DiscoGAN - Car2Face</li>
 <li>GraspGAN</li>
-
-<li><p>Unsupervised Neural Machine Translation</p>
-
-<h4 id="learning-to-learn-meta-learning">Learning to Learn / Meta Learning</h4></li>
+<li>Unsupervised Neural Machine Translation</li>
 </ul></li>
+</ul>
 
-<li><p>Building Blocks:</p>
+<h3 id="learning-to-learn-meta-learning">Learning to Learn / Meta Learning</h3>
+
+<ul>
+<li>Building Blocks:
 
 <ul>
 <li>Inputs and Outputs: text, images, actions</li>
 <li>Architectures: Recurrent, CNN (+attention)</li>
 <li>Losses (loss based on another loss): Model, Optimization, Initialization</li>
 </ul></li>
-
-<li><p>Learning to learn:</p>
+<li>Learning to learn:
 
 <ul>
 <li>What is Meta Learning?
@@ -539,29 +589,25 @@
 <li>Go beyond train/test from same distribution</li>
 <li>Task between train/test changes, so model has to &ldquo;learn to learn&rdquo;</li>
 </ul></li>
-
-<li><p>Model Based, Metric Based, Optimization Based</p>
-
-<h2 id="conclusions-and-expectations">Conclusions and Expectations</h2></li>
+<li>Model Based, Metric Based, Optimization Based</li>
 </ul></li>
+</ul>
 
-<li><p>Deep autoregressive models and ConvNets are ubiquitous and already useful in consumer applications</p></li>
+<h2 id="conclusions-and-expectations">Conclusions and Expectations</h2>
 
-<li><p>Inductive biases are useful</p>
+<ul>
+<li>Deep autoregressive models and ConvNets are ubiquitous and already useful in consumer applications</li>
+<li>Inductive biases are useful
 
 <ul>
 <li>spatial invariance for CNNs</li>
 <li>time recurrence for RNNs</li>
 <li>Permutation invariance for Graphs</li>
 </ul></li>
-
-<li><p>Simple tricks like ResNet will be discovered</p></li>
-
-<li><p>Adversarial networks and unsupervised domain adaptation have interesting market app (e.g. phone apps like style transfer)</p></li>
-
-<li><p>Meta learning: more and more of the model lifecycle (train/val/test) will be learned in an end-to-end way</p></li>
-
-<li><p>Program syntesis + Graph networks may be very important and find more real-world applications (e.g. RobustFill)</p></li>
+<li>Simple tricks like ResNet will be discovered</li>
+<li>Adversarial networks and unsupervised domain adaptation have interesting market app (e.g. phone apps like style transfer)</li>
+<li>Meta learning: more and more of the model lifecycle (train/val/test) will be learned in an end-to-end way</li>
+<li>Program syntesis + Graph networks may be very important and find more real-world applications (e.g. RobustFill)</li>
 </ul>
 
       </div>

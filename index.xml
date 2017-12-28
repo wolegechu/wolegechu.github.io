@@ -11,6 +11,281 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Virtual Memory Hardware</title>
+      <link>/post/vm_hardware/</link>
+      <pubDate>Tue, 26 Dec 2017 00:38:00 +0000</pubDate>
+      
+      <guid>/post/vm_hardware/</guid>
+      <description>
+
+&lt;h3 id=&#34;issues-in-sharing-physical-memory&#34;&gt;Issues in sharing physical memory&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-152306.png&#34; alt=&#34;&#34; /&gt;
+- Protection
+    - A bug in one process can corrupt in another
+    - Must somehow prevent process A from trashing B&amp;rsquo;s memory
+    - Also prevent A from even observing B&amp;rsquo;s memory (ssh-agent)
+- Transparency
+    - A process shouldn&amp;rsquo;t require particular physical memory bits
+    - Yet processes often require large amounts of contiguous memory (for stack, large data structures, etc.)
+- Resource exhaustion
+    - Programmers typically assume machine has &amp;ldquo;enough&amp;rdquo; memory
+    - Sum of sizes of all processes often greater than physical memory&lt;/p&gt;
+
+&lt;h2 id=&#34;virtual-memory&#34;&gt;Virtual memory&lt;/h2&gt;
+
+&lt;h3 id=&#34;goals&#34;&gt;goals&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Give each program its own &lt;em&gt;virtual&lt;/em&gt; address space
+
+&lt;ul&gt;
+&lt;li&gt;At runtime, &lt;strong&gt;Memory-Management Unit (MMU)&lt;/strong&gt; relocates each load/store&lt;/li&gt;
+&lt;li&gt;Application doesn&amp;rsquo;t see physical memory addresses&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Also enforce protection
+
+&lt;ul&gt;
+&lt;li&gt;Prevent one app from messing with another&amp;rsquo;s memory&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;And allow programs to see more memory than exists
+
+&lt;ul&gt;
+&lt;li&gt;Somehow relocate some memory accesses to disk&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;virtual-memory-advantages&#34;&gt;Virtual memory advantages&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Can relocate program while running
+
+&lt;ul&gt;
+&lt;li&gt;Run partially in memory, partially on disk&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Most of a process&amp;rsquo;s memory may be idle (&lt;sup&gt;80&lt;/sup&gt;&amp;frasl;&lt;sub&gt;20&lt;/sub&gt; rule)
+
+&lt;ul&gt;
+&lt;li&gt;&lt;img src=&#34;/img/post/WX20171226-153927.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;Write idle parts to disk until needed&lt;/li&gt;
+&lt;li&gt;Let other processes use memory of idle part&lt;/li&gt;
+&lt;li&gt;Like CPU virtualization: when process not using CPU, switch (Not using amemory region? switch it to another process)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Challenge: VM = extra layer, could be slow&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ideas&#34;&gt;Ideas&lt;/h2&gt;
+
+&lt;h3 id=&#34;ideal-1-load-time-linking&#34;&gt;Ideal 1: load-time linking&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-154928.png&#34; alt=&#34;&#34; /&gt;
+- &lt;em&gt;Linker&lt;/em&gt; patches addresses of symbols like printf
+- Idea: link when process executed, not at compile time
+    - Determine where process will reside in memory
+    - Adjust all refernces within program (using addtion)
+- Problems?
+    - How to enforce protection?
+    - How to move once already in memory? (consider data pointers)
+    - What if no contiguous free region fits program?&lt;/p&gt;
+
+&lt;h3 id=&#34;ideal-2-base-bound-register&#34;&gt;Ideal 2: base + bound register&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-163437.png&#34; alt=&#34;&#34; /&gt;
+- Two special privileged registers: &lt;strong&gt;base&lt;/strong&gt; snf &lt;strong&gt;bound&lt;/strong&gt;
+- On each load/store/jump:
+    - Physical address = virtual address + base
+    - Check 0 ≤ vitual address ≤ bound, else trap to kernel
+- How to move process in memory?
+    - Change base register
+- What happens on context switch?
+    - OS must re-load base and bound register&lt;/p&gt;
+
+&lt;h2 id=&#34;definition&#34;&gt;Definition&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Programs load/store to &lt;code&gt;virtual addresses&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Actual memory uses &lt;code&gt;physical addresses&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;VM Hardware is Memory Management Unit (&lt;code&gt;MMU&lt;/code&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;Usually part of CPU&lt;/li&gt;
+&lt;li&gt;Configured through privileged instructions (e.g., load bound reg)&lt;/li&gt;
+&lt;li&gt;Translates from virtual to physical addresses&lt;/li&gt;
+&lt;li&gt;Gives per-process view of memory called &lt;code&gt;address space&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;base-bound&#34;&gt;Base + bound&lt;/h2&gt;
+
+&lt;h3 id=&#34;trade-offs&#34;&gt;Trade-offs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Advantages
+
+&lt;ul&gt;
+&lt;li&gt;Cheap in terms of hardware: only two registers&lt;/li&gt;
+&lt;li&gt;Cheap in terms of cycles: do add and compare in parallel&lt;/li&gt;
+&lt;li&gt;Examples: Cray-1 used this scheme&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Disadvantages
+
+&lt;ul&gt;
+&lt;li&gt;Growing a process is expensive or impossible&lt;/li&gt;
+&lt;li&gt;No way to share code or data (E.g., two copies of bochs, both running pintos)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;One solution: Multiple segments
+
+&lt;ul&gt;
+&lt;li&gt;E.g., separate code, stack, data segments&lt;/li&gt;
+&lt;li&gt;Possibly multiple data segments&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;segmentation&#34;&gt;Segmentation&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-164915.png&#34; alt=&#34;&#34; /&gt;
+- Let processes have many base/bound regs
+    - Address space built from many segments
+    - Can share/protect memory at segment granularity
+- Must specify segment as part of virtual address&lt;/p&gt;
+
+&lt;h3 id=&#34;segmentation-mechanics&#34;&gt;Segmentation mechanics&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-191449.png&#34; alt=&#34;&#34; /&gt;
+- Each process has a segment table
+- Each VA (Virtual Address) indicates a segment and offset:
+    - Top bits of addr select segment, low bits select offset (PDP-10)
+    - Or segment selected by instruction or operand (means you need wider &amp;ldquo;far&amp;rdquo; pointers to specify segment)&lt;/p&gt;
+
+&lt;h3 id=&#34;segmentation-example&#34;&gt;Segmentation example&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/WX20171226-192145.png&#34; alt=&#34;&#34; /&gt;
+- 2-bit segment number (1st digit), 12 bit offset (last 3)
+    - Where is 0x0&lt;/p&gt;
+
+&lt;h3 id=&#34;trade-offs-1&#34;&gt;Trade-offs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Advantages
+
+&lt;ul&gt;
+&lt;li&gt;Multiple segments per process&lt;/li&gt;
+&lt;li&gt;Allows sharing!&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t need entire process in memory&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Disadvantages
+
+&lt;ul&gt;
+&lt;li&gt;Requires translation hardware, which could limit performance&lt;/li&gt;
+&lt;li&gt;Segments not completely transparent to program (e.g., default segment faster or uses shorter instruction)&lt;/li&gt;
+&lt;li&gt;$n$ byte segment needs &lt;em&gt;n contiguous&lt;/em&gt; bytes of physical memory&lt;/li&gt;
+&lt;li&gt;Makes &lt;em&gt;fragmentation&lt;/em&gt; a real problem&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;fragmentation&#34;&gt;Fragmentation&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fragmentation =&amp;gt; Inability to use free memory&lt;/li&gt;
+&lt;li&gt;Over time:
+
+&lt;ul&gt;
+&lt;li&gt;Variable-sized pices = many small holes (external fragmentation)&lt;/li&gt;
+&lt;li&gt;Fixed-sized pieces = no external holes, but force internal waste (internal fragmentation)
+&lt;img src=&#34;/img/post/WX20171226-213655.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;alternatives-to-hardware-mmu&#34;&gt;Alternatives to hardware MMU&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Language-level protection (Java)
+
+&lt;ul&gt;
+&lt;li&gt;Single address space for different modules&lt;/li&gt;
+&lt;li&gt;Language enforces isolation&lt;/li&gt;
+&lt;li&gt;Singularity OS does this&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Software fault isolation
+
+&lt;ul&gt;
+&lt;li&gt;Instrument compiler output&lt;/li&gt;
+&lt;li&gt;Checks before ever ystore operation prevents modules from trashing each other&lt;/li&gt;
+&lt;li&gt;Google Native Client does this&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;paging&#34;&gt;Paging&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Divede memory up into small &lt;em&gt;pages&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Map virtual pages to physical pages
+
+&lt;ul&gt;
+&lt;li&gt;Each process has separate mapping&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Allow OS to gain control on certain operation
+
+&lt;ul&gt;
+&lt;li&gt;Read-only pages trap to OS on write&lt;/li&gt;
+&lt;li&gt;Invalid pages trap to OS on read or write&lt;/li&gt;
+&lt;li&gt;OS can change mapping and resume application&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Other features sometimes found:
+
+&lt;ul&gt;
+&lt;li&gt;Hardware can set &amp;ldquo;accessed&amp;rdquo; and &amp;ldquo;dirty&amp;rdquo; bits&lt;/li&gt;
+&lt;li&gt;Control page execute permission separately from read/write&lt;/li&gt;
+&lt;li&gt;Control caching or memory consistency of page&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;trade-offs-2&#34;&gt;Trade-offs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Eliminates external fragmentation&lt;/li&gt;
+&lt;li&gt;Simplifies allocation, free, and backing storage (swap)&lt;/li&gt;
+&lt;li&gt;Average internal fragmentation of .5 pages per &amp;ldquo;segment&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;simplified-allocation&#34;&gt;Simplified allocation&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Allocate any physical page to any process&lt;/li&gt;
+&lt;li&gt;Can store idle virtual pages on disk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paging-data-structures&#34;&gt;Paging data structures&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Pages are fixed size, e.g., 4K
+
+&lt;ul&gt;
+&lt;li&gt;Least significant 12 ($log_{2}4K$) bits of address are page offset&lt;/li&gt;
+&lt;li&gt;Most significant bits are &lt;em&gt;page number&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Each process has a page table
+
+&lt;ul&gt;
+&lt;li&gt;Maps &lt;em&gt;virtual page numbers (VPNs)&lt;/em&gt; to &lt;em&gt;physical page numbers (PPNS)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Also includes bits for protection, validity, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;On memory access: Translate VPN to PPN, then add offset
+&lt;img src=&#34;/img/post/WX20171227-094654.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;###Example: Paging on PDP-11
+- 64K virtual memory, 8K pages
+    - Separate address space for instructions &amp;amp; data
+    - I.e., can&amp;rsquo;t read your own instructions with a load
+- Entire page table stored in registers
+    - 8 Instruction page translation
+    - 8 Data page translation
+- Swap 16 machine registers on each context switch&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>2017-12-12</title>
       <link>/post/til-2017-12-12/</link>
       <pubDate>Tue, 12 Dec 2017 00:38:00 +0000</pubDate>
@@ -690,30 +965,6 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
 &lt;/ul&gt;
 
 &lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/3.%20Customer%20Segments/customer_segments.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Finding Donors for CharityML</title>
-      <link>/project/finding-donors/</link>
-      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/finding-donors/</guid>
-      <description>&lt;p&gt;In this project, I applied supervised learning techniques and an analytical mind on data collected for the U.S. census to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. I first explored the data to learn how the census data is recorded. Next, I applied a series of transformations and preprocessing techniques to manipulate the data into a workable format. Then I evaluated several supervised learners of my choice on the data, and considered which is best suited for the solution. Afterwards, I optimized the model I had selected and presented it as my solution to CharityML. Finally, I explored the chosen model and its predictions under the hood, to see just how well it&amp;rsquo;s performing when considering the data it&amp;rsquo;s given. predicted selling price to the statistics.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Decision Trees&lt;/li&gt;
-&lt;li&gt;Regression &amp;amp; Classification&lt;/li&gt;
-&lt;li&gt;Regressions&lt;/li&gt;
-&lt;li&gt;Kernel Methods &amp;amp; SVM&lt;/li&gt;
-&lt;li&gt;GaussianNB&lt;/li&gt;
-&lt;li&gt;Ensemble learning&lt;/li&gt;
-&lt;li&gt;RandomForestClassifier&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/2.%20Finding%20Donors/finding_donors.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

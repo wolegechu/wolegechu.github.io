@@ -273,7 +273,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    3 min read
   </span>
   
 
@@ -342,8 +342,14 @@
 <li><a href="#working-set-model">Working set model</a></li>
 <li><a href="#paging-challenge">Paging challenge</a></li>
 <li><a href="#re-starting-instructions">Re-starting instructions</a></li>
+<li><a href="#what-to-fetch">What to fetch</a></li>
+<li><a href="#selecting-physical-pages">Selecting physical pages</a></li>
+<li><a href="#superpages">Superpages</a></li>
 </ul></li>
-<li><a href="#eviction-policies">Eviction policies</a></li>
+<li><a href="#eviction-policies">Eviction policies</a>
+<ul>
+<li><a href="#starw-man-fifo-eviction">Starw man: FIFO eviction</a></li>
+</ul></li>
 <li><a href="#thrashing">Thrashing</a></li>
 <li><a href="#details-of-paging">Details of paging</a></li>
 <li><a href="#the-user-level-perspective">The user-level perspective</a></li>
@@ -421,12 +427,88 @@
 <ul>
 <li>E.g., x86 move string instructions</li>
 <li>Specify src, dst, count in <code>%esi, %edi, %ecx</code> registers</li>
-<li>On fault, registers adjusted to resume where move left off
-<br /></li>
+<li>On fault, registers adjusted to resume where move left off</li>
+</ul></li>
+</ul>
+
+<h3 id="what-to-fetch">What to fetch</h3>
+
+<ul>
+<li>Bring in page that caused page fault</li>
+<li>Pre-fetch surrounding pages?
+
+<ul>
+<li>Reading two disk blocks approximately as fast as reading one</li>
+<li>As long as no track/head switch, seek time dominates</li>
+<li>If application exhibits spacial locality, then big win to store and read multiple contiguous pages</li>
+</ul></li>
+<li>Also pre-zero unused pages in idle loop
+
+<ul>
+<li>Need 0-filled pages for stack, heap, anonymously mmapped memory</li>
+<li>Zeroing them only on demand is slower</li>
+<li>Hence, many OSes zero freed pages while CPU is idle</li>
+</ul></li>
+</ul>
+
+<h3 id="selecting-physical-pages">Selecting physical pages</h3>
+
+<ul>
+<li>May need to eject some pages
+
+<ul>
+<li>More on eviction policy in two slides</li>
+</ul></li>
+<li>May also have a choice of physical pages</li>
+<li>Direct-mapped physical caches
+
+<ul>
+<li>Virtual -&gt; Physical mapping can affect performance</li>
+<li>In old days: Physical adddredd A conflicts with $kC+A$ (where k is any integer, C is cache size)</li>
+<li>Applications can conflict with each other or themselves</li>
+<li>Scientific application benefit if consecutive virtual pages do not confilict in the cache</li>
+<li>Many other applications do better with random mapping</li>
+<li>There days: CPUs more sophisticated than kC + A</li>
+</ul></li>
+</ul>
+
+<h3 id="superpages">Superpages</h3>
+
+<ul>
+<li>How should OS make use of &ldquo;large&rdquo; mappings
+
+<ul>
+<li>x86 has <sup>2</sup>&frasl;<sub>4</sub> MB pages that might be useful</li>
+<li>Alpha has even more choices: 8KB, 64KB, 512KB, 4MB</li>
+</ul></li>
+<li>Sometimes more pages in L2 cache than TLB entries
+
+<ul>
+<li>Don&rsquo;t want costly TLB misses going to main memory</li>
+</ul></li>
+<li>Or have two-level TLBs
+
+<ul>
+<li>Want to maximize hit rate in faster L1 TLB</li>
+</ul></li>
+<li>OS can transparently support superpages
+
+<ul>
+<li>&ldquo;reserve&rdquo; appropriate physical pages if possible</li>
+<li>Promote contiguous pages to superpages</li>
+<li>Does complicate evicting (esp. dirty pages) - demote</li>
 </ul></li>
 </ul>
 
 <h2 id="eviction-policies">Eviction policies</h2>
+
+<h3 id="starw-man-fifo-eviction">Starw man: FIFO eviction</h3>
+
+<ul>
+<li>Evict oldest fetched page in system</li>
+<li>Example-reference string 1,2,3,4,1,2,5,1,2,3,4,5</li>
+<li>3 physical pages: 9 page faults</li>
+</ul>
 
 <h2 id="thrashing">Thrashing</h2>
 

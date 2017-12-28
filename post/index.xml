@@ -28,8 +28,14 @@
 &lt;li&gt;&lt;a href=&#34;#working-set-model&#34;&gt;Working set model&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#paging-challenge&#34;&gt;Paging challenge&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#re-starting-instructions&#34;&gt;Re-starting instructions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-to-fetch&#34;&gt;What to fetch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#selecting-physical-pages&#34;&gt;Selecting physical pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#superpages&#34;&gt;Superpages&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#eviction-policies&#34;&gt;Eviction policies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#eviction-policies&#34;&gt;Eviction policies&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#starw-man-fifo-eviction&#34;&gt;Starw man: FIFO eviction&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#thrashing&#34;&gt;Thrashing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#details-of-paging&#34;&gt;Details of paging&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#the-user-level-perspective&#34;&gt;The user-level perspective&lt;/a&gt;&lt;/li&gt;
@@ -107,12 +113,88 @@
 &lt;ul&gt;
 &lt;li&gt;E.g., x86 move string instructions&lt;/li&gt;
 &lt;li&gt;Specify src, dst, count in &lt;code&gt;%esi, %edi, %ecx&lt;/code&gt; registers&lt;/li&gt;
-&lt;li&gt;On fault, registers adjusted to resume where move left off
-&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;On fault, registers adjusted to resume where move left off&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-to-fetch&#34;&gt;What to fetch&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bring in page that caused page fault&lt;/li&gt;
+&lt;li&gt;Pre-fetch surrounding pages?
+
+&lt;ul&gt;
+&lt;li&gt;Reading two disk blocks approximately as fast as reading one&lt;/li&gt;
+&lt;li&gt;As long as no track/head switch, seek time dominates&lt;/li&gt;
+&lt;li&gt;If application exhibits spacial locality, then big win to store and read multiple contiguous pages&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Also pre-zero unused pages in idle loop
+
+&lt;ul&gt;
+&lt;li&gt;Need 0-filled pages for stack, heap, anonymously mmapped memory&lt;/li&gt;
+&lt;li&gt;Zeroing them only on demand is slower&lt;/li&gt;
+&lt;li&gt;Hence, many OSes zero freed pages while CPU is idle&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;selecting-physical-pages&#34;&gt;Selecting physical pages&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;May need to eject some pages
+
+&lt;ul&gt;
+&lt;li&gt;More on eviction policy in two slides&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;May also have a choice of physical pages&lt;/li&gt;
+&lt;li&gt;Direct-mapped physical caches
+
+&lt;ul&gt;
+&lt;li&gt;Virtual -&amp;gt; Physical mapping can affect performance&lt;/li&gt;
+&lt;li&gt;In old days: Physical adddredd A conflicts with $kC+A$ (where k is any integer, C is cache size)&lt;/li&gt;
+&lt;li&gt;Applications can conflict with each other or themselves&lt;/li&gt;
+&lt;li&gt;Scientific application benefit if consecutive virtual pages do not confilict in the cache&lt;/li&gt;
+&lt;li&gt;Many other applications do better with random mapping&lt;/li&gt;
+&lt;li&gt;There days: CPUs more sophisticated than kC + A&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;superpages&#34;&gt;Superpages&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How should OS make use of &amp;ldquo;large&amp;rdquo; mappings
+
+&lt;ul&gt;
+&lt;li&gt;x86 has &lt;sup&gt;2&lt;/sup&gt;&amp;frasl;&lt;sub&gt;4&lt;/sub&gt; MB pages that might be useful&lt;/li&gt;
+&lt;li&gt;Alpha has even more choices: 8KB, 64KB, 512KB, 4MB&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Sometimes more pages in L2 cache than TLB entries
+
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t want costly TLB misses going to main memory&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Or have two-level TLBs
+
+&lt;ul&gt;
+&lt;li&gt;Want to maximize hit rate in faster L1 TLB&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;OS can transparently support superpages
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;reserve&amp;rdquo; appropriate physical pages if possible&lt;/li&gt;
+&lt;li&gt;Promote contiguous pages to superpages&lt;/li&gt;
+&lt;li&gt;Does complicate evicting (esp. dirty pages) - demote&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;eviction-policies&#34;&gt;Eviction policies&lt;/h2&gt;
+
+&lt;h3 id=&#34;starw-man-fifo-eviction&#34;&gt;Starw man: FIFO eviction&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Evict oldest fetched page in system&lt;/li&gt;
+&lt;li&gt;Example-reference string 1,2,3,4,1,2,5,1,2,3,4,5&lt;/li&gt;
+&lt;li&gt;3 physical pages: 9 page faults&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;thrashing&#34;&gt;Thrashing&lt;/h2&gt;
 

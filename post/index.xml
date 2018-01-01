@@ -11,6 +11,160 @@
     <atom:link href="/post/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Synchronization (Part I)</title>
+      <link>/post/synchronization_1/</link>
+      <pubDate>Mon, 01 Jan 2018 00:38:00 +0000</pubDate>
+      
+      <guid>/post/synchronization_1/</guid>
+      <description>
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#cache-coherence-the-hardware-view&#34;&gt;Cache coherence (the hardware view)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#multicore-caches&#34;&gt;Multicore Caches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mesi-coherence-protocol&#34;&gt;MESI coherence protocol&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#core-and-bus-actions&#34;&gt;Core and Bus Actions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#cc-numa&#34;&gt;cc-NUMA&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;h2 id=&#34;cache-coherence-the-hardware-view&#34;&gt;Cache coherence (the hardware view)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Important memory system properties
+
+&lt;ul&gt;
+&lt;li&gt;Coherence - concerns accesses to a single memory location
+
+&lt;ul&gt;
+&lt;li&gt;Must obey program order if access from only CPU&lt;/li&gt;
+&lt;li&gt;There is a total order on all updates&lt;/li&gt;
+&lt;li&gt;There is bounded latency before everyone sees a write&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Consistency - concerns ordering across memory locations
+
+&lt;ul&gt;
+&lt;li&gt;Even with coherence, different CPUs can see the same write happen at different times&lt;/li&gt;
+&lt;li&gt;Sequential consistency is what matches our intuition (As if instructions from all CPUs interleaved on one CPU)&lt;/li&gt;
+&lt;li&gt;Many architectures offer weaker consistency can still be sufficient to implement thread API&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;multicore-caches&#34;&gt;Multicore Caches&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Performance requires caches
+
+&lt;ul&gt;
+&lt;li&gt;Divided into chuncks of bytes called lines (e.g., 64 bytes)&lt;/li&gt;
+&lt;li&gt;Caches create an opportunity for cores to disagree about memory&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Bus-based approaches
+
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Snoopy&amp;rdquo; protocols, each CPU listens to memory bus&lt;/li&gt;
+&lt;li&gt;Use write-through and invalidate when you see a write bits&lt;/li&gt;
+&lt;li&gt;Bus-based schemes limit scalability&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Modern CPUs use networks (e.g., hypertransport, QPI)
+
+&lt;ul&gt;
+&lt;li&gt;CPUs pass each other messages about cache lines&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mesi-coherence-protocol&#34;&gt;MESI coherence protocol&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Modified
+
+&lt;ul&gt;
+&lt;li&gt;One cache has a valid copy&lt;/li&gt;
+&lt;li&gt;That copy is dirty (needs to be written back to memory)&lt;/li&gt;
+&lt;li&gt;Must invalidate all copies in other caches before entering this state&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Exclusive
+
+&lt;ul&gt;
+&lt;li&gt;Same as Modified except the cache copy is clean&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Shared
+
+&lt;ul&gt;
+&lt;li&gt;One or more caches and memory have a valid copy&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Invalid
+
+&lt;ul&gt;
+&lt;li&gt;Doesn&amp;rsquo;t contain any data&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Owned (for enhanced &amp;ldquo;MOESI&amp;rdquo; protocal)
+
+&lt;ul&gt;
+&lt;li&gt;Memory may contain stale value of data (like Modified state)&lt;/li&gt;
+&lt;li&gt;But have to broadcast modifications (sort of like Shared state)&lt;/li&gt;
+&lt;li&gt;Can have both one owned and mutiple shared copies of cache line&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;core-and-bus-actions&#34;&gt;Core and Bus Actions&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Core
+
+&lt;ul&gt;
+&lt;li&gt;Read&lt;/li&gt;
+&lt;li&gt;Write&lt;/li&gt;
+&lt;li&gt;Evict (modified? must write back)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Bus
+
+&lt;ul&gt;
+&lt;li&gt;Read: without intent to modify, data can come from memory or another cache&lt;/li&gt;
+&lt;li&gt;Read-exclusive: with intent to modify, must invalidate all other cache copies&lt;/li&gt;
+&lt;li&gt;Writeback: contens put on bus and memory is updated&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;cc-numa&#34;&gt;cc-NUMA&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Old machines used &lt;em&gt;dance hall&lt;/em&gt; achitectures
+
+&lt;ul&gt;
+&lt;li&gt;Any CPU can &amp;ldquo;dance with&amp;rdquo; any memory equally&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;An alternative: Non-Uniform Memory Access
+
+&lt;ul&gt;
+&lt;li&gt;Each CPU has fast access to some &amp;ldquo;close&amp;rdquo; memory&lt;/li&gt;
+&lt;li&gt;Slower to access memory that is farther away&lt;/li&gt;
+&lt;li&gt;Use a directory to keep track of who is caching what&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Originally for esoteric machines with many CPUs
+
+&lt;ul&gt;
+&lt;li&gt;But AMD and then Intel integrated memory controller into CPU&lt;/li&gt;
+&lt;li&gt;Faster to access memory controlled by the local socket (or even local die in a multi-chip module)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;cc-NUMA = cache-coherent NUMA
+
+&lt;ul&gt;
+&lt;li&gt;Rarely see non-cache-coherent NUMA&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Virtual Memory OS</title>
       <link>/post/vm_os/</link>
       <pubDate>Wed, 27 Dec 2017 00:38:00 +0000</pubDate>

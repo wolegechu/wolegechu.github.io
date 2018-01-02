@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="author" content="Yuchu Luo">
+  <meta name="description" content="Junior Student">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/processes/">
+
+  
+  
+
+
+  
+
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7cMerriweather%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-72309442-3', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yuchu Luo - 罗宇矗">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yuchu Luo - 罗宇矗">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/processes/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/luoyuchu">
+  <meta property="twitter:creator" content="@https://twitter.com/luoyuchu">
+  
+  <meta property="og:site_name" content="Yuchu Luo - 罗宇矗">
+  <meta property="og:url" content="/post/processes/">
+  <meta property="og:title" content="[OS Notes] Processes | Yuchu Luo - 罗宇矗">
+  <meta property="og:description" content="">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-01-01T00:38:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-01-01T00:38:00&#43;00:00">
+  
+
+  
+
+  <title>[OS Notes] Processes | Yuchu Luo - 罗宇矗</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Yuchu Luo - 罗宇矗</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#skills">
+            
+            <span>Skills</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/tags/today-i-learned/">
+            
+            <span>Today I Learned</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <div class="article-inner">
+      <h1 itemprop="name">[OS Notes] Processes</h1>
+
+      
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-01-01 00:38:00 &#43;0000 UTC" itemprop="datePublished">
+      Jan 1, 2018
+    </time>
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=%5bOS%20Notes%5d%20Processes&amp;url=%2fpost%2fprocesses%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fprocesses%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fprocesses%2f&amp;title=%5bOS%20Notes%5d%20Processes"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fprocesses%2f&amp;title=%5bOS%20Notes%5d%20Processes"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=%5bOS%20Notes%5d%20Processes&amp;body=%2fpost%2fprocesses%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+      <div class="article-style" itemprop="articleBody">
+        
+
+<h2>Table of Contents</h2>
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#unic-centric-user-view-of-processes">(UNIC-centric) User view of processes</a>
+<ul>
+<li><a href="#creating-processes">Creating processes</a></li>
+<li><a href="#deleting-processes">Deleting processes</a></li>
+<li><a href="#running-programs">Running programs</a></li>
+<li><a href="#manipulating-file-descriptors">Manipulating file descriptors</a></li>
+<li><a href="#pipes">Pipes</a></li>
+<li><a href="#why-fork">Why fork?</a></li>
+</ul></li>
+<li><a href="#kernel-view-of-processes">Kernel view of processes</a>
+<ul>
+<li><a href="#implementing-processes">Implementing processes</a></li>
+<li><a href="#process-states">Process states</a></li>
+<li><a href="#scheduling">Scheduling</a>
+<ul>
+<li><a href="#policy">Policy</a></li>
+</ul></li>
+<li><a href="#preemption">Preemption</a></li>
+<li><a href="#context-switch">Context switch</a></li>
+</ul></li>
+<li><a href="#threads">Threads</a>
+<ul>
+<li><a href="#threads-package-api">Threads package API</a></li>
+<li><a href="#kernel-threads">Kernel threads</a></li>
+<li><a href="#limitation-of-kernel-level-threads">Limitation of kernel-level threads</a></li>
+<li><a href="#alternative-user-threads">Alternative: User threads</a></li>
+<li><a href="#implementing-user-level-threads">Implementing user-level threads</a></li>
+</ul></li>
+<li><a href="#thread-implementation-details">Thread implementation details</a>
+<ul>
+<li><a href="#backgroud">Backgroud</a>
+<ul>
+<li><a href="#calling-conventions">Calling conventions</a></li>
+<li><a href="#procedure-calls">Procedure calls</a></li>
+</ul></li>
+<li><a href="#pintos-thread-implementation">Pintos thread implementation</a></li>
+<li><a href="#i386-switch-threads">i386 switch_threads</a></li>
+<li><a href="#limitations-of-user-level-threads">Limitations of user-level threads</a></li>
+<li><a href="#user-threads-on-kernel-threads">User threads on kernel threads</a></li>
+<li><a href="#limitation-of-n-m-threading">Limitation of n:m threading</a></li>
+</ul></li>
+<li><a href="#lessons">Lessons</a></li>
+</ul></li>
+</ul>
+</nav>
+
+
+<h2 id="unic-centric-user-view-of-processes">(UNIC-centric) User view of processes</h2>
+
+<h3 id="creating-processes">Creating processes</h3>
+
+<ul>
+<li><strong>Original UNIX paper</strong> is a great reference on core system calls
+
+<ul>
+<li><code>int fork (void);</code>
+
+<ul>
+<li>Create new process that is exact copy of current one</li>
+<li>Returen <em>process ID</em> of new process in &ldquo;parent&rdquo;</li>
+<li>Return 0 in &ldquo;child&rdquo;</li>
+</ul></li>
+<li><code>int waitpid (int pid, int *stat, int opt);</code>
+
+<ul>
+<li>pid - process to wait for, or -1 for any</li>
+<li>stat - will contain exit value, or signal</li>
+<li>opt - usually 0 or WNOHANG</li>
+<li>Returns process ID or -1 on error</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="deleting-processes">Deleting processes</h3>
+
+<ul>
+<li><code>void exit (int status);</code>
+
+<ul>
+<li>Current process ceases to exist</li>
+<li><em>status</em> shows up in <em>waitpid</em> (shifted)</li>
+<li>By convention, status of 0 is success, non-zero error</li>
+</ul></li>
+<li><code>int kill (int pid, int sig)</code>
+
+<ul>
+<li>Sends signal <em>sig</em> to process <em>pid</em></li>
+<li><em>SIGTERM</em> most common value, kills process by default (but application can catch it for &ldquo;cleanup&rdquo;)</li>
+<li><em>SIGKILL</em> stronger, kills process always</li>
+</ul></li>
+</ul>
+
+<h3 id="running-programs">Running programs</h3>
+
+<ul>
+<li><code>int execve (char *prog, char **argv, char **envp);</code>
+
+<ul>
+<li>prog - full pathname of program to run</li>
+<li>argv - argument vector that gets passed to <em>main</em></li>
+<li>envp - environment variables, e.g., PATH, HOME</li>
+</ul></li>
+<li>Generally called through a wrapper functions
+
+<ul>
+<li><code>int execvp (char *prog, char **argv);</code> Search PATH for prog, use current environment</li>
+<li><code>int execlp (char *prog, char *arg, ...);</code> List arguments one at a time, finish with <em>NULL</em></li>
+</ul></li>
+<li>Warning: Pintos exec more like combined fork/exec</li>
+</ul>
+
+<p><strong>Simplified minish.c</strong></p>
+
+<pre><code class="language-C">pid_t pid; char **av;
+void do exec(){
+    execvp (av[0], av);
+    perror (av[0]);
+    exit (1);
+}
+/* ... main loop: */
+for (;;) {
+    parse_next_line_of_input (&amp;av, stdin)
+    switch (pid = fork()) {
+        case -1:
+            perror (&quot;fork&quot;); break;
+        case 0:
+            doexec();
+        default:
+            waitpid (pid, NULL, o); break;
+    }
+}
+</code></pre>
+
+<h3 id="manipulating-file-descriptors">Manipulating file descriptors</h3>
+
+<ul>
+<li><code>int dup2 (int oldfd, int newfd);</code>
+
+<ul>
+<li>Closes <em>newfd</em>, if it was a valid descriptor</li>
+<li>Makes <em>newfd</em> an exact copy of <em>oldfd</em></li>
+<li>Two file descriptors will share some offset (lseek on one will affect both)</li>
+</ul></li>
+<li><code>int fcntl (int fd, F_SETFD, int val)</code>
+
+<ul>
+<li>Sets <em>close on exec</em> flag if val = 1, clears if val = 0</li>
+<li>Make file descriptor non-inheritable by spawned programs</li>
+</ul></li>
+<li>Example: redirsh.c
+
+<ul>
+<li>Loop that reads a command and executes it</li>
+<li>Recognizes command &lt; input &gt; output 2&gt; errlog</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-C">void doexec (void) {
+    int fd;
+    if (infile) {  /* non-NULL for &quot;command &lt; infile&quot; */
+        if ((fd = open (infile, O_RDONLY)) &lt; 0){
+            perror (infile);
+            exit (1);
+        }
+        if (fd != 0) {
+            dup2 (fd, 0);
+            close (fd);
+        }
+    }
+
+    /* ... do same for outfile-&gt;fd 1, errfile-&gt;fd 2 ... */
+    execvp (av[0], av);
+    perror (av[0]);
+    exit(1);
+}
+</code></pre>
+
+<h3 id="pipes">Pipes</h3>
+
+<ul>
+<li><code>int pipe (int fds[2]);</code>
+
+<ul>
+<li>Returns two descriptors in <em>fds[0]</em> and <em>fds[1]</em></li>
+<li>Data written to <em>fds[1]</em> will be returned by <em>read</em> on <em>fds[0]</em></li>
+<li>When last copy of fds[1] closed, fds[0] will return <em>EOF</em></li>
+<li>Returns 0 on success, -1 on error</li>
+</ul></li>
+<li>Operations on pipes
+
+<ul>
+<li><em>read/write/close</em> - as with files</li>
+<li>When <em>fds[1]</em> closed, read(fds[0]) returns 0 bytes</li>
+<li>When <em>fds[0]</em> closed, write(fds[1]):
+
+<ul>
+<li>Kills process with SIGPIPE</li>
+<li>Or if signal ignored, fails with EPIPE</li>
+</ul></li>
+<li>Example: pipesh.c
+
+<ul>
+<li>Stes up pipeline command1 | command2 | command3 &hellip;</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<pre><code class="language-C">void doexec (void) {
+    while (outcmd) {
+        int pipefds[2]; pipe (pipefds);
+        switch (fork()){
+            case -1:
+                perror (&quot;fork&quot;); exit (1);
+            case 0:
+                dup2 (pipefds[1], 1);
+                close (pipefds[0]); close (pipefds[1]);
+                outcmd = NULL;
+                break;
+            default:
+                dup2 (pipefds[0], 0);
+                close (pipefds[0]); close (pipdefds[1]);
+                parse_command_line (&amp;av, &amp;outcomd, outcomd);
+                break;
+        }
+    }
+}
+</code></pre>
+
+<h3 id="why-fork">Why fork?</h3>
+
+<ul>
+<li>Most calls to <em>fork</em> followed by <em>execve</em></li>
+<li>Could also combine into one <em>spawn</em> system call (like Pintos exec)</li>
+<li>Occasionally useful to fork one process
+
+<ul>
+<li>Unix <em>dump</em> utility backs up file system to tape</li>
+<li>If tape fills up, must restart at some logical point</li>
+<li>Implemented by forking to revert to old state if tape ends</li>
+</ul></li>
+<li>Real win is simplicity of interface
+
+<ul>
+<li>Tons of things you might want to do to child: Manipulate file descriptors, set encironment variables, reduce privileges, &hellip;</li>
+<li>Yet <em>fork</em> requires no arguments at all</li>
+</ul></li>
+<li>Spawning a process without fork
+
+<ul>
+<li>Without fork, needs tons of different options for new process</li>
+<li>Example: Windows <em>CreateProcess</em> System call</li>
+</ul></li>
+</ul>
+
+<h2 id="kernel-view-of-processes">Kernel view of processes</h2>
+
+<h3 id="implementing-processes">Implementing processes</h3>
+
+<ul>
+<li>Keep a data structure for each process
+
+<ul>
+<li>Process Control Block (PCB)</li>
+<li>Called <em>proc</em> in Unix, <em>task_struct</em> in Linux, and just <em>struct thread</em> in Pintos</li>
+</ul></li>
+<li>Tracks <em>state</em> of the process
+
+<ul>
+<li>Running, ready (runnable), waiting, etc.</li>
+</ul></li>
+<li>Includes information necessary to run
+
+<ul>
+<li>Registers, virtual memory mappings, etc.</li>
+<li>Open files (including memory mapped files)</li>
+</ul></li>
+<li>Various other data about the process
+
+<ul>
+<li>Credentials (user/group ID), signal mask, controlling terminal, priority, accounting statistics, whether being debugged, which system call binary emulation in use,..</li>
+</ul></li>
+</ul>
+
+<h3 id="process-states">Process states</h3>
+
+<p><img src="/img/post/QQ20180102-100721.png" alt="" /></p>
+
+<ul>
+<li>Process can be in one of several states
+
+<ul>
+<li><em>new</em> &amp; <em>terminated</em> at beginning &amp; end of life</li>
+<li><em>running</em> - currently executing (or will execute on kernel return)</li>
+<li><em>ready</em> - can run, but kernel has chosen different process to run</li>
+<li><em>waiting</em> - needs async event (e.g., disk operation)</li>
+</ul></li>
+<li>Which process should kernel run?
+
+<ul>
+<li>if 0 runnable, run idle loop (or halt CPU), if 1 runnable, run it</li>
+<li>if &gt; 1 runnable, must make scheduling decision</li>
+</ul></li>
+</ul>
+
+<h3 id="scheduling">Scheduling</h3>
+
+<ul>
+<li>How to pick which process to run</li>
+<li>Scan process table for first runnable</li>
+<li>FIFO?</li>
+<li>Priority?</li>
+</ul>
+
+<h4 id="policy">Policy</h4>
+
+<ul>
+<li>Want to balance multiple goals
+
+<ul>
+<li><em>Fairness</em> - don&rsquo;t starve processes</li>
+<li><em>Priority</em> - reflect relative importance of procs</li>
+<li><em>Deadlines</em> - must do X (play audio) by certain time</li>
+<li><em>Throughput</em> - want good overall performance</li>
+<li><em>EfficiencyJ</em> - minimize overhead of scheduler itself</li>
+</ul></li>
+<li>No universal policy
+
+<ul>
+<li>Many variables, can&rsquo;t optimize for all</li>
+<li>Conflicting goals (e.g., throughput or priority vs. fairness)</li>
+</ul></li>
+</ul>
+
+<h3 id="preemption">Preemption</h3>
+
+<ul>
+<li>Can preempt a process when kernel gets control</li>
+<li>Running process can vector control to kernel
+
+<ul>
+<li>System call, page fault, illegal instruction, etc.</li>
+<li>May put current process to sleep</li>
+<li>May make other process runnable</li>
+</ul></li>
+<li>Periodic timer interrupt
+
+<ul>
+<li>If running process used up quantum, schedule another</li>
+</ul></li>
+<li>Device interrupt
+
+<ul>
+<li>Disk request completed, or packet arrived on network</li>
+<li>Previously waiting process becomes runnable</li>
+<li>Schedule if higher priority than current running proc.</li>
+</ul></li>
+<li>Changing running process is called a <em>context switch</em></li>
+</ul>
+
+<h3 id="context-switch">Context switch</h3>
+
+<p><img src="/img/post/QQ20180102-102427.png" alt="" /></p>
+
+<ul>
+<li>Very machine dependent. Typical things include:
+
+<ul>
+<li>Save program counter and integer registers (always)</li>
+<li>Save floating point or other special registers</li>
+<li>Save condition codes</li>
+<li>Change virtual address translations</li>
+</ul></li>
+<li>Non-negligible cost
+
+<ul>
+<li>Save/restore floating point registers expensive
+
+<ul>
+<li>Optimization: only save if process used floating point</li>
+</ul></li>
+<li>May require flushing TLB (memory translation hardware)</li>
+<li>Usually causes more cache misses (switch working sets)</li>
+</ul></li>
+</ul>
+
+<h2 id="threads">Threads</h2>
+
+<p><img src="/img/post/QQ20180102-102842.png" alt="" /></p>
+
+<ul>
+<li>Most popular abstraction for concurrency
+
+<ul>
+<li>Lighter-weight abstraction than processes</li>
+<li>All threads in one process share memory, filed escriptors, etc.</li>
+</ul></li>
+<li>Allows one process to use multiple CPUs or cores</li>
+<li>Allows program to overlap I/O and computation
+
+<ul>
+<li>Same benefit as OS running emacs &amp; gcc simultaneously</li>
+<li>E.g., threaded web server services clients simultaneously:</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-C">for (;;) {
+    fd = accept_client ();
+    thread_create (service_client, &amp;fd);
+}
+</code></pre>
+
+<ul>
+<li>Most kernels have threads, too</li>
+</ul>
+
+<h3 id="threads-package-api">Threads package API</h3>
+
+<ul>
+<li><code>tid thread_create (void (*fn) (void *), void *);</code>
+
+<ul>
+<li>Create a new thread, run <em>fn</em> with <em>arg</em></li>
+</ul></li>
+<li><code>void thread_exit ();</code>
+
+<ul>
+<li>Destroy current thread</li>
+</ul></li>
+<li><code>void thread_join (tid thread);</code>
+
+<ul>
+<li>Wait for thread <em>thread</em> to exit</li>
+</ul></li>
+<li>Can have preemptive or non-preemptive threads
+
+<ul>
+<li>Preemptive causes more race conditions</li>
+<li>Non-preemptive can&rsquo;t take advantage of multiple CPUs</li>
+<li>Before prevalent SMPs, most kernels non-preemptive</li>
+</ul></li>
+</ul>
+
+<h3 id="kernel-threads">Kernel threads</h3>
+
+<p><img src="/img/post/QQ20180102-104119.png" alt="" /></p>
+
+<ul>
+<li>Can implement <em>thread_create</em> as a system call</li>
+<li>To add <em>thread_create</em> to an OS that doesn&rsquo;t have it:
+
+<ul>
+<li>Start with process abstraction in kernel</li>
+<li><em>thread_create</em> like process creation with features stripped out
+
+<ul>
+<li>Keep same address space, file table, etc., in new process</li>
+<li><em>rfork/clone</em> syscalls actually allow individual control</li>
+</ul></li>
+</ul></li>
+<li>Faster than a process, but still very heacy weight</li>
+</ul>
+
+<h3 id="limitation-of-kernel-level-threads">Limitation of kernel-level threads</h3>
+
+<ul>
+<li>Every thread operation must go through kernel
+
+<ul>
+<li>create, exit, join, synchroniza, or switch for any reason</li>
+<li>On my laptop: syscall takes 100 cycles, fn call 5 cycles</li>
+<li>Result: threads 10x-30x slower when implemented in kernel</li>
+</ul></li>
+<li>One-size fits all thread implementation
+
+<ul>
+<li>Kernel threads must please all people</li>
+<li>Maybe pay for fancy features (priority, etc.) you don&rsquo;t need</li>
+</ul></li>
+<li>General heavy-weight memory requirements
+
+<ul>
+<li>E.g., requires a fixed-size stack whthin kernel</li>
+<li>Other data structures desighned for heavier-weight processes</li>
+</ul></li>
+</ul>
+
+<h3 id="alternative-user-threads">Alternative: User threads</h3>
+
+<p><img src="/img/post/QQ20180102-104743.png" alt="" /></p>
+
+<ul>
+<li>Implement as user-level library (a.k.a. <em>green</em> threads)
+
+<ul>
+<li>One kernel thread per process</li>
+<li><em>thread_create</em>, <em>thread_exit</em>, etc., just library functions</li>
+</ul></li>
+</ul>
+
+<h3 id="implementing-user-level-threads">Implementing user-level threads</h3>
+
+<ul>
+<li>Allocate a new stack for each <em>thread_create</em></li>
+<li>Keep a queue of runnable threads</li>
+<li>Replace networking system calls (read/write/etc.)
+
+<ul>
+<li>If operation would block, switch and run different thread</li>
+</ul></li>
+<li>Schedule periodic timer signal (setitimer)
+
+<ul>
+<li>Switch to another thread on timer signals</li>
+</ul></li>
+<li>Muti-threaded web server example
+
+<ul>
+<li>Thread calls <em>read</em> to get data from remote web browser</li>
+<li>&ldquo;Fake&rdquo; read <em>function</em> makes read <em>syscall</em> in non-blocking mode</li>
+<li>No data? schedule another thread</li>
+<li>On timer or when idle check which connections have new data</li>
+</ul></li>
+</ul>
+
+<h2 id="thread-implementation-details">Thread implementation details</h2>
+
+<h3 id="backgroud">Backgroud</h3>
+
+<h4 id="calling-conventions">Calling conventions</h4>
+
+<p><img src="/img/post/1111.png" alt="" /></p>
+
+<ul>
+<li>Registers divided into 2 groups
+
+<ul>
+<li>Functions free to clobber <strong>caller-saved</strong> regs (%eax [return val], %edx, &amp;%ecx on x86)</li>
+<li>But must restore <strong>callee-saved</strong> ones to original value upon return (on x86, %ebx, %esi, %edi, plus %ebp and %esp)</li>
+</ul></li>
+<li><em>sp</em> register always base of stack
+
+<ul>
+<li>Frame pointer (fp) is old <em>sp</em></li>
+</ul></li>
+<li>Local variables stored in registers and on stack</li>
+<li>Function arguments go in caller-saved regs and on stack
+
+<ul>
+<li>with 32-bit x86, all arguments on stack</li>
+</ul></li>
+</ul>
+
+<h4 id="procedure-calls">Procedure calls</h4>
+
+<blockquote>
+<p><strong>Procedure call</strong></p>
+
+<p>save active caller registers
+call foo (pushes pc) -&gt;
+      save used callee registers
+      &hellip;do stuff&hellip;
+      restore callee saved registers
+      jump back to calling function
+      &lt;-
+restore caller registers</p>
+</blockquote>
+
+<ul>
+<li>Caller must save some state across function call
+
+<ul>
+<li>Return address, caller-saved registers</li>
+</ul></li>
+<li>Other state does not need to be saved
+
+<ul>
+<li>Calle-saved regs, global variables, stack pointer</li>
+</ul></li>
+</ul>
+
+<h3 id="pintos-thread-implementation">Pintos thread implementation</h3>
+
+<ul>
+<li>Implemente user processes on top of its own threads
+
+<ul>
+<li>Same technique can be used to implement user-level threads, too</li>
+</ul></li>
+
+<li><p>Per-thread state in thread control block structure</p>
+
+<pre><code class="language-c">struct thread {
+...
+uint8_t *stack; /* Saved stack pointer. */
+...
+};
+uint32_t thread_stack_ofs = offsetof(struct thread, stack)
+</code></pre></li>
+
+<li><p>C declaration for asm thread-switch function</p>
+
+<pre><code class="language-C">struct thread *switch_threads (struct thread *cur, struct thread *next);
+</code></pre></li>
+
+<li><p>Also thread initialization function to create new stack:</p>
+
+<pre><code class="language-c">void thread_create (const char *name, thread_func *function, void *aux);
+</code></pre></li>
+</ul>
+
+<h3 id="i386-switch-threads">i386 switch_threads</h3>
+
+<pre><code>pushl %ebx; pushl %ebp # Save callee-saved regs
+pushl %esi; pushl %edi
+mov thread_stack_ofs, %edx # %edx = offset of stack field
+# in thread struct
+movl 20(%esp), %eax # %eax = cur
+movl %esp, (%eax,%edx,1) # cur-&gt;stack = %esp
+movl 24(%esp), %ecx # %ecx = next
+movl (%ecx,%edx,1), %esp # %esp = next-&gt;stack
+popl %edi; popl %esi # Restore calle-saved regs
+popl %ebp; popl %ebx
+ret # Resume execution
+</code></pre>
+
+<h3 id="limitations-of-user-level-threads">Limitations of user-level threads</h3>
+
+<ul>
+<li>A user-level thread library can do the same thing as Pintos</li>
+<li>Can&rsquo;t take advantage of multiple CPUs or cores</li>
+<li>A blocking system call blocks all threads
+
+<ul>
+<li>Can replace <em>read</em> to handle network connections</li>
+<li>But usually OSes don&rsquo;t let you do this for disk</li>
+<li>So one uncached disk read blocks all threads</li>
+</ul></li>
+<li>A page fault blocks all threads</li>
+<li>Possible deadlock if one thread blocks on another</li>
+</ul>
+
+<h3 id="user-threads-on-kernel-threads">User threads on kernel threads</h3>
+
+<ul>
+<li>User threads implemented on kernel threads
+
+<ul>
+<li>Multiple kernel-level threads per process</li>
+<li><em>thread_create, thread_exit</em> still library functions as before</li>
+</ul></li>
+<li>Sometimes called <em>n:m</em> threading
+
+<ul>
+<li>Have <em>n</em> user threads per <em>m</em> kernel threads (simple user-level threads are n:1, kernel threads 1:1)</li>
+</ul></li>
+</ul>
+
+<h3 id="limitation-of-n-m-threading">Limitation of n:m threading</h3>
+
+<ul>
+<li>Many of same problems as n:1 threads
+
+<ul>
+<li>Blocked threads, deadlock</li>
+</ul></li>
+<li>Hard to keep same # kthreads as availabel CPUs
+
+<ul>
+<li>Kernel knows how many CPUs available</li>
+<li>Kernel knows which kernel-level threads are blocked</li>
+<li>But tries to hide these things from applications for transparency</li>
+<li>So user-level thread scheduler might think a thread is running while underlying kernel thread is blocked</li>
+</ul></li>
+<li>Kernel doesn&rsquo;t know relative importance of threads
+
+<ul>
+<li>Might preempt kthread in which library holds important lock</li>
+</ul></li>
+</ul>
+
+<h2 id="lessons">Lessons</h2>
+
+<ul>
+<li>Threads best implemented as a library
+
+<ul>
+<li>But kernel threads not best interface on which to do this</li>
+</ul></li>
+<li>Better kernel interface have been suggested
+
+<ul>
+<li>Scheduler Activations</li>
+<li>Maybe too complex to implement on exisiting OSes (some have added then removed such features, now Windows is trying it)</li>
+</ul></li>
+<li>Standard threads still fine for most purposes
+
+<ul>
+<li>Use kernel threads if I/O concurrency main goal</li>
+<li>Use n:m threads for highly concurrent (e.g., sicentific applications) with many threads switches</li>
+</ul></li>
+<li>But concurrency greatly increases complexity</li>
+</ul>
+
+      </div>
+
+      
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/today-i-learned">Today I Learned</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/operating-system">Operating System</a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+
+</article>
+
+
+
+<div class="article-container article-widget">
+  <div class="hr-light"></div>
+  <h3>Related</h3>
+  <ul>
+    
+    <li><a href="/post/synchronization_1/">[OS Notes] Synchronization (Part I)</a></li>
+    
+    <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
+    
+    <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
+    
+    <li><a href="/post/til-2017-12-12/">2017-12-12</a></li>
+    
+    <li><a href="/post/til-2017-12-08/">2017-12-08</a></li>
+    
+  </ul>
+</div>
+
+
+
+<div class="container article-widget">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="/post/synchronization_1/"><span
+      aria-hidden="true">&larr;</span> [OS Notes] Synchronization (Part I)</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+
+<div class="article-container">
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yuchuluo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Yuchu Luo &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

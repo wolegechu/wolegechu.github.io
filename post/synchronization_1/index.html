@@ -28,9 +28,7 @@
   
     
     
-      
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-      
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
     
   
   
@@ -81,7 +79,7 @@
   
   <meta property="og:site_name" content="Yuchu Luo - 罗宇矗">
   <meta property="og:url" content="/post/synchronization_1/">
-  <meta property="og:title" content="Synchronization (Part I) | Yuchu Luo - 罗宇矗">
+  <meta property="og:title" content="[OS Notes] Synchronization (Part I) | Yuchu Luo - 罗宇矗">
   <meta property="og:description" content="">
   <meta property="og:locale" content="en-us">
   
@@ -92,7 +90,7 @@
 
   
 
-  <title>Synchronization (Part I) | Yuchu Luo - 罗宇矗</title>
+  <title>[OS Notes] Synchronization (Part I) | Yuchu Luo - 罗宇矗</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -257,7 +255,7 @@
 
   <div class="article-container">
     <div class="article-inner">
-      <h1 itemprop="name">Synchronization (Part I)</h1>
+      <h1 itemprop="name">[OS Notes] Synchronization (Part I)</h1>
 
       
 
@@ -273,7 +271,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    3 min read
   </span>
   
 
@@ -288,7 +286,7 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Synchronization%20%28Part%20I%29&amp;url=%2fpost%2fsynchronization_1%2f"
+         href="https://twitter.com/intent/tweet?text=%5bOS%20Notes%5d%20Synchronization%20%28Part%20I%29&amp;url=%2fpost%2fsynchronization_1%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
@@ -302,21 +300,21 @@
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsynchronization_1%2f&amp;title=Synchronization%20%28Part%20I%29"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsynchronization_1%2f&amp;title=%5bOS%20Notes%5d%20Synchronization%20%28Part%20I%29"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsynchronization_1%2f&amp;title=Synchronization%20%28Part%20I%29"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsynchronization_1%2f&amp;title=%5bOS%20Notes%5d%20Synchronization%20%28Part%20I%29"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Synchronization%20%28Part%20I%29&amp;body=%2fpost%2fsynchronization_1%2f">
+         href="mailto:?subject=%5bOS%20Notes%5d%20Synchronization%20%28Part%20I%29&amp;body=%2fpost%2fsynchronization_1%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -343,6 +341,7 @@
 <li><a href="#mesi-coherence-protocol">MESI coherence protocol</a></li>
 <li><a href="#core-and-bus-actions">Core and Bus Actions</a></li>
 <li><a href="#cc-numa">cc-NUMA</a></li>
+<li><a href="#real-world-coherence-costs">Real World Coherence Costs</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -469,10 +468,20 @@
 <li>But AMD and then Intel integrated memory controller into CPU</li>
 <li>Faster to access memory controlled by the local socket (or even local die in a multi-chip module)</li>
 </ul></li>
-<li>cc-NUMA = cache-coherent NUMA
+<li>cc-NUMA = cache-coherent non-uniform memory access
 
 <ul>
 <li>Rarely see non-cache-coherent NUMA</li>
+</ul></li>
+</ul>
+
+<h3 id="real-world-coherence-costs">Real World Coherence Costs</h3>
+
+<ul>
+<li>If another core in same socket holds line in modified state:
+
+<ul>
+<li>load: 109 cycles</li>
 </ul></li>
 </ul>
 
@@ -503,15 +512,15 @@
   <h3>Related</h3>
   <ul>
     
-    <li><a href="/post/vm_os/">Virtual Memory OS</a></li>
+    <li><a href="/post/processes/">[OS Notes] Processes</a></li>
     
-    <li><a href="/post/vm_hardware/">Virtual Memory Hardware</a></li>
+    <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
+    
+    <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
     
     <li><a href="/post/til-2017-12-12/">2017-12-12</a></li>
     
     <li><a href="/post/til-2017-12-08/">2017-12-08</a></li>
-    
-    <li><a href="/post/til-2017-12-05/">2017-12-05</a></li>
     
   </ul>
 </div>
@@ -523,9 +532,12 @@
   <ul class="pager">
     
     <li class="previous"><a href="/post/vm_os/"><span
-      aria-hidden="true">&larr;</span> Virtual Memory OS</a></li>
+      aria-hidden="true">&larr;</span> [OS Notes] Virtual Memory OS</a></li>
     
 
+    
+    <li class="next"><a href="/post/processes/">[OS Notes] Processes <span
+      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>

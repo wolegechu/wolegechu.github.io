@@ -11,7 +11,725 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Synchronization (Part I)</title>
+      <title>[OS Notes] Processes</title>
+      <link>/post/processes/</link>
+      <pubDate>Mon, 01 Jan 2018 00:38:00 +0000</pubDate>
+      
+      <guid>/post/processes/</guid>
+      <description>
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#unic-centric-user-view-of-processes&#34;&gt;(UNIC-centric) User view of processes&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#creating-processes&#34;&gt;Creating processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#deleting-processes&#34;&gt;Deleting processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#running-programs&#34;&gt;Running programs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#manipulating-file-descriptors&#34;&gt;Manipulating file descriptors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pipes&#34;&gt;Pipes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#why-fork&#34;&gt;Why fork?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#kernel-view-of-processes&#34;&gt;Kernel view of processes&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#implementing-processes&#34;&gt;Implementing processes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#process-states&#34;&gt;Process states&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#scheduling&#34;&gt;Scheduling&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#policy&#34;&gt;Policy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#preemption&#34;&gt;Preemption&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#context-switch&#34;&gt;Context switch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#threads&#34;&gt;Threads&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#threads-package-api&#34;&gt;Threads package API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#kernel-threads&#34;&gt;Kernel threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#limitation-of-kernel-level-threads&#34;&gt;Limitation of kernel-level threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#alternative-user-threads&#34;&gt;Alternative: User threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#implementing-user-level-threads&#34;&gt;Implementing user-level threads&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#thread-implementation-details&#34;&gt;Thread implementation details&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#backgroud&#34;&gt;Backgroud&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#calling-conventions&#34;&gt;Calling conventions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#procedure-calls&#34;&gt;Procedure calls&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pintos-thread-implementation&#34;&gt;Pintos thread implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#i386-switch-threads&#34;&gt;i386 switch_threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#limitations-of-user-level-threads&#34;&gt;Limitations of user-level threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#user-threads-on-kernel-threads&#34;&gt;User threads on kernel threads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#limitation-of-n-m-threading&#34;&gt;Limitation of n:m threading&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lessons&#34;&gt;Lessons&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;h2 id=&#34;unic-centric-user-view-of-processes&#34;&gt;(UNIC-centric) User view of processes&lt;/h2&gt;
+
+&lt;h3 id=&#34;creating-processes&#34;&gt;Creating processes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Original UNIX paper&lt;/strong&gt; is a great reference on core system calls
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int fork (void);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create new process that is exact copy of current one&lt;/li&gt;
+&lt;li&gt;Returen &lt;em&gt;process ID&lt;/em&gt; of new process in &amp;ldquo;parent&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Return 0 in &amp;ldquo;child&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int waitpid (int pid, int *stat, int opt);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;pid - process to wait for, or -1 for any&lt;/li&gt;
+&lt;li&gt;stat - will contain exit value, or signal&lt;/li&gt;
+&lt;li&gt;opt - usually 0 or WNOHANG&lt;/li&gt;
+&lt;li&gt;Returns process ID or -1 on error&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;deleting-processes&#34;&gt;Deleting processes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;void exit (int status);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Current process ceases to exist&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;status&lt;/em&gt; shows up in &lt;em&gt;waitpid&lt;/em&gt; (shifted)&lt;/li&gt;
+&lt;li&gt;By convention, status of 0 is success, non-zero error&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int kill (int pid, int sig)&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sends signal &lt;em&gt;sig&lt;/em&gt; to process &lt;em&gt;pid&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;SIGTERM&lt;/em&gt; most common value, kills process by default (but application can catch it for &amp;ldquo;cleanup&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;SIGKILL&lt;/em&gt; stronger, kills process always&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;running-programs&#34;&gt;Running programs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int execve (char *prog, char **argv, char **envp);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;prog - full pathname of program to run&lt;/li&gt;
+&lt;li&gt;argv - argument vector that gets passed to &lt;em&gt;main&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;envp - environment variables, e.g., PATH, HOME&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Generally called through a wrapper functions
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int execvp (char *prog, char **argv);&lt;/code&gt; Search PATH for prog, use current environment&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int execlp (char *prog, char *arg, ...);&lt;/code&gt; List arguments one at a time, finish with &lt;em&gt;NULL&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Warning: Pintos exec more like combined fork/exec&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Simplified minish.c&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;pid_t pid; char **av;
+void do exec(){
+    execvp (av[0], av);
+    perror (av[0]);
+    exit (1);
+}
+/* ... main loop: */
+for (;;) {
+    parse_next_line_of_input (&amp;amp;av, stdin)
+    switch (pid = fork()) {
+        case -1:
+            perror (&amp;quot;fork&amp;quot;); break;
+        case 0:
+            doexec();
+        default:
+            waitpid (pid, NULL, o); break;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;manipulating-file-descriptors&#34;&gt;Manipulating file descriptors&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int dup2 (int oldfd, int newfd);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Closes &lt;em&gt;newfd&lt;/em&gt;, if it was a valid descriptor&lt;/li&gt;
+&lt;li&gt;Makes &lt;em&gt;newfd&lt;/em&gt; an exact copy of &lt;em&gt;oldfd&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Two file descriptors will share some offset (lseek on one will affect both)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int fcntl (int fd, F_SETFD, int val)&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sets &lt;em&gt;close on exec&lt;/em&gt; flag if val = 1, clears if val = 0&lt;/li&gt;
+&lt;li&gt;Make file descriptor non-inheritable by spawned programs&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Example: redirsh.c
+
+&lt;ul&gt;
+&lt;li&gt;Loop that reads a command and executes it&lt;/li&gt;
+&lt;li&gt;Recognizes command &amp;lt; input &amp;gt; output 2&amp;gt; errlog&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;void doexec (void) {
+    int fd;
+    if (infile) {  /* non-NULL for &amp;quot;command &amp;lt; infile&amp;quot; */
+        if ((fd = open (infile, O_RDONLY)) &amp;lt; 0){
+            perror (infile);
+            exit (1);
+        }
+        if (fd != 0) {
+            dup2 (fd, 0);
+            close (fd);
+        }
+    }
+
+    /* ... do same for outfile-&amp;gt;fd 1, errfile-&amp;gt;fd 2 ... */
+    execvp (av[0], av);
+    perror (av[0]);
+    exit(1);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pipes&#34;&gt;Pipes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;int pipe (int fds[2]);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Returns two descriptors in &lt;em&gt;fds[0]&lt;/em&gt; and &lt;em&gt;fds[1]&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Data written to &lt;em&gt;fds[1]&lt;/em&gt; will be returned by &lt;em&gt;read&lt;/em&gt; on &lt;em&gt;fds[0]&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;When last copy of fds[1] closed, fds[0] will return &lt;em&gt;EOF&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Returns 0 on success, -1 on error&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Operations on pipes
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;read/write/close&lt;/em&gt; - as with files&lt;/li&gt;
+&lt;li&gt;When &lt;em&gt;fds[1]&lt;/em&gt; closed, read(fds[0]) returns 0 bytes&lt;/li&gt;
+&lt;li&gt;When &lt;em&gt;fds[0]&lt;/em&gt; closed, write(fds[1]):
+
+&lt;ul&gt;
+&lt;li&gt;Kills process with SIGPIPE&lt;/li&gt;
+&lt;li&gt;Or if signal ignored, fails with EPIPE&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Example: pipesh.c
+
+&lt;ul&gt;
+&lt;li&gt;Stes up pipeline command1 | command2 | command3 &amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;void doexec (void) {
+    while (outcmd) {
+        int pipefds[2]; pipe (pipefds);
+        switch (fork()){
+            case -1:
+                perror (&amp;quot;fork&amp;quot;); exit (1);
+            case 0:
+                dup2 (pipefds[1], 1);
+                close (pipefds[0]); close (pipefds[1]);
+                outcmd = NULL;
+                break;
+            default:
+                dup2 (pipefds[0], 0);
+                close (pipefds[0]); close (pipdefds[1]);
+                parse_command_line (&amp;amp;av, &amp;amp;outcomd, outcomd);
+                break;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;why-fork&#34;&gt;Why fork?&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most calls to &lt;em&gt;fork&lt;/em&gt; followed by &lt;em&gt;execve&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Could also combine into one &lt;em&gt;spawn&lt;/em&gt; system call (like Pintos exec)&lt;/li&gt;
+&lt;li&gt;Occasionally useful to fork one process
+
+&lt;ul&gt;
+&lt;li&gt;Unix &lt;em&gt;dump&lt;/em&gt; utility backs up file system to tape&lt;/li&gt;
+&lt;li&gt;If tape fills up, must restart at some logical point&lt;/li&gt;
+&lt;li&gt;Implemented by forking to revert to old state if tape ends&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Real win is simplicity of interface
+
+&lt;ul&gt;
+&lt;li&gt;Tons of things you might want to do to child: Manipulate file descriptors, set encironment variables, reduce privileges, &amp;hellip;&lt;/li&gt;
+&lt;li&gt;Yet &lt;em&gt;fork&lt;/em&gt; requires no arguments at all&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Spawning a process without fork
+
+&lt;ul&gt;
+&lt;li&gt;Without fork, needs tons of different options for new process&lt;/li&gt;
+&lt;li&gt;Example: Windows &lt;em&gt;CreateProcess&lt;/em&gt; System call&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;kernel-view-of-processes&#34;&gt;Kernel view of processes&lt;/h2&gt;
+
+&lt;h3 id=&#34;implementing-processes&#34;&gt;Implementing processes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep a data structure for each process
+
+&lt;ul&gt;
+&lt;li&gt;Process Control Block (PCB)&lt;/li&gt;
+&lt;li&gt;Called &lt;em&gt;proc&lt;/em&gt; in Unix, &lt;em&gt;task_struct&lt;/em&gt; in Linux, and just &lt;em&gt;struct thread&lt;/em&gt; in Pintos&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Tracks &lt;em&gt;state&lt;/em&gt; of the process
+
+&lt;ul&gt;
+&lt;li&gt;Running, ready (runnable), waiting, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Includes information necessary to run
+
+&lt;ul&gt;
+&lt;li&gt;Registers, virtual memory mappings, etc.&lt;/li&gt;
+&lt;li&gt;Open files (including memory mapped files)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Various other data about the process
+
+&lt;ul&gt;
+&lt;li&gt;Credentials (user/group ID), signal mask, controlling terminal, priority, accounting statistics, whether being debugged, which system call binary emulation in use,..&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;process-states&#34;&gt;Process states&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180102-100721.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Process can be in one of several states
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;new&lt;/em&gt; &amp;amp; &lt;em&gt;terminated&lt;/em&gt; at beginning &amp;amp; end of life&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;running&lt;/em&gt; - currently executing (or will execute on kernel return)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;ready&lt;/em&gt; - can run, but kernel has chosen different process to run&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;waiting&lt;/em&gt; - needs async event (e.g., disk operation)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Which process should kernel run?
+
+&lt;ul&gt;
+&lt;li&gt;if 0 runnable, run idle loop (or halt CPU), if 1 runnable, run it&lt;/li&gt;
+&lt;li&gt;if &amp;gt; 1 runnable, must make scheduling decision&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;scheduling&#34;&gt;Scheduling&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to pick which process to run&lt;/li&gt;
+&lt;li&gt;Scan process table for first runnable&lt;/li&gt;
+&lt;li&gt;FIFO?&lt;/li&gt;
+&lt;li&gt;Priority?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;policy&#34;&gt;Policy&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Want to balance multiple goals
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Fairness&lt;/em&gt; - don&amp;rsquo;t starve processes&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Priority&lt;/em&gt; - reflect relative importance of procs&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Deadlines&lt;/em&gt; - must do X (play audio) by certain time&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Throughput&lt;/em&gt; - want good overall performance&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;EfficiencyJ&lt;/em&gt; - minimize overhead of scheduler itself&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;No universal policy
+
+&lt;ul&gt;
+&lt;li&gt;Many variables, can&amp;rsquo;t optimize for all&lt;/li&gt;
+&lt;li&gt;Conflicting goals (e.g., throughput or priority vs. fairness)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;preemption&#34;&gt;Preemption&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Can preempt a process when kernel gets control&lt;/li&gt;
+&lt;li&gt;Running process can vector control to kernel
+
+&lt;ul&gt;
+&lt;li&gt;System call, page fault, illegal instruction, etc.&lt;/li&gt;
+&lt;li&gt;May put current process to sleep&lt;/li&gt;
+&lt;li&gt;May make other process runnable&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Periodic timer interrupt
+
+&lt;ul&gt;
+&lt;li&gt;If running process used up quantum, schedule another&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Device interrupt
+
+&lt;ul&gt;
+&lt;li&gt;Disk request completed, or packet arrived on network&lt;/li&gt;
+&lt;li&gt;Previously waiting process becomes runnable&lt;/li&gt;
+&lt;li&gt;Schedule if higher priority than current running proc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Changing running process is called a &lt;em&gt;context switch&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;context-switch&#34;&gt;Context switch&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180102-102427.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Very machine dependent. Typical things include:
+
+&lt;ul&gt;
+&lt;li&gt;Save program counter and integer registers (always)&lt;/li&gt;
+&lt;li&gt;Save floating point or other special registers&lt;/li&gt;
+&lt;li&gt;Save condition codes&lt;/li&gt;
+&lt;li&gt;Change virtual address translations&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Non-negligible cost
+
+&lt;ul&gt;
+&lt;li&gt;Save/restore floating point registers expensive
+
+&lt;ul&gt;
+&lt;li&gt;Optimization: only save if process used floating point&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;May require flushing TLB (memory translation hardware)&lt;/li&gt;
+&lt;li&gt;Usually causes more cache misses (switch working sets)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;threads&#34;&gt;Threads&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180102-102842.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most popular abstraction for concurrency
+
+&lt;ul&gt;
+&lt;li&gt;Lighter-weight abstraction than processes&lt;/li&gt;
+&lt;li&gt;All threads in one process share memory, filed escriptors, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Allows one process to use multiple CPUs or cores&lt;/li&gt;
+&lt;li&gt;Allows program to overlap I/O and computation
+
+&lt;ul&gt;
+&lt;li&gt;Same benefit as OS running emacs &amp;amp; gcc simultaneously&lt;/li&gt;
+&lt;li&gt;E.g., threaded web server services clients simultaneously:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;for (;;) {
+    fd = accept_client ();
+    thread_create (service_client, &amp;amp;fd);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Most kernels have threads, too&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;threads-package-api&#34;&gt;Threads package API&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tid thread_create (void (*fn) (void *), void *);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new thread, run &lt;em&gt;fn&lt;/em&gt; with &lt;em&gt;arg&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void thread_exit ();&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Destroy current thread&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void thread_join (tid thread);&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Wait for thread &lt;em&gt;thread&lt;/em&gt; to exit&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Can have preemptive or non-preemptive threads
+
+&lt;ul&gt;
+&lt;li&gt;Preemptive causes more race conditions&lt;/li&gt;
+&lt;li&gt;Non-preemptive can&amp;rsquo;t take advantage of multiple CPUs&lt;/li&gt;
+&lt;li&gt;Before prevalent SMPs, most kernels non-preemptive&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;kernel-threads&#34;&gt;Kernel threads&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180102-104119.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Can implement &lt;em&gt;thread_create&lt;/em&gt; as a system call&lt;/li&gt;
+&lt;li&gt;To add &lt;em&gt;thread_create&lt;/em&gt; to an OS that doesn&amp;rsquo;t have it:
+
+&lt;ul&gt;
+&lt;li&gt;Start with process abstraction in kernel&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;thread_create&lt;/em&gt; like process creation with features stripped out
+
+&lt;ul&gt;
+&lt;li&gt;Keep same address space, file table, etc., in new process&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;rfork/clone&lt;/em&gt; syscalls actually allow individual control&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Faster than a process, but still very heacy weight&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;limitation-of-kernel-level-threads&#34;&gt;Limitation of kernel-level threads&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Every thread operation must go through kernel
+
+&lt;ul&gt;
+&lt;li&gt;create, exit, join, synchroniza, or switch for any reason&lt;/li&gt;
+&lt;li&gt;On my laptop: syscall takes 100 cycles, fn call 5 cycles&lt;/li&gt;
+&lt;li&gt;Result: threads 10x-30x slower when implemented in kernel&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;One-size fits all thread implementation
+
+&lt;ul&gt;
+&lt;li&gt;Kernel threads must please all people&lt;/li&gt;
+&lt;li&gt;Maybe pay for fancy features (priority, etc.) you don&amp;rsquo;t need&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;General heavy-weight memory requirements
+
+&lt;ul&gt;
+&lt;li&gt;E.g., requires a fixed-size stack whthin kernel&lt;/li&gt;
+&lt;li&gt;Other data structures desighned for heavier-weight processes&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;alternative-user-threads&#34;&gt;Alternative: User threads&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180102-104743.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Implement as user-level library (a.k.a. &lt;em&gt;green&lt;/em&gt; threads)
+
+&lt;ul&gt;
+&lt;li&gt;One kernel thread per process&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;thread_create&lt;/em&gt;, &lt;em&gt;thread_exit&lt;/em&gt;, etc., just library functions&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;implementing-user-level-threads&#34;&gt;Implementing user-level threads&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Allocate a new stack for each &lt;em&gt;thread_create&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Keep a queue of runnable threads&lt;/li&gt;
+&lt;li&gt;Replace networking system calls (read/write/etc.)
+
+&lt;ul&gt;
+&lt;li&gt;If operation would block, switch and run different thread&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Schedule periodic timer signal (setitimer)
+
+&lt;ul&gt;
+&lt;li&gt;Switch to another thread on timer signals&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Muti-threaded web server example
+
+&lt;ul&gt;
+&lt;li&gt;Thread calls &lt;em&gt;read&lt;/em&gt; to get data from remote web browser&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Fake&amp;rdquo; read &lt;em&gt;function&lt;/em&gt; makes read &lt;em&gt;syscall&lt;/em&gt; in non-blocking mode&lt;/li&gt;
+&lt;li&gt;No data? schedule another thread&lt;/li&gt;
+&lt;li&gt;On timer or when idle check which connections have new data&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;thread-implementation-details&#34;&gt;Thread implementation details&lt;/h2&gt;
+
+&lt;h3 id=&#34;backgroud&#34;&gt;Backgroud&lt;/h3&gt;
+
+&lt;h4 id=&#34;calling-conventions&#34;&gt;Calling conventions&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/1111.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Registers divided into 2 groups
+
+&lt;ul&gt;
+&lt;li&gt;Functions free to clobber &lt;strong&gt;caller-saved&lt;/strong&gt; regs (%eax [return val], %edx, &amp;amp;%ecx on x86)&lt;/li&gt;
+&lt;li&gt;But must restore &lt;strong&gt;callee-saved&lt;/strong&gt; ones to original value upon return (on x86, %ebx, %esi, %edi, plus %ebp and %esp)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;sp&lt;/em&gt; register always base of stack
+
+&lt;ul&gt;
+&lt;li&gt;Frame pointer (fp) is old &lt;em&gt;sp&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Local variables stored in registers and on stack&lt;/li&gt;
+&lt;li&gt;Function arguments go in caller-saved regs and on stack
+
+&lt;ul&gt;
+&lt;li&gt;with 32-bit x86, all arguments on stack&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;procedure-calls&#34;&gt;Procedure calls&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Procedure call&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;save active caller registers
+call foo (pushes pc) -&amp;gt;
+      save used callee registers
+      &amp;hellip;do stuff&amp;hellip;
+      restore callee saved registers
+      jump back to calling function
+      &amp;lt;-
+restore caller registers&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Caller must save some state across function call
+
+&lt;ul&gt;
+&lt;li&gt;Return address, caller-saved registers&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Other state does not need to be saved
+
+&lt;ul&gt;
+&lt;li&gt;Calle-saved regs, global variables, stack pointer&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;pintos-thread-implementation&#34;&gt;Pintos thread implementation&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Implemente user processes on top of its own threads
+
+&lt;ul&gt;
+&lt;li&gt;Same technique can be used to implement user-level threads, too&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Per-thread state in thread control block structure&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;struct thread {
+...
+uint8_t *stack; /* Saved stack pointer. */
+...
+};
+uint32_t thread_stack_ofs = offsetof(struct thread, stack)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;C declaration for asm thread-switch function&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;struct thread *switch_threads (struct thread *cur, struct thread *next);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Also thread initialization function to create new stack:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;void thread_create (const char *name, thread_func *function, void *aux);
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;i386-switch-threads&#34;&gt;i386 switch_threads&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;pushl %ebx; pushl %ebp # Save callee-saved regs
+pushl %esi; pushl %edi
+mov thread_stack_ofs, %edx # %edx = offset of stack field
+# in thread struct
+movl 20(%esp), %eax # %eax = cur
+movl %esp, (%eax,%edx,1) # cur-&amp;gt;stack = %esp
+movl 24(%esp), %ecx # %ecx = next
+movl (%ecx,%edx,1), %esp # %esp = next-&amp;gt;stack
+popl %edi; popl %esi # Restore calle-saved regs
+popl %ebp; popl %ebx
+ret # Resume execution
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;limitations-of-user-level-threads&#34;&gt;Limitations of user-level threads&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A user-level thread library can do the same thing as Pintos&lt;/li&gt;
+&lt;li&gt;Can&amp;rsquo;t take advantage of multiple CPUs or cores&lt;/li&gt;
+&lt;li&gt;A blocking system call blocks all threads
+
+&lt;ul&gt;
+&lt;li&gt;Can replace &lt;em&gt;read&lt;/em&gt; to handle network connections&lt;/li&gt;
+&lt;li&gt;But usually OSes don&amp;rsquo;t let you do this for disk&lt;/li&gt;
+&lt;li&gt;So one uncached disk read blocks all threads&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;A page fault blocks all threads&lt;/li&gt;
+&lt;li&gt;Possible deadlock if one thread blocks on another&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;user-threads-on-kernel-threads&#34;&gt;User threads on kernel threads&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;User threads implemented on kernel threads
+
+&lt;ul&gt;
+&lt;li&gt;Multiple kernel-level threads per process&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;thread_create, thread_exit&lt;/em&gt; still library functions as before&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Sometimes called &lt;em&gt;n:m&lt;/em&gt; threading
+
+&lt;ul&gt;
+&lt;li&gt;Have &lt;em&gt;n&lt;/em&gt; user threads per &lt;em&gt;m&lt;/em&gt; kernel threads (simple user-level threads are n:1, kernel threads 1:1)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;limitation-of-n-m-threading&#34;&gt;Limitation of n:m threading&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Many of same problems as n:1 threads
+
+&lt;ul&gt;
+&lt;li&gt;Blocked threads, deadlock&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Hard to keep same # kthreads as availabel CPUs
+
+&lt;ul&gt;
+&lt;li&gt;Kernel knows how many CPUs available&lt;/li&gt;
+&lt;li&gt;Kernel knows which kernel-level threads are blocked&lt;/li&gt;
+&lt;li&gt;But tries to hide these things from applications for transparency&lt;/li&gt;
+&lt;li&gt;So user-level thread scheduler might think a thread is running while underlying kernel thread is blocked&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Kernel doesn&amp;rsquo;t know relative importance of threads
+
+&lt;ul&gt;
+&lt;li&gt;Might preempt kthread in which library holds important lock&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;lessons&#34;&gt;Lessons&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Threads best implemented as a library
+
+&lt;ul&gt;
+&lt;li&gt;But kernel threads not best interface on which to do this&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Better kernel interface have been suggested
+
+&lt;ul&gt;
+&lt;li&gt;Scheduler Activations&lt;/li&gt;
+&lt;li&gt;Maybe too complex to implement on exisiting OSes (some have added then removed such features, now Windows is trying it)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Standard threads still fine for most purposes
+
+&lt;ul&gt;
+&lt;li&gt;Use kernel threads if I/O concurrency main goal&lt;/li&gt;
+&lt;li&gt;Use n:m threads for highly concurrent (e.g., sicentific applications) with many threads switches&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;But concurrency greatly increases complexity&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[OS Notes] Synchronization (Part I)</title>
       <link>/post/synchronization_1/</link>
       <pubDate>Mon, 01 Jan 2018 00:38:00 +0000</pubDate>
       
@@ -29,6 +747,7 @@
 &lt;li&gt;&lt;a href=&#34;#mesi-coherence-protocol&#34;&gt;MESI coherence protocol&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#core-and-bus-actions&#34;&gt;Core and Bus Actions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#cc-numa&#34;&gt;cc-NUMA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#real-world-coherence-costs&#34;&gt;Real World Coherence Costs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -155,17 +874,27 @@
 &lt;li&gt;But AMD and then Intel integrated memory controller into CPU&lt;/li&gt;
 &lt;li&gt;Faster to access memory controlled by the local socket (or even local die in a multi-chip module)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;cc-NUMA = cache-coherent NUMA
+&lt;li&gt;cc-NUMA = cache-coherent non-uniform memory access
 
 &lt;ul&gt;
 &lt;li&gt;Rarely see non-cache-coherent NUMA&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;real-world-coherence-costs&#34;&gt;Real World Coherence Costs&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If another core in same socket holds line in modified state:
+
+&lt;ul&gt;
+&lt;li&gt;load: 109 cycles&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
     
     <item>
-      <title>Virtual Memory OS</title>
+      <title>[OS Notes] Virtual Memory OS</title>
       <link>/post/vm_os/</link>
       <pubDate>Wed, 27 Dec 2017 00:38:00 +0000</pubDate>
       
@@ -361,7 +1090,7 @@
     </item>
     
     <item>
-      <title>Virtual Memory Hardware</title>
+      <title>[OS Notes] Virtual Memory Hardware</title>
       <link>/post/vm_hardware/</link>
       <pubDate>Tue, 26 Dec 2017 00:38:00 +0000</pubDate>
       
@@ -1397,39 +2126,6 @@ You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Lear
 &lt;/ul&gt;
 
 &lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/5.%20Digit%20Recognition/digit_recognition.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Train a Smartcab How to Drive</title>
-      <link>/project/smartcab/</link>
-      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/smartcab/</guid>
-      <description>
-
-&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
-
-&lt;p&gt;In this project I applied reinforcement learning techniques for a self-driving agent in a simplified world to aid it in effectively reaching its destinations in the allotted time. I first investigated the environment the agent operates in by constructing a very basic driving implementation. Once the agent is successful at operating within the environment, I then identified each possible state the agent can be in when considering such things as traffic lights and oncoming traffic at each intersection. With states identified, I then implemented a Q-Learning algorithm for the self-driving agent to guide the agent towards its destination within the allotted time. Finally, I improved upon the Q-Learning algorithm to find the best configuration of learning and exploration factors to ensure the self-driving agent is reaching its destinations with consistently positive results.&lt;/p&gt;
-
-&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
-
-&lt;p&gt;In the not-so-distant future, taxicab companies across the United States no longer employ human drivers to operate their fleet of vehicles. Instead, the taxicabs are operated by self-driving agents, known as &lt;em&gt;smartcabs&lt;/em&gt;, to transport people from one location to another within the cities those companies operate. In major metropolitan areas, such as Chicago, New York City, and San Francisco, an increasing number of people have come to depend on &lt;em&gt;smartcabs&lt;/em&gt; to get to where they need to go as safely and reliably as possible. Although &lt;em&gt;smartcabs&lt;/em&gt; have become the transport of choice, concerns have arose that a self-driving agent might not be as safe or reliable as human drivers, particularly when considering city traffic lights and other vehicles. To alleviate these concerns, my task is to use reinforcement learning techniques to construct a demonstration of a &lt;em&gt;smartcab&lt;/em&gt; operating in real-time to prove that both safety and reliability can be achieved.&lt;/p&gt;
-
-&lt;h3 id=&#34;below-is-the-final-score&#34;&gt;Below is the final score:&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;/img/posters/smartcab.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;the-main-techniques-used&#34;&gt;The main techniques used:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Markov Decision Processes&lt;/li&gt;
-&lt;li&gt;Reinforcement Learning&lt;/li&gt;
-&lt;li&gt;Game Theory&lt;/li&gt;
-&lt;li&gt;More Game Theory beginning at Stochastic games and Multi-agent RL&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/4.%20Smartcab/smartcab.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

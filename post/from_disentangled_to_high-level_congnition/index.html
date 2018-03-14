@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.31.1" />
+  <meta name="author" content="Yuchu Luo">
+  <meta name="description" content="Junior Student">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/from_disentangled_to_high-level_congnition/">
+
+  
+  
+
+
+  
+
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7cMerriweather%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-72309442-3', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yuchu Luo - 罗宇矗">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yuchu Luo - 罗宇矗">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/from_disentangled_to_high-level_congnition/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/luoyuchu">
+  <meta property="twitter:creator" content="@https://twitter.com/luoyuchu">
+  
+  <meta property="og:site_name" content="Yuchu Luo - 罗宇矗">
+  <meta property="og:url" content="/post/from_disentangled_to_high-level_congnition/">
+  <meta property="og:title" content="From Deep Learning of Disentangled Representations to High-level Cognition | Yuchu Luo - 罗宇矗">
+  <meta property="og:description" content="">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-02-21T00:38:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-02-21T00:38:00&#43;00:00">
+  
+
+  
+
+  <title>From Deep Learning of Disentangled Representations to High-level Cognition | Yuchu Luo - 罗宇矗</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Yuchu Luo - 罗宇矗</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#skills">
+            
+            <span>Skills</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/tags/today-i-learned/">
+            
+            <span>Today I Learned</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <div class="article-inner">
+      <h1 itemprop="name">From Deep Learning of Disentangled Representations to High-level Cognition</h1>
+
+      
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-02-21 00:38:00 &#43;0000 UTC" itemprop="datePublished">
+      Feb 21, 2018
+    </time>
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=From%20Deep%20Learning%20of%20Disentangled%20Representations%20to%20High-level%20Cognition&amp;url=%2fpost%2ffrom_disentangled_to_high-level_congnition%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2ffrom_disentangled_to_high-level_congnition%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2ffrom_disentangled_to_high-level_congnition%2f&amp;title=From%20Deep%20Learning%20of%20Disentangled%20Representations%20to%20High-level%20Cognition"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2ffrom_disentangled_to_high-level_congnition%2f&amp;title=From%20Deep%20Learning%20of%20Disentangled%20Representations%20to%20High-level%20Cognition"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=From%20Deep%20Learning%20of%20Disentangled%20Representations%20to%20High-level%20Cognition&amp;body=%2fpost%2ffrom_disentangled_to_high-level_congnition%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+      <div class="article-style" itemprop="articleBody">
+        
+
+<h2>Table of Contents</h2>
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#still-far-from-human-level-ai">Still Far from Human-level AI</a>
+<ul>
+<li><a href="#paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities">Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities</a></li>
+</ul></li>
+<li><a href="#learning-how-the-world-ticks">Learning  &lt;<How the world ticks>&gt;</a>
+<ul>
+<li><a href="#paper-learning-multiple-levels-of-abstraction">Paper: Learning Multiple Levels of Abstraction</a>
+<ul>
+<li><a href="#invariance-and-disentangling">Invariance and Disentangling</a></li>
+<li><a href="#latent-variables-and-abstract-representations">Latent Variables and abstract Representations</a></li>
+</ul></li>
+<li><a href="#paper-manifold-flattening">Paper: Manifold Flattening</a></li>
+</ul></li>
+<li><a href="#what-s-missing-and-what-s-needed-with-deep-learning-deep-understanding-and-abstract-representations">What&rsquo;s Missing and What&rsquo;s Needed with Deep Learning? - Deep Understanding and Abstract Representations</a>
+<ul>
+<li><a href="#current-ml-theory-beyond-i-i-d-data">Current ML theory Beyond i.i.d. Data</a></li>
+<li><a href="#how-to-discover-good-disentangled-representations">How to Discover Good Disentangled Representations</a></li>
+<li><a href="#acting-to-guide-representation-learning-disentangling">Acting to Guide Representation Learning &amp; Disentangling</a></li>
+<li><a href="#paper-independently-controllable-factors">Paper: Independently Controllable Factors</a>
+<ul>
+<li><a href="#abstraction-challenge-for-unsupervised-learning">Abstraction Challenge for Unsupervised Learning</a></li>
+</ul></li>
+<li><a href="#paper-the-consciousness-prior-inspired-by-cognitive-psychology">Paper: The Consciousness Prior (inspired by cognitive psychology)</a>
+<ul>
+<li><a href="#on-the-relation-between-abstraction-and-attention">On the relation between Abstraction and Attention</a></li>
+<li><a href="#what-training-objective">What Training Objective?</a></li>
+<li><a href="#consiciousness-prior-and-classical-ai">Consiciousness Prior and Classical AI</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ongoing-research">Ongoing Research</a>
+<ul>
+<li><a href="#deep-unsupervised-rl-for-ai-neural-nets-cognition">Deep Unsupervised RL for AI neural nets -&gt; cognition</a></li>
+<li><a href="#ai-for-good-take-action">AI for Good: take action!</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+
+<h2 id="still-far-from-human-level-ai">Still Far from Human-level AI</h2>
+
+<ul>
+<li>Industrial successes mostly based on supervised learning</li>
+<li>Learning superficial clues, not generalizing well enough outside of training contexts, easy to fool trained networks:
+
+<ul>
+<li>Current models cheat by picking on surface regularities</li>
+</ul></li>
+</ul>
+
+<h3 id="paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities">Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities</h3>
+
+<ul>
+<li><strong>Hypothesis</strong>: <em>Deep CNNs have a tendency to learn superficial statistical regularities in the dataset rather than high level abstract concepts.</em></li>
+<li>From the perspective of learning high level abstractions, Fourier image statistics can be <em>superficial</em> regularities, not changing object category.</li>
+<li>Different Fourier filters, same high level abstractions (objects) but different surface statistical regularities (Fourier image statistics).</li>
+<li><strong>Experiments</strong>: Train on one training set and evaluate the test sets.
+
+<ul>
+<li>A generalization gap: max difference in test accuracies</li>
+<li>Large generalization gap: CNN exploits too much of low level regularities, as opposed to learning the abstract high level concepts.</li>
+</ul></li>
+</ul>
+
+<p>&rdquo;&rsquo;
+Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.
+&ldquo;&rsquo;</p>
+
+<h2 id="learning-how-the-world-ticks">Learning  &lt;<How the world ticks>&gt;</h2>
+
+<ul>
+<li>So long as our machine learning models &lt;&lt; cheat &gt;&gt; by relying only on superficial statistical regularities, they remain vulnerable to out-of-distribution examples</li>
+<li>Humans generalize better than other animals thanks to a more accurate internal model of the <strong>underlying causal relationships</strong></li>
+<li>To predict future situations (e.g., the effect of planned actions) far from anything seen before while involving known concepts, an essential component of reasoning, intelligence and science</li>
+</ul>
+
+<h3 id="paper-learning-multiple-levels-of-abstraction">Paper: Learning Multiple Levels of Abstraction</h3>
+
+<ul>
+<li>The big payoff of deep learning is to allow learning higher levels of abstraction</li>
+<li>High-level abstractions <strong>disentangle the factors of variation</strong>, which allows much easier generalization and transfer</li>
+<li>with Data -&gt; Information -&gt; Knowledge -&gt; Wisdom
+
+<ul>
+<li>Organizational Maturity gain</li>
+<li>Abstraction Level gain</li>
+</ul></li>
+</ul>
+
+<h4 id="invariance-and-disentangling">Invariance and Disentangling</h4>
+
+<p>The notion of disentangling is related but different from the notion of invariance, as being a very important notion in computer visions, speech recognition and so on, where we&rsquo;d like to build detectors and features that are invariant to the things we don&rsquo;t care about, but sensitive to the things we do care about.</p>
+
+<ul>
+<li>Invariant features</li>
+<li>Alternative: Learning to disentangle factors</li>
+<li>Good disentangling -&gt; avoid the curse of dimensionality</li>
+</ul>
+
+<h4 id="latent-variables-and-abstract-representations">Latent Variables and abstract Representations</h4>
+
+<p><img src="/img/post/QQ20180219-231015.png" alt="" /></p>
+
+<ul>
+<li>Encoder/decoder view: maps between low &amp; high-levels</li>
+<li>Encoder doses inference: interpret the data at the abstract level</li>
+<li>Decoder can generate new configurations</li>
+<li>Encoder flattens and disentangles the data manifold</li>
+<li>Marginal independence in h-space (Can assemble from each of the factors if dimension is independently)</li>
+</ul>
+
+<h3 id="paper-manifold-flattening">Paper: Manifold Flattening</h3>
+
+<ul>
+<li>Deeper representations -&gt; abstractions -&gt; disentangling</li>
+<li>Manifolds are expanded and flattened</li>
+</ul>
+
+<h2 id="what-s-missing-and-what-s-needed-with-deep-learning-deep-understanding-and-abstract-representations">What&rsquo;s Missing and What&rsquo;s Needed with Deep Learning? - Deep Understanding and Abstract Representations</h2>
+
+<h3 id="current-ml-theory-beyond-i-i-d-data">Current ML theory Beyond i.i.d. Data</h3>
+
+<ul>
+<li>Real-life applications often require generalizations in regimes not seen during training</li>
+<li>Humans can project themselves in situations they have never been (e.g. imagine being on another planet, or going through exceptional events like in many movies)</li>
+<li><strong>Key: understanging explanatory/causal factors and mechanisms</strong></li>
+</ul>
+
+<h3 id="how-to-discover-good-disentangled-representations">How to Discover Good Disentangled Representations</h3>
+
+<ul>
+<li>How to discover abstractions?</li>
+<li>What is a good representation? <em>(Bengio et al 2013)</em></li>
+<li>Need clues (= priors) to help <em>disentangle</em> the underlying factors, such as
+
+<ul>
+<li>Spatial &amp; temporal scales</li>
+<li>Marginal independence</li>
+<li>Simple dependencies between factors
+
+<ul>
+<li>Consciousness prior</li>
+</ul></li>
+<li>Causal / mechanism independence
+
+<ul>
+<li>Controllable factors</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="acting-to-guide-representation-learning-disentangling">Acting to Guide Representation Learning &amp; Disentangling</h3>
+
+<ul>
+<li><strong>Some factors (e.g. objects) correspond to &lsquo;independently controllable&rsquo; aspects of the world</strong></li>
+<li><em>Can only be discovered by acting in the world</em>
+
+<ul>
+<li><em>Control linked to notion of objects &amp; agents</em></li>
+<li><em>Causal but agent-specific &amp; subjective</em></li>
+</ul></li>
+</ul>
+
+<p>(Acting to acquire information)</p>
+
+<h3 id="paper-independently-controllable-factors">Paper: Independently Controllable Factors</h3>
+
+<ul>
+<li>Jointly train for each aspect (factor)
+
+<ul>
+<li>A policy $\pi_k$ (which tries to selectively change just that factor)
+
+<ul>
+<li>Kth policy is going to control the Kth factor</li>
+</ul></li>
+<li>A representation (which maps state to value of factor) $f_k$</li>
+<li>Discrete case, $\phi \in {1,..,N}$, define *selectivity$:
+
+<ul>
+<li>$$\sum<em>{k=1}^N{\mathbb{E}</em>{(s_t, a<em>t, s</em>{t+1})} [\pi_k{a_t|s_t} \cfrac{f<em>k(s</em>{t+1}) - f_k(s<em>t)}{\sum</em>{k&rsquo;}{|f<em>{k&rsquo;}(s</em>{t+1})f_{k&rsquo;}(s_t)|}}]}$$</li>
+</ul></li>
+</ul></li>
+<li>Optimize both policy $\pi_k$ and representation $f_k$ to minimize
+
+<ul>
+<li>$$\mathbb{E}_s[\frac{1}{2} \lVert s - g(f(s)) \rVert^2_2] - \lambda \sum_k{\mathbb{E}_s[ \sum_a{\pi_k(a|s)\log{sel(s,a,k)}}]}$$</li>
+<li>Namely, (reconstruction error) - $\lambda$ (disentanglement objective)</li>
+</ul></li>
+<li>Example 1.Predict the effect of actions in attribute space</li>
+<li>Example 2.Given two states, recover the casual actions leading from one to the other
+Given initial state and set of actions, predict new attribute values and the corresponding reconstructed images.</li>
+</ul>
+
+<p><img src="/img/post/QQ20180220-175520.png" alt="" /></p>
+
+<ul>
+<li>Multi-step policies $\epsilon$ Embedding Space for Naming Factors and Policies
+<img src="/img/post/QQ20180220-180229.png" alt="" /></li>
+</ul>
+
+<h4 id="abstraction-challenge-for-unsupervised-learning">Abstraction Challenge for Unsupervised Learning</h4>
+
+<ul>
+<li>Why is modeling P(acoustics) so much worse than modeling P(acoustics|phonemes) P(phonemes)?</li>
+<li>Wrong level of abstraction?
+
+<ul>
+<li>many more entropy bits in acoustic details then linguistic content -&gt; predict the future in abstract space instead</li>
+</ul></li>
+</ul>
+
+<h3 id="paper-the-consciousness-prior-inspired-by-cognitive-psychology">Paper: The Consciousness Prior (inspired by cognitive psychology)</h3>
+
+<ul>
+<li>Conscious thoughts are very low-dimensional objects compared to the full state of the (unconscious) brain</li>
+<li>Yet they have unexpected predictive value of usefulness -&gt; strong constraint or prior on the underlying representation</li>
+<li>Other
+
+<ul>
+<li>*<em>Thought</em>: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain</li>
+<li>Richer than but closely associated with short verbal expression such as a <strong>sentence</strong> or phrase, a <strong>rule</strong> or <strong>fact</strong> (link to classical symbolic AI &amp; knowledge representation)</li>
+</ul></li>
+<li><strong>How to select a few relevant abstract concepts making a thought?</strong>
+
+<ul>
+<li>Content-based  Attention</li>
+</ul></li>
+</ul>
+
+<h4 id="on-the-relation-between-abstraction-and-attention">On the relation between Abstraction and Attention</h4>
+
+<ul>
+<li>Attention allows to focus on a few elements out of a large set</li>
+<li>Soft-attention allows this process to be trainable with gradient-based optimization and backprop</li>
+<li>Attention focuses on a few appropriate abstract or concret elements of mental representation</li>
+<li>Access consciousness is one aspect of consciousness, what is accessed and comes to mind (Dehaene&rsquo;s C1 or global availability), See <em>Dehaene et al, Science, 2017.</em>
+
+<ul>
+<li><img src="/img/post/QQ20180221-044638.png" alt="" /></li>
+</ul></li>
+<li>2 levels of representation
+
+<ul>
+<li>High-dimensional abstract representation space (all known concepts and factors) <em>h</em></li>
+<li>Low-dimensional conscious thought <em>c</em>, extracted from <em>h</em>
+
+<ul>
+<li><img src="/img/post/QQ20180221-045704.png" alt="" /></li>
+</ul></li>
+<li><em>c</em> includes names (keys) and values of factors</li>
+</ul></li>
+<li>Conscious prediction over attended variables A (soft-attention)
+
+<ul>
+<li>$$V = - \sum_A{w<em>a \log{P(h</em>{t,A} = a | c_{t-1})}}$$
+
+<ul>
+<li>$w_A$: Attention weights</li>
+<li>$h_{t,A}$: Factor <strong>name</strong></li>
+<li>$a$: Predicted <strong>value</strong></li>
+<li>$c_{t-1}$: Earlier conscious state
+<br /></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h4 id="what-training-objective">What Training Objective?</h4>
+
+<ul>
+<li>How to train the attention mechanism which selects which variables to predict?
+
+<ul>
+<li>Representation learning without reconstruction:
+
+<ul>
+<li>Maximize entropy of code (preserve a lot of information about the data)</li>
+<li>Maximize mutual information between past and future representations (see also <em>Becker &amp; Hinton 1992</em>)</li>
+</ul></li>
+<li><em>Objective function completely in abstract space, higher-level parameters model dependencies in abstract space</em></li>
+<li><strong>Usefulness of thoughts: as conditioning information for action, i.e., a particular form of planning for RL, i.e., the estimated gradient of rewards could also be used to drive learning of abstract representations</strong></li>
+</ul></li>
+</ul>
+
+<h4 id="consiciousness-prior-and-classical-ai">Consiciousness Prior and Classical AI</h4>
+
+<ul>
+<li><em>Conscious thought is closedly related to a linguistic utterance</em></li>
+<li>(conditioning variables -&gt; predicted variables) = a <strong>rule</strong></li>
+<li>Conscious thoughts &amp; short-term memory: good level of representation for memorization and memories</li>
+<li>Need to refer to variables in conscious states facilitates recursive compositional computation</li>
+<li>Consciousness makes it easier to associate preception, action and <strong>natural language</strong> and use <em>natural language data to guide the creation of high-level abstraction expressed linguistically</em></li>
+</ul>
+
+<h2 id="ongoing-research">Ongoing Research</h2>
+
+<h3 id="deep-unsupervised-rl-for-ai-neural-nets-cognition">Deep Unsupervised RL for AI neural nets -&gt; cognition</h3>
+
+<ul>
+<li>Learn more abstract representations which capture causality</li>
+<li>Disentangle controllable factors</li>
+<li>Naturally gives rise to the notion of <strong>objects, attributes, agents &amp; goals</strong></li>
+<li>Natural language &amp; consciousness prior: other clue about abstract representations (see also <em>Andreas, Klein &amp; Levine 2017</em>)</li>
+<li>Unsupervised RL research, performed in gradually more challenging sumulated environments</li>
+</ul>
+
+<h3 id="ai-for-good-take-action">AI for Good: take action!</h3>
+
+<ul>
+<li>Beyond developing the next gadget</li>
+<li>Actionalbe items:
+
+<ul>
+<li>Favor ML applications which help the poorest countries, may help with fighting climate change, etc.</li>
+<li>A role for the Partnership on AI: fund an organization which will coordinate, prioritize and channel funding for such applications, as well as facilitate internships for students from poor conuntries in top ML labs</li>
+<li>Accept such interns even if they are below our bar, they will return home with knowledge of the state-of-the-art in ML</li>
+</ul></li>
+</ul>
+
+      </div>
+
+      
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/today-i-learned">Today I Learned</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/deep-learning">Deep Learning</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/star">star</a>
+  
+</div>
+
+
+
+    </div>
+  </div>
+
+</article>
+
+
+
+<div class="article-container article-widget">
+  <div class="hr-light"></div>
+  <h3>Related</h3>
+  <ul>
+    
+    <li><a href="/post/synchronization_2/">[OS Notes] Synchronization (Part II)</a></li>
+    
+    <li><a href="/post/processes/">[OS Notes] Processes</a></li>
+    
+    <li><a href="/post/synchronization_1/">[OS Notes] Synchronization (Part I)</a></li>
+    
+    <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
+    
+    <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
+    
+  </ul>
+</div>
+
+
+
+<div class="container article-widget">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="/post/processes/"><span
+      aria-hidden="true">&larr;</span> [OS Notes] Processes</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+
+<div class="article-container">
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "yuchuluo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Yuchu Luo &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

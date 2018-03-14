@@ -11,7 +11,7 @@
   <meta name="description" content="Junior Student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/vm_os/">
+  <link rel="alternate" hreflang="en-us" href="/post/synchronization_2/">
 
   
   
@@ -70,7 +70,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/vm_os/">
+  <link rel="canonical" href="/post/synchronization_2/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -78,19 +78,19 @@
   <meta property="twitter:creator" content="@https://twitter.com/luoyuchu">
   
   <meta property="og:site_name" content="Yuchu Luo - 罗宇矗">
-  <meta property="og:url" content="/post/vm_os/">
-  <meta property="og:title" content="[OS Notes] Virtual Memory OS | Yuchu Luo - 罗宇矗">
+  <meta property="og:url" content="/post/synchronization_2/">
+  <meta property="og:title" content="[OS Notes] Synchronization (Part II) | Yuchu Luo - 罗宇矗">
   <meta property="og:description" content="">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2017-12-27T00:38:00&#43;00:00">
+  <meta property="article:published_time" content="2018-01-01T00:38:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2017-12-27T00:38:00&#43;00:00">
-  
-
+  <meta property="article:modified_time" content="2018-01-01T00:38:00&#43;00:00">
   
 
-  <title>[OS Notes] Virtual Memory OS | Yuchu Luo - 罗宇矗</title>
+  
+
+  <title>[OS Notes] Synchronization (Part II) | Yuchu Luo - 罗宇矗</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -255,7 +255,7 @@
 
   <div class="article-container">
     <div class="article-inner">
-      <h1 itemprop="name">[OS Notes] Virtual Memory OS</h1>
+      <h1 itemprop="name">[OS Notes] Synchronization (Part II)</h1>
 
       
 
@@ -263,15 +263,15 @@
 
   <span class="article-date">
     
-    <time datetime="2017-12-27 00:38:00 &#43;0000 UTC" itemprop="datePublished">
-      Dec 27, 2017
+    <time datetime="2018-01-01 00:38:00 &#43;0000 UTC" itemprop="datePublished">
+      Jan 1, 2018
     </time>
   </span>
 
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -286,35 +286,35 @@
   <ul class="share">
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=%5bOS%20Notes%5d%20Virtual%20Memory%20OS&amp;url=%2fpost%2fvm_os%2f"
+         href="https://twitter.com/intent/tweet?text=%5bOS%20Notes%5d%20Synchronization%20%28Part%20II%29&amp;url=%2fpost%2fsynchronization_2%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2fvm_os%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fsynchronization_2%2f"
          target="_blank" rel="noopener">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fvm_os%2f&amp;title=%5bOS%20Notes%5d%20Virtual%20Memory%20OS"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsynchronization_2%2f&amp;title=%5bOS%20Notes%5d%20Synchronization%20%28Part%20II%29"
          target="_blank" rel="noopener">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2fvm_os%2f&amp;title=%5bOS%20Notes%5d%20Virtual%20Memory%20OS"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsynchronization_2%2f&amp;title=%5bOS%20Notes%5d%20Synchronization%20%28Part%20II%29"
          target="_blank" rel="noopener">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=%5bOS%20Notes%5d%20Virtual%20Memory%20OS&amp;body=%2fpost%2fvm_os%2f">
+         href="mailto:?subject=%5bOS%20Notes%5d%20Synchronization%20%28Part%20II%29&amp;body=%2fpost%2fsynchronization_2%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -335,186 +335,248 @@
 <ul>
 <li>
 <ul>
-<li><a href="#paging">Paging</a>
+<li><a href="#overview-of-previous-and-current-lectures">Overview of previous and current lectures</a></li>
+<li><a href="#rcu-read-copy-update">RCU (Read-copy update)</a>
 <ul>
-<li><a href="#working-set-model">Working set model</a></li>
-<li><a href="#paging-challenge">Paging challenge</a></li>
-<li><a href="#re-starting-instructions">Re-starting instructions</a></li>
-<li><a href="#what-to-fetch">What to fetch</a></li>
-<li><a href="#selecting-physical-pages">Selecting physical pages</a></li>
-<li><a href="#superpages">Superpages</a></li>
+<li><a href="#is-rcu-really-safe">Is RCU really safe?</a></li>
+<li><a href="#preemptible-kernels">Preemptible kernels</a></li>
+<li><a href="#garbage-collection">Garbage collection</a></li>
 </ul></li>
-<li><a href="#eviction-policies">Eviction policies</a>
+<li><a href="#improving-spinlock-performance">Improving spinlock performance</a>
 <ul>
-<li><a href="#starw-man-fifo-eviction">Starw man: FIFO eviction</a></li>
+<li><a href="#useful-macros">Useful macros</a></li>
+<li><a href="#mcs-lock">MCS lock</a></li>
+<li><a href="#mcs-acquire">MCS Acquire</a></li>
+<li><a href="#mcs-release-with-cas">MCS Release with CAS</a></li>
 </ul></li>
-<li><a href="#thrashing">Thrashing</a></li>
-<li><a href="#details-of-paging">Details of paging</a></li>
-<li><a href="#the-user-level-perspective">The user-level perspective</a></li>
-<li><a href="#case-study-4-4-bsd">Case study: 4.4 BSD</a></li>
 </ul></li>
 </ul>
 </nav>
 
 
-<h2 id="paging">Paging</h2>
-
-<p><img src="/img/post/WX20171227-110059.png" alt="" /></p>
+<h2 id="overview-of-previous-and-current-lectures">Overview of previous and current lectures</h2>
 
 <ul>
-<li>Use disk to simulate larger virtual than physical memory</li>
-</ul>
-
-<h3 id="working-set-model">Working set model</h3>
+<li>Locks create serial code
 
 <ul>
-<li>Disk much, much slower than memory
-
-<ul>
-<li>Goal: run at memory speed, not disk speed</li>
+<li>Serial code gets no speedup from multiprocessor</li>
 </ul></li>
-<li><sup>80</sup>&frasl;<sub>20</sub> rule: 20% of memory gets 80% of memory accesses
+<li>Test-and-set spinlock has additional disadvantages
 
 <ul>
-<li>Keep the hot 20% in memory</li>
-<li>Keep the cold 80% on disk</li>
+<li>Lots of traffic over memory bus</li>
+<li>Not fair on NUMA machines</li>
 </ul></li>
-</ul>
-
-<h3 id="paging-challenge">Paging challenge</h3>
+<li>Idea 1: Avoid spinlocks
 
 <ul>
-<li>How to resume a process after a fault?
-
-<ul>
-<li>Need to save state and resume</li>
-<li>Process might have been in the middle of an instruction!</li>
+<li>We saw lock-free algorithms last lecture</li>
+<li>Discussing RCU very quickly last time</li>
 </ul></li>
-<li>What to fetch from disk?
+<li>Idea 2: Design better spinlocks
 
 <ul>
-<li>Just needed page or more?</li>
+<li>Less memory traffic, better fairness</li>
 </ul></li>
-<li>What to eject?
+<li>Idea 3: Hardware turns coarse-into fine-grained locks!
 
 <ul>
-<li>How to allocate physical pages amongst processes?</li>
-<li>Wchich of a particular process&rsquo;s pages to keep in memory?</li>
+<li>While also reducing memory traffic for lock in common case</li>
 </ul></li>
 </ul>
 
-<h3 id="re-starting-instructions">Re-starting instructions</h3>
+<h2 id="rcu-read-copy-update">RCU (Read-copy update)</h2>
 
 <ul>
-<li>Hardware provides kernel with information about page fault
+<li>Some data is read way more often than written
 
 <ul>
-<li>Faulting virtual address (In <code>%cr2</code> reg on x86&ndash;may see it if you midify Pintos <code>page_fault</code> and use <code>fault_addr</code>)</li>
-<li>Address of instruction that caused fault</li>
-<li>Was the access a read or write? Was it an instruction fetch? Was it caused by user accss to kernel-only memory?</li>
+<li>Routing tables consulted for each forwarded packet</li>
+<li>Data maps in system with 100+ disks (updated on disk failure)</li>
 </ul></li>
-<li>Hardware mush allow resuming after a fault</li>
-<li>Idempotent instructions are easy
+<li>Optimize for the common case of reading without lock
 
 <ul>
-<li>E.g., simple load or store instruction can be restarted</li>
-<li>Just re-execute any instruction that only accesses one address</li>
+<li>E.g., global variable: <code>routing_table *rt;</code></li>
+<li>Call <code>lookup (rt, route);</code> with no lock</li>
 </ul></li>
-<li>Complex instructions must be re-started, too
+<li>Update by making copy, swapping pointer
+<code>C
+routing_table *newrt = copy_routing_table (rt);
+update_routing_table (newrt);
+atomic_thread_fence (memory_order_release);
+rt = newrt;
+</code></li>
+</ul>
+
+<h3 id="is-rcu-really-safe">Is RCU really safe?</h3>
 
 <ul>
-<li>E.g., x86 move string instructions</li>
-<li>Specify src, dst, count in <code>%esi, %edi, %ecx</code> registers</li>
-<li>On fault, registers adjusted to resume where move left off</li>
+<li>Consider the use of global <em>rt</em> with no fences: <code>loolup (rt, route);</code></li>
+<li>Could a CPU read new pointer but then old contents of *rt?</li>
+<li>Yes on alpha, No on all other existing architectures</li>
+<li>We are saved by <em>dependency ordering</em> in hardware
+
+<ul>
+<li>Instruction B depends on A if B uses result of A</li>
+<li>Non-alpha CPUs won&rsquo;t re-order dependent instructions</li>
+<li>If wwriter uses release fence, safe to load pointer then just use it</li>
+</ul></li>
+<li>This is the point of <code>memory_order_consume</code>
+
+<ul>
+<li>Should be quivalent to acquire barrier on alpha</li>
+<li>But should compile to nothing (be free) on other machines</li>
+<li>Active area of discussion for C++ committee</li>
 </ul></li>
 </ul>
 
-<h3 id="what-to-fetch">What to fetch</h3>
+<h3 id="preemptible-kernels">Preemptible kernels</h3>
 
 <ul>
-<li>Bring in page that caused page fault</li>
-<li>Pre-fetch surrounding pages?
+<li>Recall <em>kernel process context</em>
 
 <ul>
-<li>Reading two disk blocks approximately as fast as reading one</li>
-<li>As long as no track/head switch, seek time dominates</li>
-<li>If application exhibits spacial locality, then big win to store and read multiple contiguous pages</li>
+<li>When CPU in kernel mode but excuting on behalf of a process (e.h., might be in system call or page fault handler)</li>
+<li>As opposed to interrupt handlers or context switch code</li>
 </ul></li>
-<li>Also pre-zero unused pages in idle loop
+<li>A <em>preemptible kernel</em> can preempt process context code
 
 <ul>
-<li>Need 0-filled pages for stack, heap, anonymously mmapped memory</li>
-<li>Zeroing them only on demand is slower</li>
-<li>Hence, many OSes zero freed pages while CPU is idle</li>
+<li>Take a CPU core away from kernel process context code between any two instructions</li>
+<li>Give the same CPU core to kernel code for a different process</li>
 </ul></li>
-</ul>
-
-<h3 id="selecting-physical-pages">Selecting physical pages</h3>
+<li>Don&rsquo;t confuse with
 
 <ul>
-<li>May need to eject some pages
-
-<ul>
-<li>More on eviction policy in two slides</li>
+<li>Interrupt handlers can always preempt process context code</li>
+<li>Preemptive threads (always have for multicore)</li>
+<li>Process context code running concurrently on other CPU cores</li>
 </ul></li>
-<li>May also have a choice of physical pages</li>
-<li>Direct-mapped physical caches
+<li>Sometimes want or need to disable preemption
 
 <ul>
-<li>Virtual -&gt; Physical mapping can affect performance</li>
-<li>In old days: Physical adddredd A conflicts with $kC+A$ (where k is any integer, C is cache size)</li>
-<li>Applications can conflict with each other or themselves</li>
-<li>Scientific application benefit if consecutive virtual pages do not confilict in the cache</li>
-<li>Many other applications do better with random mapping</li>
-<li>There days: CPUs more sophisticated than kC + A</li>
+<li>E.g., might help performance while holding a spinlock</li>
 </ul></li>
 </ul>
 
-<h3 id="superpages">Superpages</h3>
+<h3 id="garbage-collection">Garbage collection</h3>
 
 <ul>
-<li>How should OS make use of &ldquo;large&rdquo; mappings
+<li>When can you free memory of old routing table?
 
 <ul>
-<li>x86 has <sup>2</sup>&frasl;<sub>4</sub> MB pages that might be useful</li>
-<li>Alpha has even more choices: 8KB, 64KB, 512KB, 4MB</li>
+<li>When you are guaranteed no one is using it —— how to determine</li>
 </ul></li>
-<li>Sometimes more pages in L2 cache than TLB entries
+<li>Definitions:
 
 <ul>
-<li>Don&rsquo;t want costly TLB misses going to main memory</li>
+<li><em>temporary variable</em> - short-used (e.g., local) variable</li>
+<li><em>permanent variable</em> - long lived data (e.g., global <em>rt</em> pointer)</li>
+<li><em>quiescent state</em> - when all a thread&rsquo;s temporary variables dead</li>
+<li><em>quiescent period</em> - time during which every thread has been in quiesceent state at least once</li>
 </ul></li>
-<li>Or have two-level TLBs
+<li>Free old copy of updated data after quiescent period
 
 <ul>
-<li>Want to maximize hit rate in faster L1 TLB</li>
-</ul></li>
-<li>OS can transparently support superpages
-
-<ul>
-<li>&ldquo;reserve&rdquo; appropriate physical pages if possible</li>
-<li>Promote contiguous pages to superpages</li>
-<li>Does complicate evicting (esp. dirty pages) - demote</li>
+<li>How to determine when quiescent period has gone by?</li>
+<li>E.g., keep count of syscalls/context on each CPU</li>
+<li>Can&rsquo;t hold a pointer across context switch or user mode</li>
+<li>Must disable preemption while consuming RCU data structure</li>
 </ul></li>
 </ul>
 
-<h2 id="eviction-policies">Eviction policies</h2>
+<h2 id="improving-spinlock-performance">Improving spinlock performance</h2>
 
-<h3 id="starw-man-fifo-eviction">Starw man: FIFO eviction</h3>
+<h3 id="useful-macros">Useful macros</h3>
 
 <ul>
-<li>Evict oldest fetched page in system</li>
-<li>Example-reference string 1,2,3,4,1,2,5,1,2,3,4,5</li>
-<li>3 physical pages: 9 page faults</li>
+<li>Atomic compare and swap: CAS (mem, old, new)
+
+<ul>
+<li>In C11: <code>atomic_compare_exchange_strong</code></li>
+<li>On x86: <code>cmpxchg</code> instruction provides this (with <em>lock</em> prefix)</li>
+<li><code>if *mem == old, then swap *mem&lt;-&gt;new and return true, else false</code></li>
+</ul></li>
+<li>Atomic swap: XCHG (mem, new)
+
+<ul>
+<li>C11 <code>atomic_exchange</code>, can implement with xchg on x86</li>
+<li>Atomically exchanges <code>*mem&lt;-&gt;new</code></li>
+</ul></li>
+<li>Atomic fetch and add: FADD (mem, val)
+
+<ul>
+<li>C11 <code>atomic_fetch_add</code>, can implement with <em>lock</em> add on x86
+Atomically sets <code>*mem += val</code> and returns <em>old</em> value of <code>*mem</code></li>
+</ul></li>
+<li>Atomic fetch and subtract: FSUB (mem, val)</li>
+<li>Note all atomics return previous value (like x++, not ++x)</li>
+<li>All behave like sequentially consistent fences, too
+
+<ul>
+<li>Unlike <code>_explicit</code> versions, which take a <code>memory_order</code> argument</li>
+</ul></li>
 </ul>
 
-<h2 id="thrashing">Thrashing</h2>
+<h3 id="mcs-lock">MCS lock</h3>
 
-<h2 id="details-of-paging">Details of paging</h2>
+<ul>
+<li>Idea 2: Build a better spinlock</li>
+<li>Lick designed by Mellor-Crummey and Scott
 
-<h2 id="the-user-level-perspective">The user-level perspective</h2>
+<ul>
+<li>Goal: reduce bus traffic on cc machines, improve fairness</li>
+</ul></li>
+<li>Each CPU has a <em>qnode</em> structure in local memory
+<code>C
+typedef struct qnode {
+_Atomic (struct qnode *) next;
+atomic_bool locked;
+} qnode;
+</code></li>
+<li>A lock is a <em>qnode</em> pointer: <code>typedef _Atomic (qnode *) lock;</code>
 
-<h2 id="case-study-4-4-bsd">Case study: 4.4 BSD</h2>
+<ul>
+<li>Construct lisk of CPUs holding or waiting for lock</li>
+<li><em>lock</em> itself points to taiil of list list</li>
+</ul></li>
+<li>While waiting, spin on your local <em>locked</em> flag</li>
+</ul>
+
+<h3 id="mcs-acquire">MCS Acquire</h3>
+
+<pre><code class="language-C">acquire (lock *L, qnode*I){
+    I-&gt;next = NULL;
+    qnode *preprocessor = I;
+    XCHG (*L, predecessor);
+    if (predecessor != NULL){
+        I-&gt;locked = true
+        predecessor-&gt;next = I;;
+        while (I-&gt;locked);
+    }
+}
+</code></pre>
+
+<p><img src="/img/post/QQ20180123-033259@2x.pnd" alt="" /></p>
+
+<ul>
+<li>If unlocked, L is NULL</li>
+<li>If locked, no waiters, L is owner&rsquo;s qnode</li>
+<li>If waiters, *L is tail of waiter list</li>
+</ul>
+
+<h3 id="mcs-release-with-cas">MCS Release with CAS</h3>
+
+<pre><code class="language-C">release (lock* L, qnode * I) {
+    if (!I-&gt;next)
+        if (CAS (*L, I, NULL))
+            return;
+    while (!I-&gt;nxt);
+    I-&gt;next-&gt;locked false
+}
+</code></pre>
 
       </div>
 
@@ -543,13 +605,15 @@
   <h3>Related</h3>
   <ul>
     
+    <li><a href="/post/synchronization_1/">[OS Notes] Synchronization (Part I)</a></li>
+    
+    <li><a href="/post/processes/">[OS Notes] Processes</a></li>
+    
+    <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
+    
     <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
     
     <li><a href="/post/til-2017-12-12/">2017-12-12</a></li>
-    
-    <li><a href="/post/til-2017-12-08/">2017-12-08</a></li>
-    
-    <li><a href="/post/til-2017-12-05/">2017-12-05</a></li>
     
   </ul>
 </div>
@@ -560,12 +624,12 @@
   <nav>
   <ul class="pager">
     
-    <li class="previous"><a href="/post/vm_hardware/"><span
-      aria-hidden="true">&larr;</span> [OS Notes] Virtual Memory Hardware</a></li>
+    <li class="previous"><a href="/post/vm_os/"><span
+      aria-hidden="true">&larr;</span> [OS Notes] Virtual Memory OS</a></li>
     
 
     
-    <li class="next"><a href="/post/synchronization_2/">[OS Notes] Synchronization (Part II) <span
+    <li class="next"><a href="/post/synchronization_1/">[OS Notes] Synchronization (Part I) <span
       aria-hidden="true">&rarr;</span></a></li>
     
   </ul>

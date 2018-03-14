@@ -271,7 +271,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -342,6 +342,13 @@
 <li><a href="#core-and-bus-actions">Core and Bus Actions</a></li>
 <li><a href="#cc-numa">cc-NUMA</a></li>
 <li><a href="#real-world-coherence-costs">Real World Coherence Costs</a></li>
+<li><a href="#numa-and-spinlocks">NUMA and spinlocks</a></li>
+</ul></li>
+<li><a href="#synchronization-and-memory-consistency-review">Synchronization and memory consistency review</a>
+<ul>
+<li><a href="#amdahl-s-law">Amdahl&rsquo;s law</a></li>
+<li><a href="#locking-basics">Locking basics</a></li>
+<li><a href="#locking-granularity">Locking granularity</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -481,7 +488,116 @@
 <li>If another core in same socket holds line in modified state:
 
 <ul>
-<li>load: 109 cycles</li>
+<li>load: 109 cycles (LLC + 65)</li>
+<li>store: 115 cycles (LLC + 71)</li>
+<li>atomic CAS: 120 cycles (LLC + 76)</li>
+</ul></li>
+<li>If a core in a different socket holds line in modiefied state
+
+<ul>
+<li>NUMA load: 289 cycles</li>
+<li>NUMA store: 320 cycles</li>
+<li>NUMA atomic CAS: 324 cycles</li>
+</ul></li>
+<li>But only a partial picture
+
+<ul>
+<li>Could be faster because of out-of-order execution</li>
+<li>Could be slower if interconnect contention or multiple hops</li>
+</ul></li>
+</ul>
+
+<h3 id="numa-and-spinlocks">NUMA and spinlocks</h3>
+
+<ul>
+<li>Test-and-set spinlock has serveral advantages
+
+<ul>
+<li>Simple to implement and understand</li>
+<li>One memory location for arbitrarily many CPUs</li>
+</ul></li>
+<li>But also has disadvantages
+
+<ul>
+<li>Lots of traffic over memory bus (especially when &gt; 1 spinner)</li>
+<li>Not neccessarily fair (same CPU acquires lock many times)</li>
+<li>Even less fair on a NUMA machine</li>
+</ul></li>
+<li>Idea 1: Avoid spinlocks altogether (today)</li>
+<li>Idea 2: Reduce bus traffic with better spinlocks (next lecture)
+
+<ul>
+<li>Design lock that spins only on local memory</li>
+<li>Also gives better fairness</li>
+</ul></li>
+</ul>
+
+<h2 id="synchronization-and-memory-consistency-review">Synchronization and memory consistency review</h2>
+
+<h3 id="amdahl-s-law">Amdahl&rsquo;s law</h3>
+
+<p>$$T(n)=T(1)(B+1/n(1-B))$$</p>
+
+<ul>
+<li>Expected speedup limited when only part of a task is sped up
+
+<ul>
+<li>$T(n)$: the time it takes n CPU cores to complete the task</li>
+<li>B: the fraction of the job that must be serial</li>
+</ul></li>
+<li>Even with massive multiprocessors, $\lim_{n\to \infty} = B \cdot T(1) $
+<img src="/img/post/QQ20180103-233445.png" alt="" />
+
+<ul>
+<li>Places an ultimate limit on parallel speedup</li>
+</ul></li>
+<li>Problem: synchronization increases serial section size</li>
+</ul>
+
+<h3 id="locking-basics">Locking basics</h3>
+
+<pre><code class="language-c">mutex_t m;
+lock(&amp;m);
+cnt = cnt + 1; /* critical section */
+unlock(&amp;m);
+</code></pre>
+
+<ul>
+<li>Only one thread can hold a mutex at a time
+
+<ul>
+<li>Makes critical section atomic</li>
+</ul></li>
+<li>Recall <strong>thread API contract</strong>
+
+<ul>
+<li>All access to global data must be protected by a mutex</li>
+<li>Global = two or more threads touch data and at least one writes</li>
+</ul></li>
+<li>Means must map each piece of global data to one mutex
+
+<ul>
+<li>Never touch the data unless you locked that mutex</li>
+</ul></li>
+<li>But many ways to map data to mutexes</li>
+</ul>
+
+<h3 id="locking-granularity">Locking granularity</h3>
+
+<ul>
+<li>Consider two lookup implementations for global hash table:
+<code>c
+struct list *hash_tbl[1021];
+</code>
+
+<ul>
+<li>coarse-grained locking
+<code>c
+mutex_t m;
+...
+mutex_lock(&amp;m);
+struct list_elem
+</code><br /></li>
 </ul></li>
 </ul>
 
@@ -512,6 +628,8 @@
   <h3>Related</h3>
   <ul>
     
+    <li><a href="/post/synchronization_2/">[OS Notes] Synchronization (Part II)</a></li>
+    
     <li><a href="/post/processes/">[OS Notes] Processes</a></li>
     
     <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
@@ -519,8 +637,6 @@
     <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
     
     <li><a href="/post/til-2017-12-12/">2017-12-12</a></li>
-    
-    <li><a href="/post/til-2017-12-08/">2017-12-08</a></li>
     
   </ul>
 </div>
@@ -531,8 +647,8 @@
   <nav>
   <ul class="pager">
     
-    <li class="previous"><a href="/post/vm_os/"><span
-      aria-hidden="true">&larr;</span> [OS Notes] Virtual Memory OS</a></li>
+    <li class="previous"><a href="/post/synchronization_2/"><span
+      aria-hidden="true">&larr;</span> [OS Notes] Synchronization (Part II)</a></li>
     
 
     

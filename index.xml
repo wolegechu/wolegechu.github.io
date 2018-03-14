@@ -11,6 +11,340 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>From Deep Learning of Disentangled Representations to High-level Cognition</title>
+      <link>/post/from_disentangled_to_high-level_congnition/</link>
+      <pubDate>Wed, 21 Feb 2018 00:38:00 +0000</pubDate>
+      
+      <guid>/post/from_disentangled_to_high-level_congnition/</guid>
+      <description>
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#still-far-from-human-level-ai&#34;&gt;Still Far from Human-level AI&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities&#34;&gt;Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#learning-how-the-world-ticks&#34;&gt;Learning  &amp;lt;&lt;How the world ticks&gt;&amp;gt;&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#paper-learning-multiple-levels-of-abstraction&#34;&gt;Paper: Learning Multiple Levels of Abstraction&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#invariance-and-disentangling&#34;&gt;Invariance and Disentangling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#latent-variables-and-abstract-representations&#34;&gt;Latent Variables and abstract Representations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paper-manifold-flattening&#34;&gt;Paper: Manifold Flattening&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-s-missing-and-what-s-needed-with-deep-learning-deep-understanding-and-abstract-representations&#34;&gt;What&amp;rsquo;s Missing and What&amp;rsquo;s Needed with Deep Learning? - Deep Understanding and Abstract Representations&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#current-ml-theory-beyond-i-i-d-data&#34;&gt;Current ML theory Beyond i.i.d. Data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-to-discover-good-disentangled-representations&#34;&gt;How to Discover Good Disentangled Representations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#acting-to-guide-representation-learning-disentangling&#34;&gt;Acting to Guide Representation Learning &amp;amp; Disentangling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paper-independently-controllable-factors&#34;&gt;Paper: Independently Controllable Factors&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#abstraction-challenge-for-unsupervised-learning&#34;&gt;Abstraction Challenge for Unsupervised Learning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#paper-the-consciousness-prior-inspired-by-cognitive-psychology&#34;&gt;Paper: The Consciousness Prior (inspired by cognitive psychology)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#on-the-relation-between-abstraction-and-attention&#34;&gt;On the relation between Abstraction and Attention&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-training-objective&#34;&gt;What Training Objective?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#consiciousness-prior-and-classical-ai&#34;&gt;Consiciousness Prior and Classical AI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ongoing-research&#34;&gt;Ongoing Research&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#deep-unsupervised-rl-for-ai-neural-nets-cognition&#34;&gt;Deep Unsupervised RL for AI neural nets -&amp;gt; cognition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ai-for-good-take-action&#34;&gt;AI for Good: take action!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;h2 id=&#34;still-far-from-human-level-ai&#34;&gt;Still Far from Human-level AI&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Industrial successes mostly based on supervised learning&lt;/li&gt;
+&lt;li&gt;Learning superficial clues, not generalizing well enough outside of training contexts, easy to fool trained networks:
+
+&lt;ul&gt;
+&lt;li&gt;Current models cheat by picking on surface regularities&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities&#34;&gt;Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hypothesis&lt;/strong&gt;: &lt;em&gt;Deep CNNs have a tendency to learn superficial statistical regularities in the dataset rather than high level abstract concepts.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;From the perspective of learning high level abstractions, Fourier image statistics can be &lt;em&gt;superficial&lt;/em&gt; regularities, not changing object category.&lt;/li&gt;
+&lt;li&gt;Different Fourier filters, same high level abstractions (objects) but different surface statistical regularities (Fourier image statistics).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Experiments&lt;/strong&gt;: Train on one training set and evaluate the test sets.
+
+&lt;ul&gt;
+&lt;li&gt;A generalization gap: max difference in test accuracies&lt;/li&gt;
+&lt;li&gt;Large generalization gap: CNN exploits too much of low level regularities, as opposed to learning the abstract high level concepts.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;rdquo;&amp;rsquo;
+Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&amp;rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.
+&amp;ldquo;&amp;rsquo;&lt;/p&gt;
+
+&lt;h2 id=&#34;learning-how-the-world-ticks&#34;&gt;Learning  &amp;lt;&lt;How the world ticks&gt;&amp;gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;So long as our machine learning models &amp;lt;&amp;lt; cheat &amp;gt;&amp;gt; by relying only on superficial statistical regularities, they remain vulnerable to out-of-distribution examples&lt;/li&gt;
+&lt;li&gt;Humans generalize better than other animals thanks to a more accurate internal model of the &lt;strong&gt;underlying causal relationships&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;To predict future situations (e.g., the effect of planned actions) far from anything seen before while involving known concepts, an essential component of reasoning, intelligence and science&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paper-learning-multiple-levels-of-abstraction&#34;&gt;Paper: Learning Multiple Levels of Abstraction&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The big payoff of deep learning is to allow learning higher levels of abstraction&lt;/li&gt;
+&lt;li&gt;High-level abstractions &lt;strong&gt;disentangle the factors of variation&lt;/strong&gt;, which allows much easier generalization and transfer&lt;/li&gt;
+&lt;li&gt;with Data -&amp;gt; Information -&amp;gt; Knowledge -&amp;gt; Wisdom
+
+&lt;ul&gt;
+&lt;li&gt;Organizational Maturity gain&lt;/li&gt;
+&lt;li&gt;Abstraction Level gain&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;invariance-and-disentangling&#34;&gt;Invariance and Disentangling&lt;/h4&gt;
+
+&lt;p&gt;The notion of disentangling is related but different from the notion of invariance, as being a very important notion in computer visions, speech recognition and so on, where we&amp;rsquo;d like to build detectors and features that are invariant to the things we don&amp;rsquo;t care about, but sensitive to the things we do care about.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Invariant features&lt;/li&gt;
+&lt;li&gt;Alternative: Learning to disentangle factors&lt;/li&gt;
+&lt;li&gt;Good disentangling -&amp;gt; avoid the curse of dimensionality&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;latent-variables-and-abstract-representations&#34;&gt;Latent Variables and abstract Representations&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180219-231015.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Encoder/decoder view: maps between low &amp;amp; high-levels&lt;/li&gt;
+&lt;li&gt;Encoder doses inference: interpret the data at the abstract level&lt;/li&gt;
+&lt;li&gt;Decoder can generate new configurations&lt;/li&gt;
+&lt;li&gt;Encoder flattens and disentangles the data manifold&lt;/li&gt;
+&lt;li&gt;Marginal independence in h-space (Can assemble from each of the factors if dimension is independently)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paper-manifold-flattening&#34;&gt;Paper: Manifold Flattening&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Deeper representations -&amp;gt; abstractions -&amp;gt; disentangling&lt;/li&gt;
+&lt;li&gt;Manifolds are expanded and flattened&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-s-missing-and-what-s-needed-with-deep-learning-deep-understanding-and-abstract-representations&#34;&gt;What&amp;rsquo;s Missing and What&amp;rsquo;s Needed with Deep Learning? - Deep Understanding and Abstract Representations&lt;/h2&gt;
+
+&lt;h3 id=&#34;current-ml-theory-beyond-i-i-d-data&#34;&gt;Current ML theory Beyond i.i.d. Data&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Real-life applications often require generalizations in regimes not seen during training&lt;/li&gt;
+&lt;li&gt;Humans can project themselves in situations they have never been (e.g. imagine being on another planet, or going through exceptional events like in many movies)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key: understanging explanatory/causal factors and mechanisms&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;how-to-discover-good-disentangled-representations&#34;&gt;How to Discover Good Disentangled Representations&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to discover abstractions?&lt;/li&gt;
+&lt;li&gt;What is a good representation? &lt;em&gt;(Bengio et al 2013)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Need clues (= priors) to help &lt;em&gt;disentangle&lt;/em&gt; the underlying factors, such as
+
+&lt;ul&gt;
+&lt;li&gt;Spatial &amp;amp; temporal scales&lt;/li&gt;
+&lt;li&gt;Marginal independence&lt;/li&gt;
+&lt;li&gt;Simple dependencies between factors
+
+&lt;ul&gt;
+&lt;li&gt;Consciousness prior&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Causal / mechanism independence
+
+&lt;ul&gt;
+&lt;li&gt;Controllable factors&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;acting-to-guide-representation-learning-disentangling&#34;&gt;Acting to Guide Representation Learning &amp;amp; Disentangling&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Some factors (e.g. objects) correspond to &amp;lsquo;independently controllable&amp;rsquo; aspects of the world&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Can only be discovered by acting in the world&lt;/em&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Control linked to notion of objects &amp;amp; agents&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Causal but agent-specific &amp;amp; subjective&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(Acting to acquire information)&lt;/p&gt;
+
+&lt;h3 id=&#34;paper-independently-controllable-factors&#34;&gt;Paper: Independently Controllable Factors&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Jointly train for each aspect (factor)
+
+&lt;ul&gt;
+&lt;li&gt;A policy $\pi_k$ (which tries to selectively change just that factor)
+
+&lt;ul&gt;
+&lt;li&gt;Kth policy is going to control the Kth factor&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;A representation (which maps state to value of factor) $f_k$&lt;/li&gt;
+&lt;li&gt;Discrete case, $\phi \in {1,..,N}$, define *selectivity$:
+
+&lt;ul&gt;
+&lt;li&gt;$$\sum&lt;em&gt;{k=1}^N{\mathbb{E}&lt;/em&gt;{(s_t, a&lt;em&gt;t, s&lt;/em&gt;{t+1})} [\pi_k{a_t|s_t} \cfrac{f&lt;em&gt;k(s&lt;/em&gt;{t+1}) - f_k(s&lt;em&gt;t)}{\sum&lt;/em&gt;{k&amp;rsquo;}{|f&lt;em&gt;{k&amp;rsquo;}(s&lt;/em&gt;{t+1})f_{k&amp;rsquo;}(s_t)|}}]}$$&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Optimize both policy $\pi_k$ and representation $f_k$ to minimize
+
+&lt;ul&gt;
+&lt;li&gt;$$\mathbb{E}_s[\frac{1}{2} \lVert s - g(f(s)) \rVert^2_2] - \lambda \sum_k{\mathbb{E}_s[ \sum_a{\pi_k(a|s)\log{sel(s,a,k)}}]}$$&lt;/li&gt;
+&lt;li&gt;Namely, (reconstruction error) - $\lambda$ (disentanglement objective)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Example 1.Predict the effect of actions in attribute space&lt;/li&gt;
+&lt;li&gt;Example 2.Given two states, recover the casual actions leading from one to the other
+Given initial state and set of actions, predict new attribute values and the corresponding reconstructed images.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180220-175520.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Multi-step policies $\epsilon$ Embedding Space for Naming Factors and Policies
+&lt;img src=&#34;/img/post/QQ20180220-180229.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;abstraction-challenge-for-unsupervised-learning&#34;&gt;Abstraction Challenge for Unsupervised Learning&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is modeling P(acoustics) so much worse than modeling P(acoustics|phonemes) P(phonemes)?&lt;/li&gt;
+&lt;li&gt;Wrong level of abstraction?
+
+&lt;ul&gt;
+&lt;li&gt;many more entropy bits in acoustic details then linguistic content -&amp;gt; predict the future in abstract space instead&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;paper-the-consciousness-prior-inspired-by-cognitive-psychology&#34;&gt;Paper: The Consciousness Prior (inspired by cognitive psychology)&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Conscious thoughts are very low-dimensional objects compared to the full state of the (unconscious) brain&lt;/li&gt;
+&lt;li&gt;Yet they have unexpected predictive value of usefulness -&amp;gt; strong constraint or prior on the underlying representation&lt;/li&gt;
+&lt;li&gt;Other
+
+&lt;ul&gt;
+&lt;li&gt;*&lt;em&gt;Thought&lt;/em&gt;: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain&lt;/li&gt;
+&lt;li&gt;Richer than but closely associated with short verbal expression such as a &lt;strong&gt;sentence&lt;/strong&gt; or phrase, a &lt;strong&gt;rule&lt;/strong&gt; or &lt;strong&gt;fact&lt;/strong&gt; (link to classical symbolic AI &amp;amp; knowledge representation)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;How to select a few relevant abstract concepts making a thought?&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Content-based  Attention&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;on-the-relation-between-abstraction-and-attention&#34;&gt;On the relation between Abstraction and Attention&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Attention allows to focus on a few elements out of a large set&lt;/li&gt;
+&lt;li&gt;Soft-attention allows this process to be trainable with gradient-based optimization and backprop&lt;/li&gt;
+&lt;li&gt;Attention focuses on a few appropriate abstract or concret elements of mental representation&lt;/li&gt;
+&lt;li&gt;Access consciousness is one aspect of consciousness, what is accessed and comes to mind (Dehaene&amp;rsquo;s C1 or global availability), See &lt;em&gt;Dehaene et al, Science, 2017.&lt;/em&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;img src=&#34;/img/post/QQ20180221-044638.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;2 levels of representation
+
+&lt;ul&gt;
+&lt;li&gt;High-dimensional abstract representation space (all known concepts and factors) &lt;em&gt;h&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Low-dimensional conscious thought &lt;em&gt;c&lt;/em&gt;, extracted from &lt;em&gt;h&lt;/em&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;img src=&#34;/img/post/QQ20180221-045704.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;c&lt;/em&gt; includes names (keys) and values of factors&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Conscious prediction over attended variables A (soft-attention)
+
+&lt;ul&gt;
+&lt;li&gt;$$V = - \sum_A{w&lt;em&gt;a \log{P(h&lt;/em&gt;{t,A} = a | c_{t-1})}}$$
+
+&lt;ul&gt;
+&lt;li&gt;$w_A$: Attention weights&lt;/li&gt;
+&lt;li&gt;$h_{t,A}$: Factor &lt;strong&gt;name&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;$a$: Predicted &lt;strong&gt;value&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;$c_{t-1}$: Earlier conscious state
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;what-training-objective&#34;&gt;What Training Objective?&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to train the attention mechanism which selects which variables to predict?
+
+&lt;ul&gt;
+&lt;li&gt;Representation learning without reconstruction:
+
+&lt;ul&gt;
+&lt;li&gt;Maximize entropy of code (preserve a lot of information about the data)&lt;/li&gt;
+&lt;li&gt;Maximize mutual information between past and future representations (see also &lt;em&gt;Becker &amp;amp; Hinton 1992&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Objective function completely in abstract space, higher-level parameters model dependencies in abstract space&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Usefulness of thoughts: as conditioning information for action, i.e., a particular form of planning for RL, i.e., the estimated gradient of rewards could also be used to drive learning of abstract representations&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;consiciousness-prior-and-classical-ai&#34;&gt;Consiciousness Prior and Classical AI&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Conscious thought is closedly related to a linguistic utterance&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;(conditioning variables -&amp;gt; predicted variables) = a &lt;strong&gt;rule&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Conscious thoughts &amp;amp; short-term memory: good level of representation for memorization and memories&lt;/li&gt;
+&lt;li&gt;Need to refer to variables in conscious states facilitates recursive compositional computation&lt;/li&gt;
+&lt;li&gt;Consciousness makes it easier to associate preception, action and &lt;strong&gt;natural language&lt;/strong&gt; and use &lt;em&gt;natural language data to guide the creation of high-level abstraction expressed linguistically&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;ongoing-research&#34;&gt;Ongoing Research&lt;/h2&gt;
+
+&lt;h3 id=&#34;deep-unsupervised-rl-for-ai-neural-nets-cognition&#34;&gt;Deep Unsupervised RL for AI neural nets -&amp;gt; cognition&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Learn more abstract representations which capture causality&lt;/li&gt;
+&lt;li&gt;Disentangle controllable factors&lt;/li&gt;
+&lt;li&gt;Naturally gives rise to the notion of &lt;strong&gt;objects, attributes, agents &amp;amp; goals&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Natural language &amp;amp; consciousness prior: other clue about abstract representations (see also &lt;em&gt;Andreas, Klein &amp;amp; Levine 2017&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;Unsupervised RL research, performed in gradually more challenging sumulated environments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ai-for-good-take-action&#34;&gt;AI for Good: take action!&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Beyond developing the next gadget&lt;/li&gt;
+&lt;li&gt;Actionalbe items:
+
+&lt;ul&gt;
+&lt;li&gt;Favor ML applications which help the poorest countries, may help with fighting climate change, etc.&lt;/li&gt;
+&lt;li&gt;A role for the Partnership on AI: fund an organization which will coordinate, prioritize and channel funding for such applications, as well as facilitate internships for students from poor conuntries in top ML labs&lt;/li&gt;
+&lt;li&gt;Accept such interns even if they are below our bar, they will return home with knowledge of the state-of-the-art in ML&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>[OS Notes] Processes</title>
       <link>/post/processes/</link>
       <pubDate>Mon, 01 Jan 2018 00:38:00 +0000</pubDate>
@@ -748,6 +1082,13 @@ ret # Resume execution
 &lt;li&gt;&lt;a href=&#34;#core-and-bus-actions&#34;&gt;Core and Bus Actions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#cc-numa&#34;&gt;cc-NUMA&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#real-world-coherence-costs&#34;&gt;Real World Coherence Costs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#numa-and-spinlocks&#34;&gt;NUMA and spinlocks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#synchronization-and-memory-consistency-review&#34;&gt;Synchronization and memory consistency review&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#amdahl-s-law&#34;&gt;Amdahl&amp;rsquo;s law&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#locking-basics&#34;&gt;Locking basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#locking-granularity&#34;&gt;Locking granularity&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -887,9 +1228,376 @@ ret # Resume execution
 &lt;li&gt;If another core in same socket holds line in modified state:
 
 &lt;ul&gt;
-&lt;li&gt;load: 109 cycles&lt;/li&gt;
+&lt;li&gt;load: 109 cycles (LLC + 65)&lt;/li&gt;
+&lt;li&gt;store: 115 cycles (LLC + 71)&lt;/li&gt;
+&lt;li&gt;atomic CAS: 120 cycles (LLC + 76)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If a core in a different socket holds line in modiefied state
+
+&lt;ul&gt;
+&lt;li&gt;NUMA load: 289 cycles&lt;/li&gt;
+&lt;li&gt;NUMA store: 320 cycles&lt;/li&gt;
+&lt;li&gt;NUMA atomic CAS: 324 cycles&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;But only a partial picture
+
+&lt;ul&gt;
+&lt;li&gt;Could be faster because of out-of-order execution&lt;/li&gt;
+&lt;li&gt;Could be slower if interconnect contention or multiple hops&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h3 id=&#34;numa-and-spinlocks&#34;&gt;NUMA and spinlocks&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Test-and-set spinlock has serveral advantages
+
+&lt;ul&gt;
+&lt;li&gt;Simple to implement and understand&lt;/li&gt;
+&lt;li&gt;One memory location for arbitrarily many CPUs&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;But also has disadvantages
+
+&lt;ul&gt;
+&lt;li&gt;Lots of traffic over memory bus (especially when &amp;gt; 1 spinner)&lt;/li&gt;
+&lt;li&gt;Not neccessarily fair (same CPU acquires lock many times)&lt;/li&gt;
+&lt;li&gt;Even less fair on a NUMA machine&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Idea 1: Avoid spinlocks altogether (today)&lt;/li&gt;
+&lt;li&gt;Idea 2: Reduce bus traffic with better spinlocks (next lecture)
+
+&lt;ul&gt;
+&lt;li&gt;Design lock that spins only on local memory&lt;/li&gt;
+&lt;li&gt;Also gives better fairness&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;synchronization-and-memory-consistency-review&#34;&gt;Synchronization and memory consistency review&lt;/h2&gt;
+
+&lt;h3 id=&#34;amdahl-s-law&#34;&gt;Amdahl&amp;rsquo;s law&lt;/h3&gt;
+
+&lt;p&gt;$$T(n)=T(1)(B+1/n(1-B))$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Expected speedup limited when only part of a task is sped up
+
+&lt;ul&gt;
+&lt;li&gt;$T(n)$: the time it takes n CPU cores to complete the task&lt;/li&gt;
+&lt;li&gt;B: the fraction of the job that must be serial&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Even with massive multiprocessors, $\lim_{n\to \infty} = B \cdot T(1) $
+&lt;img src=&#34;/img/post/QQ20180103-233445.png&#34; alt=&#34;&#34; /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Places an ultimate limit on parallel speedup&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Problem: synchronization increases serial section size&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;locking-basics&#34;&gt;Locking basics&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;mutex_t m;
+lock(&amp;amp;m);
+cnt = cnt + 1; /* critical section */
+unlock(&amp;amp;m);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Only one thread can hold a mutex at a time
+
+&lt;ul&gt;
+&lt;li&gt;Makes critical section atomic&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Recall &lt;strong&gt;thread API contract&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;All access to global data must be protected by a mutex&lt;/li&gt;
+&lt;li&gt;Global = two or more threads touch data and at least one writes&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Means must map each piece of global data to one mutex
+
+&lt;ul&gt;
+&lt;li&gt;Never touch the data unless you locked that mutex&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;But many ways to map data to mutexes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;locking-granularity&#34;&gt;Locking granularity&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Consider two lookup implementations for global hash table:
+&lt;code&gt;c
+struct list *hash_tbl[1021];
+&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;coarse-grained locking
+&lt;code&gt;c
+mutex_t m;
+...
+mutex_lock(&amp;amp;m);
+struct list_elem
+&lt;/code&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[OS Notes] Synchronization (Part II)</title>
+      <link>/post/synchronization_2/</link>
+      <pubDate>Mon, 01 Jan 2018 00:38:00 +0000</pubDate>
+      
+      <guid>/post/synchronization_2/</guid>
+      <description>
+
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#overview-of-previous-and-current-lectures&#34;&gt;Overview of previous and current lectures&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rcu-read-copy-update&#34;&gt;RCU (Read-copy update)&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#is-rcu-really-safe&#34;&gt;Is RCU really safe?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#preemptible-kernels&#34;&gt;Preemptible kernels&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#garbage-collection&#34;&gt;Garbage collection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#improving-spinlock-performance&#34;&gt;Improving spinlock performance&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#useful-macros&#34;&gt;Useful macros&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mcs-lock&#34;&gt;MCS lock&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mcs-acquire&#34;&gt;MCS Acquire&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mcs-release-with-cas&#34;&gt;MCS Release with CAS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+
+
+&lt;h2 id=&#34;overview-of-previous-and-current-lectures&#34;&gt;Overview of previous and current lectures&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Locks create serial code
+
+&lt;ul&gt;
+&lt;li&gt;Serial code gets no speedup from multiprocessor&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Test-and-set spinlock has additional disadvantages
+
+&lt;ul&gt;
+&lt;li&gt;Lots of traffic over memory bus&lt;/li&gt;
+&lt;li&gt;Not fair on NUMA machines&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Idea 1: Avoid spinlocks
+
+&lt;ul&gt;
+&lt;li&gt;We saw lock-free algorithms last lecture&lt;/li&gt;
+&lt;li&gt;Discussing RCU very quickly last time&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Idea 2: Design better spinlocks
+
+&lt;ul&gt;
+&lt;li&gt;Less memory traffic, better fairness&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Idea 3: Hardware turns coarse-into fine-grained locks!
+
+&lt;ul&gt;
+&lt;li&gt;While also reducing memory traffic for lock in common case&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;rcu-read-copy-update&#34;&gt;RCU (Read-copy update)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Some data is read way more often than written
+
+&lt;ul&gt;
+&lt;li&gt;Routing tables consulted for each forwarded packet&lt;/li&gt;
+&lt;li&gt;Data maps in system with 100+ disks (updated on disk failure)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Optimize for the common case of reading without lock
+
+&lt;ul&gt;
+&lt;li&gt;E.g., global variable: &lt;code&gt;routing_table *rt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Call &lt;code&gt;lookup (rt, route);&lt;/code&gt; with no lock&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Update by making copy, swapping pointer
+&lt;code&gt;C
+routing_table *newrt = copy_routing_table (rt);
+update_routing_table (newrt);
+atomic_thread_fence (memory_order_release);
+rt = newrt;
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;is-rcu-really-safe&#34;&gt;Is RCU really safe?&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Consider the use of global &lt;em&gt;rt&lt;/em&gt; with no fences: &lt;code&gt;loolup (rt, route);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Could a CPU read new pointer but then old contents of *rt?&lt;/li&gt;
+&lt;li&gt;Yes on alpha, No on all other existing architectures&lt;/li&gt;
+&lt;li&gt;We are saved by &lt;em&gt;dependency ordering&lt;/em&gt; in hardware
+
+&lt;ul&gt;
+&lt;li&gt;Instruction B depends on A if B uses result of A&lt;/li&gt;
+&lt;li&gt;Non-alpha CPUs won&amp;rsquo;t re-order dependent instructions&lt;/li&gt;
+&lt;li&gt;If wwriter uses release fence, safe to load pointer then just use it&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;This is the point of &lt;code&gt;memory_order_consume&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Should be quivalent to acquire barrier on alpha&lt;/li&gt;
+&lt;li&gt;But should compile to nothing (be free) on other machines&lt;/li&gt;
+&lt;li&gt;Active area of discussion for C++ committee&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;preemptible-kernels&#34;&gt;Preemptible kernels&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Recall &lt;em&gt;kernel process context&lt;/em&gt;
+
+&lt;ul&gt;
+&lt;li&gt;When CPU in kernel mode but excuting on behalf of a process (e.h., might be in system call or page fault handler)&lt;/li&gt;
+&lt;li&gt;As opposed to interrupt handlers or context switch code&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;A &lt;em&gt;preemptible kernel&lt;/em&gt; can preempt process context code
+
+&lt;ul&gt;
+&lt;li&gt;Take a CPU core away from kernel process context code between any two instructions&lt;/li&gt;
+&lt;li&gt;Give the same CPU core to kernel code for a different process&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t confuse with
+
+&lt;ul&gt;
+&lt;li&gt;Interrupt handlers can always preempt process context code&lt;/li&gt;
+&lt;li&gt;Preemptive threads (always have for multicore)&lt;/li&gt;
+&lt;li&gt;Process context code running concurrently on other CPU cores&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Sometimes want or need to disable preemption
+
+&lt;ul&gt;
+&lt;li&gt;E.g., might help performance while holding a spinlock&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;garbage-collection&#34;&gt;Garbage collection&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;When can you free memory of old routing table?
+
+&lt;ul&gt;
+&lt;li&gt;When you are guaranteed no one is using it —— how to determine&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Definitions:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;temporary variable&lt;/em&gt; - short-used (e.g., local) variable&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;permanent variable&lt;/em&gt; - long lived data (e.g., global &lt;em&gt;rt&lt;/em&gt; pointer)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;quiescent state&lt;/em&gt; - when all a thread&amp;rsquo;s temporary variables dead&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;quiescent period&lt;/em&gt; - time during which every thread has been in quiesceent state at least once&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Free old copy of updated data after quiescent period
+
+&lt;ul&gt;
+&lt;li&gt;How to determine when quiescent period has gone by?&lt;/li&gt;
+&lt;li&gt;E.g., keep count of syscalls/context on each CPU&lt;/li&gt;
+&lt;li&gt;Can&amp;rsquo;t hold a pointer across context switch or user mode&lt;/li&gt;
+&lt;li&gt;Must disable preemption while consuming RCU data structure&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;improving-spinlock-performance&#34;&gt;Improving spinlock performance&lt;/h2&gt;
+
+&lt;h3 id=&#34;useful-macros&#34;&gt;Useful macros&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Atomic compare and swap: CAS (mem, old, new)
+
+&lt;ul&gt;
+&lt;li&gt;In C11: &lt;code&gt;atomic_compare_exchange_strong&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;On x86: &lt;code&gt;cmpxchg&lt;/code&gt; instruction provides this (with &lt;em&gt;lock&lt;/em&gt; prefix)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;if *mem == old, then swap *mem&amp;lt;-&amp;gt;new and return true, else false&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Atomic swap: XCHG (mem, new)
+
+&lt;ul&gt;
+&lt;li&gt;C11 &lt;code&gt;atomic_exchange&lt;/code&gt;, can implement with xchg on x86&lt;/li&gt;
+&lt;li&gt;Atomically exchanges &lt;code&gt;*mem&amp;lt;-&amp;gt;new&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Atomic fetch and add: FADD (mem, val)
+
+&lt;ul&gt;
+&lt;li&gt;C11 &lt;code&gt;atomic_fetch_add&lt;/code&gt;, can implement with &lt;em&gt;lock&lt;/em&gt; add on x86
+Atomically sets &lt;code&gt;*mem += val&lt;/code&gt; and returns &lt;em&gt;old&lt;/em&gt; value of &lt;code&gt;*mem&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Atomic fetch and subtract: FSUB (mem, val)&lt;/li&gt;
+&lt;li&gt;Note all atomics return previous value (like x++, not ++x)&lt;/li&gt;
+&lt;li&gt;All behave like sequentially consistent fences, too
+
+&lt;ul&gt;
+&lt;li&gt;Unlike &lt;code&gt;_explicit&lt;/code&gt; versions, which take a &lt;code&gt;memory_order&lt;/code&gt; argument&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mcs-lock&#34;&gt;MCS lock&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Idea 2: Build a better spinlock&lt;/li&gt;
+&lt;li&gt;Lick designed by Mellor-Crummey and Scott
+
+&lt;ul&gt;
+&lt;li&gt;Goal: reduce bus traffic on cc machines, improve fairness&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Each CPU has a &lt;em&gt;qnode&lt;/em&gt; structure in local memory
+&lt;code&gt;C
+typedef struct qnode {
+_Atomic (struct qnode *) next;
+atomic_bool locked;
+} qnode;
+&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;A lock is a &lt;em&gt;qnode&lt;/em&gt; pointer: &lt;code&gt;typedef _Atomic (qnode *) lock;&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Construct lisk of CPUs holding or waiting for lock&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;lock&lt;/em&gt; itself points to taiil of list list&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;While waiting, spin on your local &lt;em&gt;locked&lt;/em&gt; flag&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mcs-acquire&#34;&gt;MCS Acquire&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;acquire (lock *L, qnode*I){
+    I-&amp;gt;next = NULL;
+    qnode *preprocessor = I;
+    XCHG (*L, predecessor);
+    if (predecessor != NULL){
+        I-&amp;gt;locked = true
+        predecessor-&amp;gt;next = I;;
+        while (I-&amp;gt;locked);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/QQ20180123-033259@2x.pnd&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If unlocked, L is NULL&lt;/li&gt;
+&lt;li&gt;If locked, no waiters, L is owner&amp;rsquo;s qnode&lt;/li&gt;
+&lt;li&gt;If waiters, *L is tail of waiter list&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mcs-release-with-cas&#34;&gt;MCS Release with CAS&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;release (lock* L, qnode * I) {
+    if (!I-&amp;gt;next)
+        if (CAS (*L, I, NULL))
+            return;
+    while (!I-&amp;gt;nxt);
+    I-&amp;gt;next-&amp;gt;locked false
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -2090,42 +2798,6 @@ Advances in neural information processing systems. 1989.&lt;/li&gt;
 &lt;li&gt;Developed an exploration tool for the iForest algorithm, which can do visualization to a certain extent&lt;/li&gt;
 &lt;li&gt;Won Provincial 1st Prizes both in the 2017 Challenge Cup and the E-Commerce Competition, Technical group. And get the qualification to the 2017 national contests.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Predicting Rossmann Store Sales</title>
-      <link>/project/rossmann/</link>
-      <pubDate>Sun, 19 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/rossmann/</guid>
-      <description>&lt;p&gt;Rossmann operates over 3,000 drug stores in 7 European countries. Currently, Rossmann store managers are tasked with predicting their daily sales for up to six weeks in advance. Store sales are influenced by many factors, including promotions, competition, school and state holidays, seasonality, and locality. With thousands of individual managers predicting sales based on their unique circumstances, the accuracy of results can be quite varied.&lt;/p&gt;
-
-&lt;p&gt;In their first Kaggle competition, Rossmann is challenging you to predict 6 weeks of daily sales for 1,115 stores located across Germany. Reliable sales forecasts enable store managers to create effective staff schedules that increase productivity and motivation. By helping Rossmann create a robust prediction model, you will help store managers stay focused on what’s most important to them: their customers and their teams!&lt;/p&gt;
-
-&lt;p&gt;(There are a lot of flaws due to lack of time.)
-You can see the report &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/tree/master/Capstone&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Digit Recognition Program</title>
-      <link>/project/digit_recognition/</link>
-      <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/digit_recognition/</guid>
-      <description>&lt;p&gt;In this project, I used deep neural networks and convolutional neural networks to create a program that prints numbers it observes in real time from images it is given. First, I designed and tested a model architecture that can identify sequences of digits in an image. Next, I trained that model so it could decode sequences of digits from natural images by using the Street View House Numbers (SVHN) dataset. After the model was properly trained, I then tested my model using a program on newly-captured images. Finally, I refined your implementation to also localize where numbers are on the image, and test this localization on newly-captured images.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The main techniques used:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Deep Neural Networks&lt;/li&gt;
-&lt;li&gt;Convolutional Neural Networks&lt;/li&gt;
-&lt;li&gt;Adadelta&lt;/li&gt;
-&lt;li&gt;Keras based on TensorFlow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You can see the code(iPython notebook) &lt;a href=&#34;https://github.com/wolegechu/Machine_Learning_Nanodegree/blob/master/5.%20Digit%20Recognition/digit_recognition.ipynb&#34; target=&#34;_blank&#34;&gt;there&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

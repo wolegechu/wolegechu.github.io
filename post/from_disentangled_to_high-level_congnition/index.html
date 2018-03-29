@@ -39,7 +39,7 @@
   
   
   
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7cMerriweather%7cRoboto&#43;Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
   
   <link rel="stylesheet" href="/styles.css">
   
@@ -339,7 +339,7 @@
 <ul>
 <li><a href="#paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities">Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities</a></li>
 </ul></li>
-<li><a href="#learning-how-the-world-ticks">Learning  &lt;<How the world ticks>&gt;</a>
+<li><a href="#learning-how-the-world-ticks">Learning &ldquo;How the world ticks&rdquo;</a>
 <ul>
 <li><a href="#paper-learning-multiple-levels-of-abstraction">Paper: Learning Multiple Levels of Abstraction</a>
 <ul>
@@ -399,11 +399,11 @@
 </ul></li>
 </ul>
 
-<p>&rdquo;&rsquo;
-Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.
-&ldquo;&rsquo;</p>
+<blockquote>
+<p>Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.</p>
+</blockquote>
 
-<h2 id="learning-how-the-world-ticks">Learning  &lt;<How the world ticks>&gt;</h2>
+<h2 id="learning-how-the-world-ticks">Learning &ldquo;How the world ticks&rdquo;</h2>
 
 <ul>
 <li>So long as our machine learning models &lt;&lt; cheat &gt;&gt; by relying only on superficial statistical regularities, they remain vulnerable to out-of-distribution examples</li>
@@ -512,12 +512,14 @@ Intuition: we have a mental model that captures the explanatory factors of our w
 <li>Kth policy is going to control the Kth factor</li>
 </ul></li>
 <li>A representation (which maps state to value of factor) $f_k$</li>
-<li>Discrete case, $\phi \in {1,..,N}$, define *selectivity$:
+<li>Discrete case, $\phi \in {1,..,N}$, define <em>selectivity</em>:
+<br /></li>
+</ul></li>
+</ul>
+
+<p>$$ \sum_{k=1}^N{\mathbb{E}_{(s_t, a_t, s_{t+1})} [\pi_k{a_t|s_t} \cfrac{f_k(s_{t+1}) - f_k(s_t)}{\sum_{k&rsquo;}{|f_{k&rsquo;}(s_{t+1})f_{k&rsquo;}(s_t)|}}]} $$</p>
 
 <ul>
-<li>$$\sum<em>{k=1}^N{\mathbb{E}</em>{(s_t, a<em>t, s</em>{t+1})} [\pi_k{a_t|s_t} \cfrac{f<em>k(s</em>{t+1}) - f_k(s<em>t)}{\sum</em>{k&rsquo;}{|f<em>{k&rsquo;}(s</em>{t+1})f_{k&rsquo;}(s_t)|}}]}$$</li>
-</ul></li>
-</ul></li>
 <li>Optimize both policy $\pi_k$ and representation $f_k$ to minimize
 
 <ul>
@@ -555,7 +557,7 @@ Given initial state and set of actions, predict new attribute values and the cor
 <li>Other
 
 <ul>
-<li>*<em>Thought</em>: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain</li>
+<li><strong>Thought</strong>: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain</li>
 <li>Richer than but closely associated with short verbal expression such as a <strong>sentence</strong> or phrase, a <strong>rule</strong> or <strong>fact</strong> (link to classical symbolic AI &amp; knowledge representation)</li>
 </ul></li>
 <li><strong>How to select a few relevant abstract concepts making a thought?</strong>
@@ -590,7 +592,7 @@ Given initial state and set of actions, predict new attribute values and the cor
 <li>Conscious prediction over attended variables A (soft-attention)
 
 <ul>
-<li>$$V = - \sum_A{w<em>a \log{P(h</em>{t,A} = a | c_{t-1})}}$$
+<li>$$V = - \sum_A{w_a \log{P(h_{t,A} = a | c_{t-1})}}$$
 
 <ul>
 <li>$w_A$: Attention weights</li>
@@ -661,8 +663,6 @@ Given initial state and set of actions, predict new attribute values and the cor
 
 <div class="article-tags">
   
-  <a class="btn btn-primary btn-outline" href="/tags/today-i-learned">Today I Learned</a>
-  
   <a class="btn btn-primary btn-outline" href="/tags/deep-learning">Deep Learning</a>
   
   <a class="btn btn-primary btn-outline" href="/tags/star">star</a>
@@ -683,15 +683,13 @@ Given initial state and set of actions, predict new attribute values and the cor
   <h3>Related</h3>
   <ul>
     
-    <li><a href="/post/synchronization_2/">[OS Notes] Synchronization (Part II)</a></li>
+    <li><a href="/post/imitation-learning-1/">An introduction to Imitation Learning (Part 1)</a></li>
     
-    <li><a href="/post/processes/">[OS Notes] Processes</a></li>
+    <li><a href="/post/knowledge-arrangement-about-rl/">Knowledge arrangement about Reinforcement Learning</a></li>
     
-    <li><a href="/post/synchronization_1/">[OS Notes] Synchronization (Part I)</a></li>
+    <li><a href="/post/knowledge-of-domain-name/">The knowledge of domain name that everyone should know</a></li>
     
-    <li><a href="/post/vm_os/">[OS Notes] Virtual Memory OS</a></li>
-    
-    <li><a href="/post/vm_hardware/">[OS Notes] Virtual Memory Hardware</a></li>
+    <li><a href="/post/user-portrait-theoretical/">The construction of user portrait based on Big Data (Theoretical section)</a></li>
     
   </ul>
 </div>

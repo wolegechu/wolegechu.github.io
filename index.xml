@@ -27,7 +27,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#paper-measuring-the-tendency-of-cnns-to-learn-surface-statistical-regularities&#34;&gt;Paper: Measuring the tendency of CNNs to Learn Surface Statistical Regularities&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#learning-how-the-world-ticks&#34;&gt;Learning  &amp;lt;&lt;How the world ticks&gt;&amp;gt;&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#learning-how-the-world-ticks&#34;&gt;Learning &amp;ldquo;How the world ticks&amp;rdquo;&lt;/a&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#paper-learning-multiple-levels-of-abstraction&#34;&gt;Paper: Learning Multiple Levels of Abstraction&lt;/a&gt;
 &lt;ul&gt;
@@ -87,11 +87,11 @@
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&amp;rdquo;&amp;rsquo;
-Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&amp;rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.
-&amp;ldquo;&amp;rsquo;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Intuition: we have a mental model that captures the explanatory factors of our world to some extent. It&amp;rsquo;s not perfect. And we can generalize to new configurations of the existing factor. When in new situation, involve concepts that we already know, thaen just combine  in very new ways.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&#34;learning-how-the-world-ticks&#34;&gt;Learning  &amp;lt;&lt;How the world ticks&gt;&amp;gt;&lt;/h2&gt;
+&lt;h2 id=&#34;learning-how-the-world-ticks&#34;&gt;Learning &amp;ldquo;How the world ticks&amp;rdquo;&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;So long as our machine learning models &amp;lt;&amp;lt; cheat &amp;gt;&amp;gt; by relying only on superficial statistical regularities, they remain vulnerable to out-of-distribution examples&lt;/li&gt;
@@ -200,12 +200,14 @@ Intuition: we have a mental model that captures the explanatory factors of our w
 &lt;li&gt;Kth policy is going to control the Kth factor&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;A representation (which maps state to value of factor) $f_k$&lt;/li&gt;
-&lt;li&gt;Discrete case, $\phi \in {1,..,N}$, define *selectivity$:
+&lt;li&gt;Discrete case, $\phi \in {1,..,N}$, define &lt;em&gt;selectivity&lt;/em&gt;:
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$ \sum_{k=1}^N{\mathbb{E}_{(s_t, a_t, s_{t+1})} [\pi_k{a_t|s_t} \cfrac{f_k(s_{t+1}) - f_k(s_t)}{\sum_{k&amp;rsquo;}{|f_{k&amp;rsquo;}(s_{t+1})f_{k&amp;rsquo;}(s_t)|}}]} $$&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;$$\sum&lt;em&gt;{k=1}^N{\mathbb{E}&lt;/em&gt;{(s_t, a&lt;em&gt;t, s&lt;/em&gt;{t+1})} [\pi_k{a_t|s_t} \cfrac{f&lt;em&gt;k(s&lt;/em&gt;{t+1}) - f_k(s&lt;em&gt;t)}{\sum&lt;/em&gt;{k&amp;rsquo;}{|f&lt;em&gt;{k&amp;rsquo;}(s&lt;/em&gt;{t+1})f_{k&amp;rsquo;}(s_t)|}}]}$$&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Optimize both policy $\pi_k$ and representation $f_k$ to minimize
 
 &lt;ul&gt;
@@ -243,7 +245,7 @@ Given initial state and set of actions, predict new attribute values and the cor
 &lt;li&gt;Other
 
 &lt;ul&gt;
-&lt;li&gt;*&lt;em&gt;Thought&lt;/em&gt;: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Thought&lt;/strong&gt;: composition of few selected factors / concepts (key/value) at the highest level of abstraction of our brain&lt;/li&gt;
 &lt;li&gt;Richer than but closely associated with short verbal expression such as a &lt;strong&gt;sentence&lt;/strong&gt; or phrase, a &lt;strong&gt;rule&lt;/strong&gt; or &lt;strong&gt;fact&lt;/strong&gt; (link to classical symbolic AI &amp;amp; knowledge representation)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;How to select a few relevant abstract concepts making a thought?&lt;/strong&gt;
@@ -278,7 +280,7 @@ Given initial state and set of actions, predict new attribute values and the cor
 &lt;li&gt;Conscious prediction over attended variables A (soft-attention)
 
 &lt;ul&gt;
-&lt;li&gt;$$V = - \sum_A{w&lt;em&gt;a \log{P(h&lt;/em&gt;{t,A} = a | c_{t-1})}}$$
+&lt;li&gt;$$V = - \sum_A{w_a \log{P(h_{t,A} = a | c_{t-1})}}$$
 
 &lt;ul&gt;
 &lt;li&gt;$w_A$: Attention weights&lt;/li&gt;
@@ -2683,7 +2685,6 @@ atomic_bool locked;
 &lt;li&gt;Pomerleau, Dean A. &amp;ldquo;Alvinn: An autonomous land vehicle in a neural network.&amp;ldquo; 
 Advances in neural information processing systems. 1989.&lt;/li&gt;
 &lt;li&gt;Muller, Urs, et al. &amp;ldquo;Off-road obstacle avoidance through end-to-end learning.“ Advances in neural information processing systems. 2006.APA&lt;br /&gt;&lt;/li&gt;
-&lt;li&gt;Chen, Chenyi, et al. &amp;ldquo;Deepdriving: Learning affordance for direct perception in autonomous driving.&amp;ldquo; Proceedings of the IEEE International Conference on Computer Vision. 2015.&lt;/li&gt;
 &lt;li&gt;Chen, Chenyi, et al. &amp;ldquo;Deepdriving: Learning affordance for direct perception in autonomous driving.&amp;ldquo; Proceedings of the IEEE International Conference on Computer Vision. 2015.&lt;/li&gt;
 &lt;li&gt;Bojarski, Mariusz, et al. &amp;ldquo;End to end learning for self-driving cars.&amp;ldquo; arXiv preprint arXiv:1604.07316 (2016).&lt;/li&gt;
 &lt;li&gt;Codevilla, Felipe, et al. &amp;ldquo;End-to-end driving via conditional imitation learning.&amp;ldquo; arXiv preprint arXiv:1710.02410 (2017).&lt;/li&gt;

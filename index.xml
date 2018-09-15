@@ -11,6 +11,41 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Apollo Planning 规划模块简析（附大致流程）</title>
+      <link>/post/apollo_planning/</link>
+      <pubDate>Wed, 21 Feb 2018 00:38:00 +0000</pubDate>
+      
+      <guid>/post/apollo_planning/</guid>
+      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;
+
+
+
+&lt;p&gt;Apollo 的 Planning 模块以 Routing 模块产生一条当前位置到终点的理想路径作为输入，结合当前场景下的路况信息（信号灯、短期内障碍物的运动轨迹等），生成短期内的一条驾驶路径。&lt;/p&gt;
+
+&lt;p&gt;在展开之前先介绍下 Apollo 主要采用的 Frenet 坐标系，见下图，整个坐标系基于一条光滑的参考线（右图中红线），然后将汽车的坐投影到参考线上，得到一个参考线上的投影点（图中蓝色点）。从参考线起点到投影点的路径长度就是汽车在 Frenet 坐标系下的纵向偏移量，用 S 表示。而投影点到汽车位置的距离则是汽车在Frenet坐标系下的横向偏移量，用 L 表示。通过汽车的朝向、速度、加速度也可以计算出 Frenet 坐标系下，横向和纵向偏移量的一阶导和二阶导。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/apollo_frenet.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Planning 模块的大致流程如下图&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&amp;amp;mid=2247485310&amp;amp;idx=1&amp;amp;sn=830f95c8fe1c0fe300ab4baa735361d5&amp;amp;chksm=ea1e150cdd699c1a149879f5d044b6ed866d0ae5d30c59aa571cdbcad2cad738c964c397fcdd&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0914fHtF0ADvSZWvZ7WSioeu&amp;amp;rd2werd=1#wechat_redirect，首先使用&#34; target=&#34;_blank&#34;&gt;https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&amp;amp;mid=2247485310&amp;amp;idx=1&amp;amp;sn=830f95c8fe1c0fe300ab4baa735361d5&amp;amp;chksm=ea1e150cdd699c1a149879f5d044b6ed866d0ae5d30c59aa571cdbcad2cad738c964c397fcdd&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0914fHtF0ADvSZWvZ7WSioeu&amp;amp;rd2werd=1#wechat_redirect，首先使用&lt;/a&gt; Routing 模块返回的全局路径通过 Planning and Control (PnC) Map 生成多条未经平滑的参考线，范围为车辆后方 30m 至前方 150～250m，经过平滑后交由 Frame 类处理。Frame 类初始化使用 PnC Map 生成的参考线，然后融合从感知模块获取的障碍物信息 PathObstacle 和障碍物（以及交规）对路径的决策影响 PathDecision 构成 ReferenceLineInfo 类。同时基于参考线信息和其中障碍物未来时刻的轨迹信息，规划器（EM planner 或 Lattice planner）会生成一条未来短距离内（如 40m）的最优规划路径 PathData (S-L 序列)，以及短时间内（如 8s, 150m）的速度规划序列 SpeedData (S-T 序列)，然后将两者融合得到最优路径 （S-L-T序列）交由 Control 模块处理。&lt;/p&gt;
+
+&lt;p&gt;PnC Map 主要做的事是生成参考线，这里参考线可以直接看作是车道中心线，通常会对当前车道和当前车道可驶入的邻接车道（该邻接车道也需存在于全局规划的路径中）分别生成参考线供后续模块使用。&lt;/p&gt;
+
+&lt;p&gt;在 Frame 类中，因为 PnC Map 给出的参考线实质上是一系列的点，所以会首先对每条参考线进行光滑处理，这里也涉及到了跨车道（如路口、分流、汇流等）情况下的参考线拼接。然后从感知模块获取障碍物信息进行滞后预测（lagged prediction），即除了使用 Prediction 模块发布的最新一次信息，还会考虑障碍物的历史轨迹预测数据以供更精确地预测。再将障碍物的轨迹信息加入到参考线中，并判断每个障碍物对自身轨迹规划产生的决策影响（纵向：忽略，停车，超车，减速，跟车；横向：忽略，微调，绕行）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/post/apollo_planning_flowchart.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里我只是简单介绍了 Apollo 中做 Planning 的过程，更多细节可以参见 Github 中已开源的代码，为了更好地了解也可以进一步阅读下面的参考资料。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;
+1. &lt;a href=&#34;https://github.com/wolegechu/Apollo-Note&#34; target=&#34;_blank&#34;&gt;https://github.com/wolegechu/Apollo-Note&lt;/a&gt; (Forked from &lt;a href=&#34;https://github.com/YannZyl/Apollo-Note&#34; target=&#34;_blank&#34;&gt;YannZyl/Apollo-Note&lt;/a&gt;)
+2. &lt;a href=&#34;https://github.com/ApolloAuto/apollo&#34; target=&#34;_blank&#34;&gt;ApolloAuto/apollo&lt;/a&gt;
+3. &lt;a href=&#34;https://github.com/ApolloAuto/apollo/blob/master/modules/planning/README.md&#34; target=&#34;_blank&#34;&gt;Apollo 3.0 技术指南 - Planning 模块&lt;/a&gt;
+4. &lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&amp;amp;mid=2247485310&amp;amp;idx=1&amp;amp;sn=830f95c8fe1c0fe300ab4baa735361d5&amp;amp;chksm=ea1e150cdd699c1a149879f5d044b6ed866d0ae5d30c59aa571cdbcad2cad738c964c397fcdd&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0914fHtF0ADvSZWvZ7WSioeu&amp;amp;rd2werd=1#wechat_redirect&#34; target=&#34;_blank&#34;&gt;Apollo3.0 PnC更新以及车辆开放平台介绍&lt;/a&gt;
+5. &lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&amp;amp;mid=2247485354&amp;amp;idx=1&amp;amp;sn=c8f65591fe727904a8e1e440fb6827b9&amp;amp;chksm=ea1e15d8dd699cce46d296ede37177ccc8cc2f6c275ebd5c5b2f8008248f7d64de201e6ee1bf&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0914R7kJdKmCmX6XxA0NTUXp&amp;amp;rd2werd=1#wechat_redirect&#34; target=&#34;_blank&#34;&gt;Lattice Planner规划算法&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>From Deep Learning of Disentangled Representations to High-level Cognition</title>
       <link>/post/from_disentangled_to_high-level_congnition/</link>
       <pubDate>Wed, 21 Feb 2018 00:38:00 +0000</pubDate>
@@ -2784,20 +2819,6 @@ Advances in neural information processing systems. 1989.&lt;/li&gt;
 &lt;li&gt;(&lt;a href=&#34;http://www.youtube.com/watch?v=IXuHxkpO5E8&#34; target=&#34;_blank&#34;&gt;lecture I&lt;/a&gt;) (&lt;a href=&#34;http://www.youtube.com/watch?v=yNeSFbE1jdY&#34; target=&#34;_blank&#34;&gt;lecture II&lt;/a&gt;) (&lt;a href=&#34;http://ai.berkeley.edu/slides/Lecture%2010%20--%20Reinforcement%20Learning%20I/SP14%20CS188%20Lecture%2010%20--%20Reinforcement%20Learning%20I.pptx&#34; target=&#34;_blank&#34;&gt;PPT I&lt;/a&gt;) (&lt;a href=&#34;http://ai.berkeley.edu/slides/Lecture%2011%20--%20Reinforcement%20Learning%20II/SP14%20CS188%20Lecture%2011%20--%20Reinforcement%20Learning%20II.pptx&#34; target=&#34;_blank&#34;&gt;PPT II&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>An Quadrotor Safety Monitorting System</title>
-      <link>/project/an-quadrotor-safety-monitorting-system/</link>
-      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/project/an-quadrotor-safety-monitorting-system/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;Implemented and optimized a anomaly detection algorithm called Isolation Forest, which can receive temporal information and feed back the abnormal degree.&lt;/li&gt;
-&lt;li&gt;Developed an exploration tool for the iForest algorithm, which can do visualization to a certain extent&lt;/li&gt;
-&lt;li&gt;Won Provincial 1st Prizes both in the 2017 Challenge Cup and the E-Commerce Competition, Technical group. And get the qualification to the 2017 national contests.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Yuchu Luo</copyright>
-    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -2712,7 +2712,7 @@ atomic_bool locked;
     </item>
     
     <item>
-      <title>End-to-end Deep Models for Self-driving Car (Avaliable soon)</title>
+      <title>End-to-end Deep Models for Self-driving Car</title>
       <link>/talk/end-to-end-deep-models-for-self-driving-car/</link>
       <pubDate>Sun, 26 Nov 2017 19:00:00 +0000</pubDate>
       
